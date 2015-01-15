@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+<title>Sentinel - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-data.html#Computing-on-data" title="Computing on data">
+<link rel="prev" href="Get-max.html#Get-max" title="Get max">
+<link rel="next" href="List-equality.html#List-equality" title="List equality">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Sentinel"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="List-equality.html#List-equality">List equality</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Get-max.html#Get-max">Get max</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-data.html#Computing-on-data">Computing on data</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.3 Sentinel</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<p>In its original version <cite>Halbwach-Peron-08</cite>, this program uses a test <code>xi-&gt;data!=m</code>. We have changed it below to <code>xi-&gt;data&lt;=m</code> in order to avoid disequality constraints.
+
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist y;
+  int _l;
+  int _k;
+  int S;
+  int m;
+
+  assume (x == 0);
+  xi = NULL;
+  y = NULL;
+  xi = x;
+  while ((xi != NULL and xi->data &lt;= m))
+    {
+      y = xi->next;
+      xi = NULL;
+      xi = y;
+      y = NULL;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-sentinel.spl -->
+<!-- end multitable -->
+</pre>
+   <h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-sentinel-lsum-prd-01/log.html">log/intlist-sentinel-lsum-prd-01</a><br>
+x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land l=l[n1]+l[n2]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1), m=2
+</td><td valign="top" width="70%"><a href="log/intlist-sentinel2-lsum-prd-01/log.html">log/intlist-sentinel2-lsum-prd-01</a><br>
+x(n1) \land xi(n2) \land d(n1)\le 2 \land d(n2)\le 2 \land l=l[n1]+l[n2]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-sentinel-lsum-rel-01/log.html">log/intlist-sentinel-lsum-rel-01</a><br>
+x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land l=l[n1]+l[n2]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1), m=2
+</td><td valign="top" width="70%"><a href="log/intlist-sentinel2-lsum-rel-01/log.html">log/intlist-sentinel2-lsum-rel-01</a><br>
+x(n1) \land xi(n2) \land d(n1)\le 2 \land S[n1]\le 2l[n1] \land d(n2)\le 2 \land l=l[n1]+l[n2]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">
+</td><td valign="top" width="70%"><a href="log/intlist-sentinel-mset-rel-01/log.html">log/intlist-sentinel-mset-rel-01</a><br>
+x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land M=M[n1]+M[n2] \land l=l[n1]+l[n2]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(0,1), P11
+</td><td valign="top" width="70%"><a href="log/intlist-sentinel-uconspoly-P11-01/log.html">log/intlist-sentinel-uconspoly-P11-01</a><br>
+x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land l=l[n1]+l[n2] \land \forall y \in n1 \Rightarrow d(y)\le m
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(0,1), P11, m=2
+</td><td valign="top" width="70%"><a href="log/intlist-sentinel2-uconspoly-P11-01/log.html">log/intlist-sentinel2-uconspoly-P11-01</a><br>
+x(n1) \land xi(n2) \land d(n1)\le 2 \land d(n2)\le 2 \land l=l[n1]+l[n2] \land \forall y \in n1 \Rightarrow d(y)\le 2
+<br></td></tr></table>
+</pre>
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+   </body></html>
+

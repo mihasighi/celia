@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+<title>Spl encoding - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Introduction.html#Introduction" title="Introduction">
+<link rel="prev" href="C-code.html#C-code" title="C code">
+<link rel="next" href="Specification-logic.html#Specification-logic" title="Specification logic">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Spl-encoding"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Specification-logic.html#Specification-logic">Specification logic</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="C-code.html#C-code">C code</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Introduction.html#Introduction">Introduction</a>
+<hr>
+</div>
+
+<h3 class="section">2.2 Spl encoding</h3>
+
+<!--  -->
+<p><b>THIS PART IS ONLY FOR INTERNAL USE AND SUBJECT SILENT UPDATES.</b>
+
+   <p>The Spl language is the input language of the <a href="http://pop-art.inrialpes.fr/people/bjeannet/bjeannet-forge/interproc/index.html">Interproc tool</a>. 
+Since Spl deals only with numeric (integer or real) variables, we encode our
+programs on lists as follows:
+     <ul>
+<li>Variables of type <code>intlist</code> are coded by real variables. 
+THe constant <code>NULL</code> is encoded by value 0.0.
+
+     <li>Data variables are encoded by integer variables. 
+By convention, length variables are the first <b>two</b> integer variables. 
+(This is a constant fixed in the code.) 
+<!-- MS: to be changed because using relational analysis, the ghost variables are available as cast_l,0(x0) where x is a pointer var -->
+
+     <p>The other integer variables are considered data variables. 
+This separation of length and data variables is used only by the domains which deal differently with these variables, e.g., the <code>LSUM-PRD</code> or the <code>MSET-PRD</code> domains (see <a href="Domains.html#Domains">Domains</a>).
+
+     <li>The operations on pointers are encoded using operations on real variables as follows:
+
+     <p><table summary=""><tr align="left"><td valign="top" width="10%">type </td><td valign="top" width="30%">C </td><td valign="top" width="30%">Spl new </td><td valign="top" width="30%">Spl old
+<br></td></tr><tr align="left"><td valign="top" width="10%">constant </td><td valign="top" width="30%"><code>NULL</code> </td><td valign="top" width="30%">0.0 </td><td valign="top" width="30%"><code>_null</code>
+<br></td></tr><tr align="left"><td valign="top" width="10%">expression </td><td valign="top" width="30%"><code>x-&gt;data</code> </td><td valign="top" width="30%"><code>cast_i,n(x)</code> </td><td valign="top" width="30%"><code>x * _data</code>
+<br></td></tr><tr align="left"><td valign="top" width="10%">expression </td><td valign="top" width="30%"><code>x-&gt;next</code> </td><td valign="top" width="30%"><code>cast_f,n(x)</code> </td><td valign="top" width="30%"><code>x * _next</code>
+<br></td></tr><tr align="left"><td valign="top" width="10%">expression </td><td valign="top" width="30%"><code>x[i]</code> </td><td valign="top" width="30%"><code>x*i</code> </td><td valign="top" width="30%">not allowed
+<br></td></tr><tr align="left"><td valign="top" width="10%">expression </td><td valign="top" width="30%"><code>\length(x)</code> </td><td valign="top" width="30%"><code>cast_l,n(x)</code> </td><td valign="top" width="30%">not allowed
+<br></td></tr><tr align="left"><td valign="top" width="10%">expression </td><td valign="top" width="30%"><code>\sum(x)</code> </td><td valign="top" width="30%"><code>cast_q,0(x)</code> </td><td valign="top" width="30%">not allowed
+<br></td></tr><tr align="left"><td valign="top" width="10%">expression </td><td valign="top" width="30%"><code>\mset(x)</code> </td><td valign="top" width="30%"><code>cast_q,n(x)</code> </td><td valign="top" width="30%">not allowed
+<br></td></tr><tr align="left"><td valign="top" width="10%">statement </td><td valign="top" width="30%"><code>x-&gt;data=expr</code> </td><td valign="top" width="30%"><code>x=cast_d,0(expr)</code> </td><td valign="top" width="30%"><code>x = (expr) / _data</code>
+<br></td></tr><tr align="left"><td valign="top" width="10%">statement </td><td valign="top" width="30%"><code>x-&gt;next=expr</code> </td><td valign="top" width="30%"><code>x=cast_d,n(expr)</code> </td><td valign="top" width="30%"><code>x = (expr) / _next</code>
+<br></td></tr><tr align="left"><td valign="top" width="10%">statement </td><td valign="top" width="30%"><code>x[i]=expr</code> </td><td valign="top" width="30%"><code>x=(expr) / i</code> </td><td valign="top" width="30%">not allowed
+<br></td></tr><tr align="left"><td valign="top" width="10%">statement </td><td valign="top" width="30%"><code>x=malloc(size);</code> </td><td valign="top" width="30%"><code>x=sqrt_f,n(size)</code> </td><td valign="top" width="30%"><code>x = _new</code>
+<br></td></tr><tr align="left"><td valign="top" width="10%">statement </td><td valign="top" width="30%"><code>free(x);</code> </td><td valign="top" width="30%"><code>x=sqrt_f,n(size)</code> </td><td valign="top" width="30%"><code>x = _new</code>
+     <br></td></tr></table>
+
+     <li>All statements are elementary:
+ (1) the only terms used on pointer variables are <code>x</code>, <code>x-&gt;data</code>, and <code>x-&gt;next</code>,
+ (2) the statements have as left hand side one of the terms above, and
+ (3) when left values <code>x</code> and <code>x-&gt;next</code> are assigned, they have to be <code>NULL</code>.
+
+     <li>The specification properties (see <a href="Specification-logic.html#Specification-logic">Specification logic</a>) of the code are encoded into an initial <code>assume</code> statement of the form <code>assume(x==&lt;code&gt;);</code> with the following semantics:
+<!-- MS: change all this to introduce flexibility on variables' name -->
+<!-- assume take a boolean expression where the atomic predicates are: -->
+<!--  x > 0.0         for acyclic(x) -->
+<!--  cast_f,n(x) > x for cyclic(x) -->
+<!--  x == 0.0        for x is NULL -->
+<!--  x <> 0.0        for x is not NULL -->
+<!--  x <> y          for disjoint(x,y) -->
+<!--  x == y          for same(x,y) -->
+<!--  x > y           for reach(x,y) -->
+<!--  constraints on length(x) and sum(x) and mset(x) encoded with tcons -->
+
+          <dl>
+<dt><kbd>x==0</kbd><dd>acyclic(x) and l[x]=l and data(x),
+e.g. data(x): S[x]=S with S a program data variable,
+or data(x): M[x]=M with M a ghost multiset variable
+
+          <br><dt><kbd>x==1</kbd><dd>acyclic(x) and l[x]+l[y]=l and l&gt;=1
+and data(x,y) and reach(x,y),
+e.g., data(x,y): S[x]+S[y]=S
+
+          <br><dt><kbd>x==2</kbd><dd>acyclic(x) and l[x]=l and data(x) and
+acyclic(y) and l[y]=l and data(y) and
+_l&gt;=1 and disjoint(x,y)
+
+          <br><dt><kbd>x==3</kbd><dd>acyclic(x) and l[x]=l and data(x) and
+acyclic(y) and l[y]+1&lt;=l and data(y) and
+_l&gt;=1 and disjoint(x,y)
+
+          <br><dt><kbd>x==4</kbd><dd>acyclic(x) and l[x]=l and data(x) and
+acyclic(y) and l[y]=l and data(y) and
+acyclic(z) and l[z]=l and data(z) and
+l&gt;= 1 and disjoint(x,y,z)
+</dl>
+     </ul>
+
+<!--  -->
+   </body></html>
+

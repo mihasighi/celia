@@ -1,0 +1,25 @@
+params anon 0,1
+[32mAnnotated program after forward analysis[m
+var _data : real, _free : real, _len : real, _new : real, _next : real,
+    _null : real, x : real, xi : real, y : real, _l : int, _k : int, S : int,
+    max : int
+begin
+  /* [31m(L5 C5) top[m */
+  assume x == 0; /* [31m(L6 C18) [|0>=0|][m */
+  xi = _null; /* [31m(L7 C13) [|1>=0|][m */
+  y = _null; /* [31m(L7 C24) [|2>=0|][m */
+  xi = x; /* [31m(L8 C9) [|3>=0|][m */
+  max = x * _data; /* [31m(L9 C18) [|4>=0|][m */
+  while xi != _null do
+    /* [31m(L10 C22) [|5>=0|][m */
+    if max + 1 <= xi * _data then
+      /* [31m(L11 C32) [|6>=0|][m */
+      max = xi * _data; /* [31m(L12 C23) [|7>=0|][m */
+    endif; /* [31m(L13 C10) [|8>=0|][m */
+    y = xi * _next; /* [31m(L14 C17) [|9>=0|][m */
+    xi = _null; /* [31m(L15 C15) [|10>=0|][m */
+    xi = y; /* [31m(L16 C11) [|11>=0|][m */
+    y = _null; /* [31m(L17 C14) [|12>=0|][m */
+  done; /* [31m(L18 C7) [|13>=0|][m */
+end
+

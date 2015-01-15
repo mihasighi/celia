@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+<title>Bubble sort array - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Changing-data.html#Changing-data" title="Changing data">
+<link rel="prev" href="Insertion-sort-array.html#Insertion-sort-array" title="Insertion sort array">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Bubble-sort-array"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Insertion-sort-array.html#Insertion-sort-array">Insertion sort array</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Changing-data.html#Changing-data">Changing data</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.3.9 Bubble sort array</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist xin;
+  int _l;
+  int _k;
+  int S;
+  int v;
+
+  assume (x == 0);
+  xi = NULL;
+  xin = NULL;
+  _k = 1;
+  while (_k == 1)
+    {
+      _k = 0;
+      xi = x;
+      xin = x->next;
+      while (xi != NULL and xin != NULL)
+	{
+	  if ((xi->data >= xin->data + 1))
+	    {
+	      v = xi->data;
+	      xi->data = (xin->data);
+	      xin->data = v;
+	      _k = 1;
+	    }
+	  xi = NULL;
+	  xi = xin;
+	  xin = NULL;
+	  xin = xi->next;
+	}
+      xi = NULL;
+      xin = NULL;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-bubbleSortArr.spl -->
+<!-- end multitable -->
+</pre>
+<h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-bubbleSortArr-lsum-prd-01/log.html">log/intlist-bubbleSortArr-lsum-prd-01</a><br>
+x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land S=S[n1]+S[n2]+S[n3]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-bubbleSortArr-lsum-rel-01/log.html">log/intlist-bubbleSortArr-lsum-rel-01</a><br>
+x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land S=S[n1]+S[n2]+S[n3]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-bubbleSortArr-mset-rel-01/log.html">log/intlist-bubbleSortArr-mset-rel-01</a><br>
+x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land M=M[n1]+M[n2]+M[n3]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(2,1),P21
+</td><td valign="top" width="70%"><a href="log/intlist-bubbleSortArr-uconspoly-p21-21/log.html">log/intlist-bubbleSortArr-uconspoly-p21-21</a><br>
+x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land \forall y1,y2\in n3, y1 &lt; y2 \Rightarrow d(y1)\le d(y2)
+<br></td></tr></table>
+</pre>
+<!--  -->
+   </body></html>
+

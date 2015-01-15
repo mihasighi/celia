@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+<title>Copy a list (2) - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Changing-data.html#Changing-data" title="Changing data">
+<link rel="prev" href="Copy-a-list-_00281_0029.html#Copy-a-list-_00281_0029" title="Copy a list (1)">
+<link rel="next" href="Copy-a-list-_00283_0029.html#Copy-a-list-_00283_0029" title="Copy a list (3)">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Copy-a-list-(2)"></a>
+<a name="Copy-a-list-_00282_0029"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Copy-a-list-_00283_0029.html#Copy-a-list-_00283_0029">Copy a list (3)</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Copy-a-list-_00281_0029.html#Copy-a-list-_00281_0029">Copy a list (1)</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Changing-data.html#Changing-data">Changing data</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.3.2 Copy a list (2)</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<p>This example is the correct version of copying the data of a list into another list of different length. 
+<!-- The only interesting part is that the bug detected for the next example is not found here. -->
+
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist y;
+  intlist yi;
+  intlist z;
+  int _l;
+  int _k;
+  int S;
+
+  assume (x == 3);
+  xi = NULL;
+  yi = NULL;
+  z = NULL;
+  xi = x;
+  yi = y;
+  while (xi != NULL and yi != NULL)
+    {
+      yi->data = (xi->data);
+      z = xi->next;
+      xi = NULL;
+      xi = z;
+      z = NULL;
+      z = yi->next;
+      yi = NULL;
+      yi = z;
+      z = NULL;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-copy-neq.spl -->
+<!-- end multitable -->
+</pre>
+   <h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-copy-neq-lsum-prd-01/log.html">log/intlist-copy-neq-lsum-prd-01/</a><br>
+ x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land S(n1) = S(n3)
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-copy-neq-lsum-rel-01/log.html">log/intlist-copy-neq-lsum-rel-01/</a><br>
+ x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land S(n1) = S(n3)
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-copy-neq-mset-rel-01/log.html">log/intlist-copy-neq-mset-rel-01/</a><br>
+ x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land M(n1) = M(n3)
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(0,1),P21
+</td><td valign="top" width="70%"><a href="log/intlist-copy-neq-uconspoly-P21-01/log.html">log/intlist-copy-neq-uconspoly-P21-01/</a><br>
+x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land \forall y1\in n1, y2\in n2. y1=y2 \Rightarrow d(y1)=d(y2)
+<br></td></tr></table>
+</pre>
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+   </body></html>
+

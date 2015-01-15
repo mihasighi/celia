@@ -1,0 +1,65 @@
+<html><body>
+<br><file:f_0.shp><file:f_1.shp><file:f_2.shp><file:f_3.shp><file:f_4.shp><file:f_5.shp><file:f_6.shp><file:f_7.shp><file:f_8.shp><file:f_9.shp><file:f_10.shp><file:f_11.shp><file:f_12.shp><file:f_13.shp><file:f_14.shp><file:f_15.shp><file:f_16.shp><file:f_17.shp><file:f_18.shp><file:f_19.shp><file:f_20.shp><file:f_21.shp><file:f_22.shp><file:f_23.shp><file:f_24.shp><file:f_25.shp><file:f_26.shp><file:f_27.shp><file:f_28.shp> Annotated program after forward analysis 
+<br>var _data : real, _free : real, _len : real, _new : real, _next : real,
+<br>    _null : real, x : real, xgtv : real, xi : real, xlev : real, y : real,
+<br>    z : real, _l : int, _k : int, S : int, v : int
+<br>begin
+<br>  /*  (L5 C5) top  */
+<br>  assume x == 0; /*  (L6 C18) [<a href="./f_0.shp">f_0.shp</a>]  */
+<br>  xgtv = _null; /*  (L7 C15) [<a href="./f_1.shp">f_1.shp</a>]  */
+<br>  xi = _null; /*  (L7 C27) [<a href="./f_2.shp">f_2.shp</a>]  */
+<br>  xlev = _null; /*  (L7 C41) [<a href="./f_3.shp">f_3.shp</a>]  */
+<br>  y = _null; /*  (L7 C52) [<a href="./f_4.shp">f_4.shp</a>]  */
+<br>  z = _null; /*  (L7 C63) [<a href="./f_5.shp">f_5.shp</a>]  */
+<br>  xi = x; /*  (L8 C9) [<a href="./f_6.shp">f_6.shp</a>]  */
+<br>  x = _null; /*  (L9 C12) [<a href="./f_7.shp">f_7.shp</a>]  */
+<br>  while xi != _null do
+<br>    /*  (L10 C22) [<a href="./f_8.shp">f_8.shp</a>]  */
+<br>    y = xi; /*  (L11 C11) [<a href="./f_9.shp">f_9.shp</a>]  */
+<br>    z = xi * _next; /*  (L12 C19) [<a href="./f_10.shp">f_10.shp</a>]  */
+<br>    xi = _null; /*  (L13 C15) [<a href="./f_11.shp">f_11.shp</a>]  */
+<br>    xi = z; /*  (L14 C11) [<a href="./f_12.shp">f_12.shp</a>]  */
+<br>    z = _null; /*  (L15 C14) [<a href="./f_13.shp">f_13.shp</a>]  */
+<br>    y = _null / _next; /*  (L16 C20) [<a href="./f_14.shp">f_14.shp</a>]  */
+<br>    if y * _data <= v then
+<br>       /*  (L17 C28) [<a href="./f_15.shp">f_15.shp</a>]  */
+<br>       y = xlev / _next; /*  (L18 C23) [<a href="./f_16.shp">f_16.shp</a>]  */
+<br>       z = xlev; /*  (L19 C15) [<a href="./f_17.shp">f_17.shp</a>]  */
+<br>       xlev = _null; /*  (L20 C19) [<a href="./f_18.shp">f_18.shp</a>]  */
+<br>       xlev = y; /*  (L21 C15) [<a href="./f_19.shp">f_19.shp</a>]  */
+<br>    else
+<br>      /*  (L22 C8) [<a href="./f_20.shp">f_20.shp</a>]  */
+<br>      y = xgtv / _next; /*  (L23 C23) [<a href="./f_21.shp">f_21.shp</a>]  */
+<br>      z = xgtv; /*  (L24 C15) [<a href="./f_22.shp">f_22.shp</a>]  */
+<br>      xgtv = _null; /*  (L25 C19) [<a href="./f_23.shp">f_23.shp</a>]  */
+<br>      xgtv = y; /*  (L26 C15) [<a href="./f_24.shp">f_24.shp</a>]  */
+<br>    endif; /*  (L27 C10) [<a href="./f_25.shp">f_25.shp</a>]  */
+<br>    z = _null; /*  (L28 C14) [<a href="./f_26.shp">f_26.shp</a>]  */
+<br>    y = _null; /*  (L29 C14) [<a href="./f_27.shp">f_27.shp</a>]  */
+<br>  done; /*  (L30 C7) [<a href="./f_28.shp">f_28.shp</a>]  */
+<br>end
+<br>
+<br>	Command being timed: "./cinv-uconspoly.opt -domain shape src/intlist-dispatch.spl"
+<br>	User time (seconds): 0.54
+<br>	System time (seconds): 0.07
+<br>	Percent of CPU this job got: 98%
+<br>	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.62
+<br>	Average shared text size (kbytes): 0
+<br>	Average unshared data size (kbytes): 0
+<br>	Average stack size (kbytes): 0
+<br>	Average total size (kbytes): 0
+<br>	Maximum resident set size (kbytes): 0
+<br>	Average resident set size (kbytes): 0
+<br>	Major (requiring I/O) page faults: 0
+<br>	Minor (reclaiming a frame) page faults: 16099
+<br>	Voluntary context switches: 2
+<br>	Involuntary context switches: 3
+<br>	Swaps: 0
+<br>	File system inputs: 0
+<br>	File system outputs: 504
+<br>	Socket messages sent: 0
+<br>	Socket messages received: 0
+<br>	Signals delivered: 0
+<br>	Page size (bytes): 4096
+<br>	Exit status: 0
+</body></html>

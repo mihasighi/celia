@@ -1,0 +1,114 @@
+<html lang="en">
+<head>
+<title>List equality - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-data.html#Computing-on-data" title="Computing on data">
+<link rel="prev" href="Sentinel.html#Sentinel" title="Sentinel">
+<link rel="next" href="Sum-of-elements.html#Sum-of-elements" title="Sum of elements">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="List-equality"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Sum-of-elements.html#Sum-of-elements">Sum of elements</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Sentinel.html#Sentinel">Sentinel</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-data.html#Computing-on-data">Computing on data</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.4 List equality</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist y;
+  intlist yi;
+  intlist z;
+  int _l;
+  int _k;
+  int S;
+
+  assume (x == 2);
+  xi = NULL;
+  yi = NULL;
+  z = NULL;
+  xi = x;
+  yi = y;
+  while ((xi != NULL and yi != NULL and xi->data == yi->data))
+    {
+      z = xi->next;
+      xi = NULL;
+      xi = z;
+      z = NULL;
+      z = yi->next;
+      yi = NULL;
+      yi = z;
+      z = NULL;
+    }
+  if ((xi == NULL and yi == NULL))
+    {
+      _k = 1;
+    }
+  else
+    {
+      _k = 0;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-equal.spl -->
+<!-- end multitable -->
+</pre>
+<h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-equal-lsum-prd-01/log.html">log/intlist-equal-lsum-prd-01/</a><br>
+x(n1) \land y(n3) \land d(n1)=d(n3) \land S(n1)=S(n3) \land l=l[n1]=l[n3]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-equal-lsum-rel-01/log.html">log/intlist-equal-lsum-rel-01/</a><br>
+same as above
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-equal-mset-rel-01/log.html">log/intlist-equal-mset-rel-01/</a><br>
+x(n1) \land y(n2) \land M[n1]=M[n2] \land l=l[n1]=l[n2]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(0,2), P21
+</td><td valign="top" width="70%"><a href="log/intlist-equal-uconspoly-P21-02/log.html">log/intlist-equal-uconspoly-P21-02/</a><br>
+x(n1) \land y(n2) \land d(n1)=d(n2) \land \forall y1 \in n1, y2\in n2, y1=y2 \Rightarrow d(y1)=d(y2)
+<br></td></tr></table>
+</pre>
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+   </body></html>
+

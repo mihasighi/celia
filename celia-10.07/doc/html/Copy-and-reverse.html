@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+<title>Copy and reverse - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Changing-structure.html#Changing-structure" title="Changing structure">
+<link rel="prev" href="Dispatch-lists.html#Dispatch-lists" title="Dispatch lists">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Copy-and-reverse"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Dispatch-lists.html#Dispatch-lists">Dispatch lists</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Changing-structure.html#Changing-structure">Changing structure</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.4.7 Copy and reverse</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist y;
+  intlist z;
+  int _l;
+  int _k;
+  int S;
+
+  assume (x == 0);
+  xi = NULL;
+  y = NULL;
+  z = NULL;
+  xi = x;
+  while (xi != NULL)
+    {
+      z = (intlist) malloc (sizeof (struct _intlist));
+      z->data = (xi->data);
+      z->next = y;
+      y = NULL;
+      y = z;
+      z = NULL;
+      z = xi->next;
+      xi = NULL;
+      xi = z;
+      z = NULL;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-copyRev.spl -->
+<!-- end multitable -->
+</pre>
+<h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,2)
+</td><td valign="top" width="70%"><a href="log/intlist-copyRev-lsum-prd-02/log.html">log/intlist-copyRev-lsum-prd-02</a><br>
+x(n1) \land y(n2) \land l[n1]=l=l[n2]\ge 1 \land S=S[n1]=S[n2]
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,2)
+</td><td valign="top" width="70%"><a href="log/intlist-copyRev-lsum-rel-02/log.html">log/intlist-copyRev-lsum-rel-02</a><br>
+same as above
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">Anon=(0,2)
+</td><td valign="top" width="70%"><a href="log/intlist-copyRev-mset-prd-02/log.html">log/intlist-copyRev-mset-prd-02</a><br>
+x(n1) \land y(n2) \land l[n1]=l=l[n2]\ge 1 \land M=M[n1]=M[n2]
+
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(0,2),P11
+</td><td valign="top" width="70%"><a href="log/intlist-copyRev-uconspoly-P11-02/log.html">log/intlist-copyRev-uconspoly-P11-02</a><br>
+x(n1) \land y(n2) \land l[n1]=l=l[n2]\ge 1
+<!-- and \forall y1\in n1, y2\in n2 y1=l-y2 \implies d(y1)=d(y2) -->
+<br></td></tr></table>
+</pre>
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<!-- node Merge sorted lists, , , Changing structure -->
+<!-- subsection Merge sorted lists -->
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<!-- node Concat lists, , , Changing structure -->
+<!-- subsection Concat lists -->
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+</body></html>
+

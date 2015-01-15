@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+<title>Parameters of the analysis - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Introduction.html#Introduction" title="Introduction">
+<link rel="prev" href="Specification-logic.html#Specification-logic" title="Specification logic">
+<link rel="next" href="Results.html#Results" title="Results">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Parameters-of-the-analysis"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Results.html#Results">Results</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Specification-logic.html#Specification-logic">Specification logic</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Introduction.html#Introduction">Introduction</a>
+<hr>
+</div>
+
+<h3 class="section">2.4 Parameters of the analysis</h3>
+
+<!--  -->
+<p>The analysis done by the CINV tool is parametrized by the following inputs:
+
+     <ul>
+<li><em>Domain:</em>
+<a name="Domains"></a>The abstract domain used to represent heap segments. This domain is used by the global domain of <code>Shapes</code>. The following domains are implemented in CINV:
+          <dl>
+<dt><kbd>LSUM-PRD</kbd><dd>the domain of sums over heap segments which is a Cartesian product of a domain for lengths of segments and a domain for data of segments.
+
+          <br><dt><kbd>LSUM-REL</kbd><dd>the domain of sums over heap segments where lengths and data are put together.
+
+          <br><dt><kbd>MSET-PRD</kbd><dd>the domain of multisets over heap segments which is a Cartesian product of a domain for lengths of segments, a domain for data of segments, and a multiset domain.
+
+          <br><dt><kbd>MSET-REL</kbd><dd>the domain of multisets over heap segments where lengths and data are put together.
+
+          <br><dt><kbd>UCONS</kbd><dd>the domain of universally constrained heap segments; this domain is parametrized by the set of patterns used by the universally quantified constraints. 
+Actually, for efficiency reasons, the following patterns are implemented:
+               <dl>
+<dt><kbd>P11</kbd><dd>\forall y \in n \Rightarrow ... 
+<br><dt><kbd>P21</kbd><dd>\forall y1 \in n, y2 \in m, y1=y2 \Rightarrow ... 
+<br><dt><kbd>P12</kbd><dd>\forall y1,y2 \in n, y1&lt;=y2 \Rightarrow ... 
+<br><dt><kbd>P13</kbd><dd>\forall y1,y2,y3 \in n, y1 &lt;_1 y2 &lt;_1 y3 \Rightarrow ... 
+</dl>
+          </dl>
+
+     <li><em>Number of simple nodes:</em>
+The computation of the post abstract transformer is parameterized by the maximum number of simple nodes (nodes not labeled by a program variable or representing a sharing point) in the heap graph. 
+In CINV, this number is obtained from the following two parameters:
+          <dl>
+<dt><kbd>max_anon</kbd><dd>the maximum number of simple nodes in a heap segment, and
+
+          <br><dt><kbd>segm_anon</kbd><dd>the number of segments shall divide the number of simple nodes. 
+</dl>
+     These two parameters shall be given in the file <code>cinv.txt</code> in the directory chosen for the execution of CINV. 
+</ul>
+
+<!--  -->
+   </body></html>
+

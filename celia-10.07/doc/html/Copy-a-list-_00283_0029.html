@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+<title>Copy a list (3) - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Changing-data.html#Changing-data" title="Changing data">
+<link rel="prev" href="Copy-a-list-_00282_0029.html#Copy-a-list-_00282_0029" title="Copy a list (2)">
+<link rel="next" href="Add-some-constant.html#Add-some-constant" title="Add some constant">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Copy-a-list-(3)"></a>
+<a name="Copy-a-list-_00283_0029"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Add-some-constant.html#Add-some-constant">Add some constant</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Copy-a-list-_00282_0029.html#Copy-a-list-_00282_0029">Copy a list (2)</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Changing-data.html#Changing-data">Changing data</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.3.3 Copy a list (3)</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<p>This example is the erroneous version of copying the data of a list into another list of different length. 
+CINV reports a dereference of a NULL pointer. 
+The invariant generated at the end of the loop is bottom.
+
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist y;
+  intlist yi;
+  intlist z;
+  int _l;
+  int _k;
+  int S;
+
+  assume (x == 3);
+  xi = NULL;
+  yi = NULL;
+  z = NULL;
+  xi = x;
+  yi = y;
+  while (xi != NULL)
+    {
+      yi->data = (xi->data);
+      z = xi->next;
+      xi = NULL;
+      xi = z;
+      z = NULL;
+      z = yi->next;
+      yi = NULL;
+      yi = z;
+      z = NULL;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-copy-neq-err.spl -->
+<!-- end multitable -->
+</pre>
+   <h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-copy-neq-err-lsum-prd-01/log.html">log/intlist-copy-neq-err-lsum-prd-01/</a><br>
+null pointer dereference at line z = yi*_next
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-copy-neq-err-lsum-rel-01/log.html">log/intlist-copy-neq-err-lsum-rel-01/</a><br>
+null pointer dereference at line z = yi*_next
+<br></td></tr></table>
+</pre>
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+   </body></html>
+

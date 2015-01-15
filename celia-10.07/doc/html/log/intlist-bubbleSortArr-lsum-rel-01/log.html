@@ -1,0 +1,59 @@
+<html><body>
+<br> Annotated program after forward analysis 
+<br>var _data : real, _free : real, _len : real, _new : real, _next : real,
+<br>    _null : real, x : real, xi : real, xin : real, _l : int, _k : int,
+<br>    S : int, v : int
+<br>begin
+<br>  /*  (L5 C5) top  */
+<br>  assume x == 0; /*  (L6 C18) [<a href="./f_0.shp">f_0.shp</a>]  */
+<br>  xi = _null; /*  (L7 C13) [<a href="./f_1.shp">f_1.shp</a>]  */
+<br>  xin = _null; /*  (L7 C26) [<a href="./f_2.shp">f_2.shp</a>]  */
+<br>  _k = 1; /*  (L8 C9) [<a href="./f_3.shp">f_3.shp</a>]  */
+<br>  while _k == 1 do
+<br>    /*  (L9 C16) [<a href="./f_4.shp">f_4.shp</a>]  */
+<br>    _k = 0; /*  (L10 C11) [<a href="./f_5.shp">f_5.shp</a>]  */
+<br>    xi = x; /*  (L11 C11) [<a href="./f_6.shp">f_6.shp</a>]  */
+<br>    xin = x * _next; /*  (L12 C20) [<a href="./f_7.shp">f_7.shp</a>]  */
+<br>    while xi != _null and xin != _null do
+<br>      /*  (L13 C41) [<a href="./f_8.shp">f_8.shp</a>]  */
+<br>      if xi * _data >= xin * _data + 1 then
+<br>        /*  (L14 C44) [<a href="./f_9.shp">f_9.shp</a>]  */
+<br>        v = xi * _data; /*  (L15 C23) [<a href="./f_10.shp">f_10.shp</a>]  */
+<br>        xi = xin * _data / _data; /*  (L16 C35) [<a href="./f_11.shp">f_11.shp</a>]  */
+<br>        xin = v / _data; /*  (L17 C24) [<a href="./f_12.shp">f_12.shp</a>]  */
+<br>        _k = 1; /*  (L18 C15) [<a href="./f_13.shp">f_13.shp</a>]  */
+<br>      endif; /*  (L19 C12) [<a href="./f_14.shp">f_14.shp</a>]  */
+<br>      xi = _null; /*  (L20 C17) [<a href="./f_15.shp">f_15.shp</a>]  */
+<br>      xi = xin; /*  (L21 C15) [<a href="./f_16.shp">f_16.shp</a>]  */
+<br>      xin = _null; /*  (L22 C18) [<a href="./f_17.shp">f_17.shp</a>]  */
+<br>      xin = xi * _next; /*  (L23 C23) [<a href="./f_18.shp">f_18.shp</a>]  */
+<br>    done; /*  (L24 C9) [<a href="./f_19.shp">f_19.shp</a>]  */
+<br>    xi = _null; /*  (L25 C15) [<a href="./f_20.shp">f_20.shp</a>]  */
+<br>    xin = _null; /*  (L26 C16) [<a href="./f_21.shp">f_21.shp</a>]  */
+<br>  done; /*  (L27 C7) [<a href="./f_22.shp">f_22.shp</a>]  */
+<br>end
+<br>
+<br>	Command being timed: "./cinv-lsumrel.opt -domain shape src/intlist-bubbleSortArr.spl"
+<br>	User time (seconds): 0.06
+<br>	System time (seconds): 0.01
+<br>	Percent of CPU this job got: 97%
+<br>	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.07
+<br>	Average shared text size (kbytes): 0
+<br>	Average unshared data size (kbytes): 0
+<br>	Average stack size (kbytes): 0
+<br>	Average total size (kbytes): 0
+<br>	Maximum resident set size (kbytes): 0
+<br>	Average resident set size (kbytes): 0
+<br>	Major (requiring I/O) page faults: 0
+<br>	Minor (reclaiming a frame) page faults: 1642
+<br>	Voluntary context switches: 1
+<br>	Involuntary context switches: 3
+<br>	Swaps: 0
+<br>	File system inputs: 0
+<br>	File system outputs: 192
+<br>	Socket messages sent: 0
+<br>	Socket messages received: 0
+<br>	Signals delivered: 0
+<br>	Page size (bytes): 4096
+<br>	Exit status: 0
+</body></html>

@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+<title>Specification logic - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Introduction.html#Introduction" title="Introduction">
+<link rel="prev" href="Apron-encoding.html#Apron-encoding" title="Apron encoding">
+<link rel="next" href="Parameters-of-the-analysis.html#Parameters-of-the-analysis" title="Parameters of the analysis">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Specification-logic"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Parameters-of-the-analysis.html#Parameters-of-the-analysis">Parameters of the analysis</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Apron-encoding.html#Apron-encoding">Apron encoding</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Introduction.html#Introduction">Introduction</a>
+<hr>
+</div>
+
+<h3 class="section">2.3 Specification logic</h3>
+
+<!--  -->
+<p>The initial constraint on the program analysed is given in a logic which is a restriction of the CSL logic defined in [Bouajjani and al. CONCUR-09]. 
+This logic is a multi-sorted first order logic with reachability predicates. 
+More precisely, in this logic one can use the following terms:
+     <dl>
+<dt><kbd>len[n]</kbd><dd>the length of the heap segment stating from node <code>n</code>, i.e., the number of edges of the segment.
+
+     <br><dt><kbd>data[n]</kbd><dd>the data stored in the first element of the heap segment starting in the node <code>n</code>.
+
+     <br><dt><kbd>sum[n]</kbd><dd>the sum of the data stored in the heap segment starting from node <code>n</code> except <code>n</code> itself.
+
+     <br><dt><kbd>mstl[n]</kbd><dd>the multiset of data stored in the heap segment starting from node <code>n</code> except <code>n</code> itself.
+
+     <br><dt><kbd>mshd[n]</kbd><dd>is the term used to represent <code>data[n]</code> in the multiset constraints. 
+</dl>
+
+   <p>The atomic constraints of the logic are the following:
+
+     <dl>
+<dt><kbd>x(n)</kbd><dd>variable <code>x</code> is labeling a node of a heap called <code>n</code>.
+
+     <br><dt><kbd>expr op 0</kbd><dd>where op in =,!=,&lt;=,&gt;=,!=,&lt;,&gt; is a linear constraints on terms.
+
+     <br><dt><kbd>acyclic(x)</kbd><dd>variable <code>x</code> labels a node from which starts a segment which is acyclic.
+
+     <br><dt><kbd>reach(x,y)</kbd><dd>variable <code>x</code> labels a node from which starts a segment which reaches another node labeled by <code>y</code>.
+
+     <br><dt><kbd>disjoint(x,y)</kbd><dd>variable <code>x</code> labels a node from which starts a segment which is disjoint from (does not share nodes with) the list segment which starting node is labeled by <code>y</code>.
+
+   </dl>
+
+<!--  -->
+   </body></html>
+

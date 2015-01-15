@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+<title>Partial reset - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Initializing-data.html#Initializing-data" title="Initializing data">
+<link rel="prev" href="Initialization-with-Fibonacci.html#Initialization-with-Fibonacci" title="Initialization with Fibonacci">
+<link rel="next" href="Sum-of-lists.html#Sum-of-lists" title="Sum of lists">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Partial-reset"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Sum-of-lists.html#Sum-of-lists">Sum of lists</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Initialization-with-Fibonacci.html#Initialization-with-Fibonacci">Initialization with Fibonacci</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Initializing-data.html#Initializing-data">Initializing data</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.2.6 Partial reset</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist y;
+  intlist yi;
+  int _l;
+  int _k;
+  int S;
+
+  assume (x == 1);
+  xi = NULL;
+  yi = NULL;
+  yi = y;
+  while (yi != NULL)
+    {
+      yi->data = 0;
+      xi = yi->next;
+      yi = NULL;
+      yi = xi;
+      xi = NULL;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-pInit.spl -->
+<!-- end multitable -->
+</pre>
+<h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-pInit-lsum-prd-01/log.html">log/intlist-pInit-lsum-prd-01/</a><br>
+x(n1) \land y(n2) \land l[n1]+l[n2]=l \land S(n2)=0 \land d(n2)=0
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-pInit-lsum-rel-01/log.html">log/intlist-pInit-lsum-rel-01/</a><br>
+x(n1) \land y(n2) \land l[n1]+l[n2]=_l \land S(n2)=0 \land d(n2)=0
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-pInit-msetm-rel-01/log.html">log/intlist-pInit-mset-01/</a><br>
+none
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(0,1),P11
+</td><td valign="top" width="70%"><a href="log/intlist-pInit-uconspoly-P11-01/log.html">log/intlist-pInit-uconspoly-P11-01/</a><br>
+x(n1) \land y(n2) \land \forall y1\in n2 \Rightarrow d(y1)=0
+<br></td></tr></table>
+</pre>
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+   </body></html>
+

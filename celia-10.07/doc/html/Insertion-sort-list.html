@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+<title>Insertion sort list - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Changing-structure.html#Changing-structure" title="Changing structure">
+<link rel="prev" href="Delete-on-condition.html#Delete-on-condition" title="Delete on condition">
+<link rel="next" href="Dispatch-lists.html#Dispatch-lists" title="Dispatch lists">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Insertion-sort-list"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Dispatch-lists.html#Dispatch-lists">Dispatch lists</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Delete-on-condition.html#Delete-on-condition">Delete on condition</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Changing-structure.html#Changing-structure">Changing structure</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.4.5 Insertion sort list</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<p>This version of the insertion sort algorithm changes position of cells.
+
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist xip;
+  intlist y;
+  intlist yp;
+  intlist z;
+  int _l;
+  int _k;
+  int S;
+
+  assume (x == 0);
+  xi = NULL;
+  y = NULL;
+  xip = NULL;
+  yp = NULL;
+  z = NULL;
+  xip = x;
+  xi = x->next;
+  while (xi != NULL)
+    {
+      y = x;
+      while (y != xi and y->data &lt;= xi->data)
+	{
+	  yp = NULL;
+	  yp = y;
+	  z = y->next;
+	  y = NULL;
+	  y = z;
+	  z = NULL;
+	}
+      if (y != xi)
+	{
+	  xip->next = NULL;
+	  z = xi->next;
+	  xip->next = z;
+	  z = NULL;
+	  if (yp == NULL)
+	    {
+	      xi->next = NULL;
+	      xi->next = x;
+	      x = NULL;
+	      x = xi;
+	    }
+	  else
+	    {
+	      yp->next = NULL;
+	      yp->next = xi;
+	      xi->next = NULL;
+	      xi->next = y;
+	      yp = NULL;
+	    }
+	  y = NULL;
+	  xi = NULL;
+	}
+      else
+	{
+	  xip = NULL;
+	  xip = xi;
+	  yp = NULL;
+	  y = NULL;
+	  xi = NULL;
+	}
+      xi = xip->next;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-insertSortLst.spl -->
+<!-- end multitable -->
+</pre>
+   <h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(2,1)
+</td><td valign="top" width="70%"><a href="log/intlist-insertSortLst-lsum-prd-21/log.html">log/intlist-insertSortLst-lsum-prd-21</a><br>
+x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land S(n2)=0 \land S[n1]+S[n2]=S
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(2,1)
+</td><td valign="top" width="70%"><a href="log/intlist-insertSortLst-lsum-rel-21/log.html">log/intlist-insertSortLst-lsum-rel-21</a><br>
+x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land S(n2)=0 \land S[n1]+S[n2]=S
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">Anon=(2,1)
+</td><td valign="top" width="70%"><a href="log/intlist-insertSortLst-mset-rel-21/log.html">log/intlist-insertSortLst-mset-rel-21</a><br>
+x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land M[n1]+M[n2]=M
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+<!-- tab Anon=(2,1), P12 -->
+</td><td valign="top" width="20%">Anon=(1,1), P11
+<!-- tab @uref{log/intlist-insertSortLst-uconspoly-p21-21/log.html,log/intlist-insertSortLst-uconspoly-p21-21}@* -->
+</td><td valign="top" width="70%"><a href="log/intlist-insertSortLst-uconspoly-P11-11/log.html">log/intlist-insertSortLst-uconspoly-P11-11</a><br>
+<!-- math{x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land \forall y1,y2\in n1, y1 < y2 \Rightarrow d(y1)\le d(y2)} -->
+x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land \forall y1\in n1 \Rightarrow d(n1)\le d(y1)
+<br></td></tr></table>
+</pre>
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+   </body></html>
+

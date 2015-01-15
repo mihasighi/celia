@@ -1,0 +1,51 @@
+<html><body>
+<br> Annotated program after forward analysis 
+<br>var _data : real, _free : real, _len : real, _new : real, _next : real,
+<br>    _null : real, x : real, xi : real, y : real, z : real, _l : int,
+<br>    _k : int, S : int
+<br>begin
+<br>  /*  (L5 C5) top  */
+<br>  assume x == 0; /*  (L6 C18) [<a href="./f_0.shp">f_0.shp</a>]  */
+<br>  xi = _null; /*  (L7 C13) [<a href="./f_1.shp">f_1.shp</a>]  */
+<br>  y = _null; /*  (L7 C24) [<a href="./f_2.shp">f_2.shp</a>]  */
+<br>  z = _null; /*  (L7 C35) [<a href="./f_3.shp">f_3.shp</a>]  */
+<br>  xi = x; /*  (L8 C9) [<a href="./f_4.shp">f_4.shp</a>]  */
+<br>  while xi != _null do
+<br>    /*  (L9 C22) [<a href="./f_5.shp">f_5.shp</a>]  */
+<br>    z = _new; /*  (L10 C13) [<a href="./f_6.shp">f_6.shp</a>]  */
+<br>    z = xi * _data / _data; /*  (L11 C29) [<a href="./f_7.shp">f_7.shp</a>]  */
+<br>    z = y / _next; /*  (L12 C19) [<a href="./f_8.shp">f_8.shp</a>]  */
+<br>    y = _null; /*  (L13 C14) [<a href="./f_9.shp">f_9.shp</a>]  */
+<br>    y = z; /*  (L14 C10) [<a href="./f_10.shp">f_10.shp</a>]  */
+<br>    z = _null; /*  (L15 C14) [<a href="./f_11.shp">f_11.shp</a>]  */
+<br>    z = xi * _next; /*  (L16 C19) [<a href="./f_12.shp">f_12.shp</a>]  */
+<br>    xi = _null; /*  (L17 C15) [<a href="./f_13.shp">f_13.shp</a>]  */
+<br>    xi = z; /*  (L18 C11) [<a href="./f_14.shp">f_14.shp</a>]  */
+<br>    z = _null; /*  (L19 C14) [<a href="./f_15.shp">f_15.shp</a>]  */
+<br>  done; /*  (L20 C7) [<a href="./f_16.shp">f_16.shp</a>]  */
+<br>end
+<br>
+<br>	Command being timed: "./cinv-lsumrel.opt -domain shape src/intlist-copyRev.spl"
+<br>	User time (seconds): 0.04
+<br>	System time (seconds): 0.00
+<br>	Percent of CPU this job got: 98%
+<br>	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.05
+<br>	Average shared text size (kbytes): 0
+<br>	Average unshared data size (kbytes): 0
+<br>	Average stack size (kbytes): 0
+<br>	Average total size (kbytes): 0
+<br>	Maximum resident set size (kbytes): 0
+<br>	Average resident set size (kbytes): 0
+<br>	Major (requiring I/O) page faults: 0
+<br>	Minor (reclaiming a frame) page faults: 1432
+<br>	Voluntary context switches: 1
+<br>	Involuntary context switches: 2
+<br>	Swaps: 0
+<br>	File system inputs: 0
+<br>	File system outputs: 144
+<br>	Socket messages sent: 0
+<br>	Socket messages received: 0
+<br>	Signals delivered: 0
+<br>	Page size (bytes): 4096
+<br>	Exit status: 0
+</body></html>

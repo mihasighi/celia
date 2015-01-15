@@ -1,0 +1,76 @@
+shape of size (2) and dim(4,9)
+
+***ushape 0:
+
+ushape of dim (4,9)
+	HGraphs table of size 8
+hgraph of size 2, ptrdim 9, datadim 4, not closed
+succ matrix:
+	n0 -> n0
+	n1 -> n0
+ptr vars labels for nodes:
+	x4 ->next^0-> n0
+	x10 ->next^0-> n1
+ptr var to node:  x9(n0),  x10(n1),  x11(n0),  x12(n0), 
+
+closed bottom
+{segment constraints:
+ucons of [datadim=4, ptrdim=2] 
+polyhedron of dim (8,0)
+array of constraints of size 4
+ 0: -l0 + l[n01] = 0
+ 1: -l0 + d03 = 0
+ 2: d(n01) = 0
+ 3: l0 - 1 >= 0
+ /\ y1 in [n01], l[n01]>=2  ==> polyhedron of dim (10,0)
+array of constraints of size 6
+ 0: -l0 + l[n01] = 0
+ 1: -l0 + d03 = 0
+ 2: -y1 + d(y1) = 0
+ 3: d(n01) = 0
+ 4: y1 - 1 >= 0
+ 5: l0 - y1 - 1 >= 0
+}
+
+***ushape 1:
+
+ushape of dim (4,9)
+	HGraphs table of size 8
+hgraph of size 3, ptrdim 9, datadim 4, not closed
+succ matrix:
+	n0 -> n0
+	n1 -> n2
+	n2 -> n0
+ptr vars labels for nodes:
+	x4 ->next^0-> n0
+	x10 ->next^0-> n1
+	x11 ->next^0-> n2
+ptr var to node:  x9(n0),  x10(n1),  x11(n2),  x12(n0), 
+
+closed bottom
+{segment constraints:
+ucons of [datadim=4, ptrdim=3] 
+polyhedron of dim (10,0)
+array of constraints of size 5
+ 0: -l0 + d03 + l[n02] = 0
+ 1: -d03 + l[n01] = 0
+ 2: d(n01) = 0
+ 3: d03 - 1 >= 0
+ 4: l0 - d03 - 1 >= 0
+ /\ y1 in [n01], l[n01]>=2  ==> polyhedron of dim (12,0)
+array of constraints of size 7
+ 0: -l0 + d03 + l[n02] = 0
+ 1: -d03 + l[n01] = 0
+ 2: -y1 + d(y1) = 0
+ 3: d(n01) = 0
+ 4: y1 - 1 >= 0
+ 5: d03 - y1 - 1 >= 0
+ 6: l0 - d03 - 1 >= 0
+ /\ y1 in [n02], l[n02]>=2  ==> polyhedron of dim (12,0)
+array of constraints of size 5
+ 0: -l0 + d03 + l[n02] = 0
+ 1: -d03 + l[n01] = 0
+ 2: d(n01) = 0
+ 3: d03 - 1 >= 0
+ 4: l0 - d03 - 1 >= 0
+}

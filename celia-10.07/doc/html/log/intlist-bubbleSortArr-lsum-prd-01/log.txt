@@ -1,0 +1,58 @@
+params anon 0,1
+[32mAnnotated program after forward analysis[m
+var _data : real, _free : real, _len : real, _new : real, _next : real,
+    _null : real, x : real, xi : real, xin : real, _l : int, _k : int,
+    S : int, v : int
+begin
+  /* [31m(L5 C5) top[m */
+  assume x == 0; /* [31m(L6 C18) [|0>=0|][m */
+  xi = _null; /* [31m(L7 C13) [|1>=0|][m */
+  xin = _null; /* [31m(L7 C26) [|2>=0|][m */
+  _k = 1; /* [31m(L8 C9) [|3>=0|][m */
+  while _k == 1 do
+    /* [31m(L9 C16) [|4>=0|][m */
+    _k = 0; /* [31m(L10 C11) [|5>=0|][m */
+    xi = x; /* [31m(L11 C11) [|6>=0|][m */
+    xin = x * _next; /* [31m(L12 C20) [|7>=0|][m */
+    while xi != _null and xin != _null do
+      /* [31m(L13 C41) [|8>=0|][m */
+      if xi * _data >= xin * _data + 1 then
+        /* [31m(L14 C44) [|9>=0|][m */
+        v = xi * _data; /* [31m(L15 C23) [|10>=0|][m */
+        xi = xin * _data / _data; /* [31m(L16 C35) [|11>=0|][m */
+        xin = v / _data; /* [31m(L17 C24) [|12>=0|][m */
+        _k = 1; /* [31m(L18 C15) [|13>=0|][m */
+      endif; /* [31m(L19 C12) [|14>=0|][m */
+      xi = _null; /* [31m(L20 C17) [|15>=0|][m */
+      xi = xin; /* [31m(L21 C15) [|16>=0|][m */
+      xin = _null; /* [31m(L22 C18) [|17>=0|][m */
+      xin = xi * _next; /* [31m(L23 C23) [|18>=0|][m */
+    done; /* [31m(L24 C9) [|19>=0|][m */
+    xi = _null; /* [31m(L25 C15) [|20>=0|][m */
+    xin = _null; /* [31m(L26 C16) [|21>=0|][m */
+  done; /* [31m(L27 C7) [|22>=0|][m */
+end
+
+	Command being timed: "./cinv-lsumprd.opt -domain shape src/intlist-bubbleSortArr.spl"
+	User time (seconds): 0.04
+	System time (seconds): 0.00
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.05
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 0
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1400
+	Voluntary context switches: 1
+	Involuntary context switches: 2
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 192
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

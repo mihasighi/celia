@@ -1,0 +1,44 @@
+<html><body>
+<br><file:f_0.shp><file:f_1.shp><file:f_2.shp><file:f_3.shp><file:f_4.shp><file:f_5.shp><file:f_6.shp><file:f_7.shp><file:f_8.shp><file:f_9.shp> Annotated program after forward analysis 
+<br>var _data : real, _free : real, _len : real, _new : real, _next : real,
+<br>    _null : real, x : real, xi : real, y : real, yi : real, _l : int,
+<br>    _k : int, S : int
+<br>begin
+<br>  /*  (L5 C5) top  */
+<br>  assume x == 0; /*  (L6 C18) [<a href="./f_0.shp">f_0.shp</a>]  */
+<br>  xi = _null; /*  (L7 C13) [<a href="./f_1.shp">f_1.shp</a>]  */
+<br>  y = _null; /*  (L7 C24) [<a href="./f_2.shp">f_2.shp</a>]  */
+<br>  xi = x; /*  (L8 C9) [<a href="./f_3.shp">f_3.shp</a>]  */
+<br>  while xi != _null and xi * _data == 0 do
+<br>    /*  (L9 C43) [<a href="./f_4.shp">f_4.shp</a>]  */
+<br>    y = xi * _next; /*  (L10 C17) [<a href="./f_5.shp">f_5.shp</a>]  */
+<br>    xi = _null; /*  (L11 C15) [<a href="./f_6.shp">f_6.shp</a>]  */
+<br>    xi = y; /*  (L12 C11) [<a href="./f_7.shp">f_7.shp</a>]  */
+<br>    y = _null; /*  (L13 C14) [<a href="./f_8.shp">f_8.shp</a>]  */
+<br>  done; /*  (L14 C7) [<a href="./f_9.shp">f_9.shp</a>]  */
+<br>end
+<br>
+<br>	Command being timed: "./cinv-uconspoly.opt -domain shape src/intlist-fstNot0.spl"
+<br>	User time (seconds): 0.05
+<br>	System time (seconds): 0.00
+<br>	Percent of CPU this job got: 96%
+<br>	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.06
+<br>	Average shared text size (kbytes): 0
+<br>	Average unshared data size (kbytes): 0
+<br>	Average stack size (kbytes): 0
+<br>	Average total size (kbytes): 0
+<br>	Maximum resident set size (kbytes): 0
+<br>	Average resident set size (kbytes): 0
+<br>	Major (requiring I/O) page faults: 0
+<br>	Minor (reclaiming a frame) page faults: 1846
+<br>	Voluntary context switches: 1
+<br>	Involuntary context switches: 1
+<br>	Swaps: 0
+<br>	File system inputs: 0
+<br>	File system outputs: 88
+<br>	Socket messages sent: 0
+<br>	Socket messages received: 0
+<br>	Signals delivered: 0
+<br>	Page size (bytes): 4096
+<br>	Exit status: 0
+</body></html>

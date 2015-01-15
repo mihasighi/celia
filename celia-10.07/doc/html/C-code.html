@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>C code - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Introduction.html#Introduction" title="Introduction">
+<link rel="next" href="Apron-encoding.html#Apron-encoding" title="Apron encoding">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="C-code"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Apron-encoding.html#Apron-encoding">Apron encoding</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Introduction.html#Introduction">Introduction</a>
+<hr>
+</div>
+
+<h3 class="section">2.1 C code</h3>
+
+<!--  -->
+<p><b>THIS PART IS OBSOLTE SINCE REPLACED BY THE CELIA PLUGIN. PLEASE CONSULT CELIA DOCUMENTATION.</b>
+
+   <p>Each example is given as a C function. 
+The function has at least one list parameter of type <code>intlist</code> or its is the <code>main</code> function. 
+The C definition of type <code>intlist</code> corresponds to a singly linked list with an integer data field as follows:
+<pre class="smallformat"><pre class="verbatim">
+typedef struct intlist_ * intlist;
+struct intlist_ {
+  int data;
+  intlist next;
+};
+</pre></pre>
+   <p>The C code used is a very simple subset of C including pointers. 
+In this code, all the statements shall be elementary. 
+<!-- TODO: add description of CLIM -->
+For instance, composed terms (e.g., <code>x-&gt;next-&gt;data</code>) and statements (e.g., <code>x=y</code> with <code>x</code> not pointing to <code>NULL</code>) are not elementary.
+
+   <p>The C functions are specified using the logic presented in <a href="Specification-logic.html#Specification-logic">Specification logic</a>.
+
+<!--  -->
+   </body></html>
+

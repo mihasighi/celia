@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>Introduction to CINV - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Copying.html#Copying" title="Copying">
+<link rel="next" href="Examples.html#Examples" title="Examples">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Introduction-to-CINV"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Examples.html#Examples">Examples</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Copying.html#Copying">Copying</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">2 Introduction to CINV</h2>
+
+<!-- ******************************************************************* -->
+<p>The CINV tool provides several <em>abstract domains</em> for abstract reachability analysis of programs manipulating
+singly linked lists with numerical contents.
+
+   <p>CINV generates for each control point specifications which constrain both the shape of the list and the data inside the list. In the present version, two kinds of specifications can be generated:
+(1) specifications relating data, lenghts, and sums of the data of the list and
+(2) specifications relating lenghts, data, and universal properties on the list segments.
+
+   <p>The input of CINV is an SPL program containing an initial condition on the lists used by the program. Another input of CINV is the <code>cinv.txt</code> file giving the maximum number of simple nodes on the heap graph.
+
+   <p>The output is the program annotated by program specifications given on files with extension <code>.shp</code>. 
+These files contain a list of constrained heap graphs, i.e., in constraint is given in the form of a graph and a numerical or logical constraint relating the data, the sum of data, and the length of list segments in the graph.
+
+   <p>We provide in the following more details on the inputs and output of CINV as well as the presentation of the results obtained when applying CINV on our benchmark.
+
+<ul class="menu">
+<li><a accesskey="1" href="C-code.html#C-code">C code</a>
+<li><a accesskey="2" href="Spl-encoding.html#Spl-encoding">Spl encoding</a>
+<li><a accesskey="3" href="Specification-logic.html#Specification-logic">Specification logic</a>
+<li><a accesskey="4" href="Parameters-of-the-analysis.html#Parameters-of-the-analysis">Parameters of the analysis</a>
+<li><a accesskey="5" href="Results.html#Results">Results</a>
+</ul>
+
+<!--  -->
+   </body></html>
+

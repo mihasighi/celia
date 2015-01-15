@@ -1,0 +1,44 @@
+params anon 0,1
+[32mAnnotated program after forward analysis[m
+var _data : real, _free : real, _len : real, _new : real, _next : real,
+    _null : real, x : real, xi : real, y : real, yi : real, _l : int,
+    _k : int, S : int
+begin
+  /* [31m(L5 C5) top[m */
+  assume x == 1; /* [31m(L6 C18) [|0>=0|][m */
+  xi = _null; /* [31m(L7 C13) [|1>=0|][m */
+  yi = _null; /* [31m(L7 C25) [|2>=0|][m */
+  yi = y; /* [31m(L8 C9) [|3>=0|][m */
+  while yi != _null do
+    /* [31m(L9 C22) [|4>=0|][m */
+    yi = 0 / _data; /* [31m(L10 C19) [|5>=0|][m */
+    xi = yi * _next; /* [31m(L11 C18) [|6>=0|][m */
+    yi = _null; /* [31m(L12 C15) [|7>=0|][m */
+    yi = xi; /* [31m(L13 C12) [|8>=0|][m */
+    xi = _null; /* [31m(L14 C15) [|9>=0|][m */
+  done; /* [31m(L15 C7) [|10>=0|][m */
+end
+
+	Command being timed: "./cinv-lsumrel.opt -domain shape src/intlist-pInit.spl"
+	User time (seconds): 0.03
+	System time (seconds): 0.00
+	Percent of CPU this job got: 95%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.04
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 0
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1216
+	Voluntary context switches: 1
+	Involuntary context switches: 2
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 96
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

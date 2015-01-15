@@ -1,0 +1,172 @@
+shape of size (2) and dim(5,10)
+
+***ushape 0:
+
+ushape of dim (5,10)
+	HGraphs table of size 16
+hgraph of size 4, ptrdim 10, datadim 5, not closed
+succ matrix:
+	n0 -> n0
+	n1 -> n3
+	n2 -> n0
+	n3 -> n2
+ptr vars labels for nodes:
+	x5 ->next^0-> n0
+	x11 ->next^0-> n1
+	x12 ->next^0-> n2
+	x13 ->next^0-> n3
+ptr var to node:  x10(n0),  x11(n1),  x12(n2),  x13(n3),  x14(n0), 
+
+closed bottom
+{segment constraints:
+ucons of [datadim=5, ptrdim=4] 
+octagon of dim (13,0)
+l0 - 3 >= 0
+d03 - d(n01) >= 0
+d04 - d(n01) >= 0
+-d(n01) + d(n02) >= 0
+-d03 + d(n03) >= 0
+-d(n01) + d(n03) >= 0
+d03 - d(n03) >= 0
+l0 + l[n01] - 4 >= 0
+l[n01] - 1 >= 0
+l0 + l[n02] - 4 >= 0
+l[n01] + l[n02] - 2 >= 0
+l[n02] - 1 >= 0
+l0 - l[n02] - 2 >= 0
+l0 + l[n03] - 4 >= 0
+l[n01] + l[n03] - 2 >= 0
+l[n02] + l[n03] - 2 >= 0
+l[n03] - 1 >= 0
+ /\ y1 in [n01], l[n01]>=2  ==> octagon of dim (15,0)
+l0 - 3 >= 0
+-d(n01) + d(n02) >= 0
+-d03 + d(n03) >= 0
+d03 - d(n03) >= 0
+l0 + l[n01] - 5 >= 0
+l[n01] - 2 >= 0
+l0 + l[n02] - 4 >= 0
+l[n01] + l[n02] - 3 >= 0
+l[n02] - 1 >= 0
+l0 - l[n02] - 2 >= 0
+l0 + l[n03] - 4 >= 0
+l[n01] + l[n03] - 3 >= 0
+l[n02] + l[n03] - 2 >= 0
+l[n03] - 1 >= 0
+l0 + y1 - 4 >= 0
+l[n01] + y1 - 3 >= 0
+l[n02] + y1 - 2 >= 0
+l[n03] + y1 - 2 >= 0
+y1 - 1 >= 0
+-d(n01) + d(y1) >= 0
+ /\ y1 in [n02], l[n02]>=2  ==> octagon of dim (15,0)
+l0 - 2 >= 0
+-d(n01) + d(n02) >= 0
+-d03 + d(n03) >= 0
+d03 - d(n03) >= 0
+l0 + l[n01] - 3 >= 0
+l[n01] - 1 >= 0
+l0 + l[n02] - 3 >= 0
+l[n01] + l[n02] - 2 >= 0
+l[n02] - 1 >= 0
+l0 - l[n02] - 1 >= 0
+l0 + l[n03] - 3 >= 0
+l[n01] + l[n03] - 2 >= 0
+l[n02] + l[n03] - 2 >= 0
+l[n03] - 1 >= 0
+ /\ y1 in [n03], l[n03]>=2  ==> octagon of dim (15,0)
+l0 - 3 >= 0
+-d(n01) + d(n02) >= 0
+-d03 + d(n03) >= 0
+d03 - d(n03) >= 0
+l0 + l[n01] - 4 >= 0
+l[n01] - 1 >= 0
+l0 + l[n02] - 4 >= 0
+l[n01] + l[n02] - 2 >= 0
+l[n02] - 1 >= 0
+l0 - l[n02] - 2 >= 0
+l0 + l[n03] - 4 >= 0
+l[n01] + l[n03] - 2 >= 0
+l[n02] + l[n03] - 2 >= 0
+l[n03] - 1 >= 0
+-d(n01) + d(y1) >= 0
+}
+
+***ushape 1:
+
+ushape of dim (5,10)
+	HGraphs table of size 16
+hgraph of size 3, ptrdim 10, datadim 5, not closed
+succ matrix:
+	n0 -> n0
+	n1 -> n2
+	n2 -> n0
+ptr vars labels for nodes:
+	x5 ->next^0-> n0
+	x11 ->next^0-> n1
+	x12 ->next^0-> n2
+ptr var to node:  x10(n0),  x11(n1),  x12(n2),  x13(n1),  x14(n0), 
+
+closed bottom
+{segment constraints:
+ucons of [datadim=5, ptrdim=3] 
+octagon of dim (11,0)
+l0 - 2 >= 0
+-d03 + d04 >= 0
+-d03 + d(n01) >= 0
+d03 - d(n01) >= 0
+d04 - d(n01) >= 0
+-d03 + d(n02) >= 0
+-d(n01) + d(n02) >= 0
+d03 - d(n02) >= 0
+d04 - d(n02) >= 0
+d(n01) - d(n02) >= 0
+l0 + l[n01] - 3 >= 0
+l[n01] - 1 >= 0
+l0 + l[n02] - 3 >= 0
+l[n01] + l[n02] - 2 >= 0
+l[n02] - 1 >= 0
+l0 - l[n02] - 1 >= 0
+ /\ y1 in [n01], l[n01]>=2  ==> octagon of dim (13,0)
+l0 - 3 >= 0
+-d03 + d04 >= 0
+-d03 + d(n01) >= 0
+d03 - d(n01) >= 0
+d04 - d(n01) >= 0
+-d03 + d(n02) >= 0
+-d(n01) + d(n02) >= 0
+d03 - d(n02) >= 0
+d04 - d(n02) >= 0
+d(n01) - d(n02) >= 0
+l0 + l[n01] - 5 >= 0
+l[n01] - 2 >= 0
+l0 + l[n02] - 4 >= 0
+l[n01] + l[n02] - 3 >= 0
+l[n02] - 1 >= 0
+l0 - l[n02] - 2 >= 0
+l0 + y1 - 4 >= 0
+l[n01] + y1 - 3 >= 0
+l[n02] + y1 - 2 >= 0
+y1 - 1 >= 0
+-d03 + d(y1) >= 0
+-d04 + d(y1) >= 0
+-d(n01) + d(y1) >= 0
+-d(n02) + d(y1) >= 0
+ /\ y1 in [n02], l[n02]>=2  ==> octagon of dim (13,0)
+l0 - 2 >= 0
+-d03 + d04 >= 0
+-d03 + d(n01) >= 0
+d03 - d(n01) >= 0
+d04 - d(n01) >= 0
+-d03 + d(n02) >= 0
+-d(n01) + d(n02) >= 0
+d03 - d(n02) >= 0
+d04 - d(n02) >= 0
+d(n01) - d(n02) >= 0
+l0 + l[n01] - 3 >= 0
+l[n01] - 1 >= 0
+l0 + l[n02] - 3 >= 0
+l[n01] + l[n02] - 2 >= 0
+l[n02] - 1 >= 0
+l0 - l[n02] - 1 >= 0
+}

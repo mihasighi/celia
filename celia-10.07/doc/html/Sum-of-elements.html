@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+<title>Sum of elements - CINV 0.2</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="CINV 0.2">
+<meta name="generator" content="makeinfo 4.12">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Computing-on-data.html#Computing-on-data" title="Computing on data">
+<link rel="prev" href="List-equality.html#List-equality" title="List equality">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Sum-of-elements"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="List-equality.html#List-equality">List equality</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Computing-on-data.html#Computing-on-data">Computing on data</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.5 Sum of elements</h4>
+
+<!-- ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' -->
+<pre class="smallformat"><!-- multitable @columnfractions .5 .5 -->
+<!-- headitem  C code @tab Spl encoding -->
+<!-- item -->
+<pre class="verbatim">#include "intlist.h"
+int
+main ()
+{
+
+  intlist x;
+  intlist xi;
+  intlist y;
+  int _l;
+  int _k;
+  int S;
+  int sum;
+
+  assume (x == 0);
+  xi = NULL;
+  y = NULL;
+  xi = x;
+  sum = 0;
+  while (xi != NULL)
+    {
+      sum = sum + xi->data;
+      y = xi->next;
+      xi = NULL;
+      xi = y;
+      y = NULL;
+    }
+  return 0;
+}
+</pre>
+<!-- tab -->
+<!-- verbatiminclude ../samples/spl/intlist-sum.spl -->
+<!-- end multitable -->
+</pre>
+<h5 class="subsubheading">Results</h5>
+
+<pre class="smallformat">
+<p><table summary=""><tr align="left"><th valign="top" width="10%">Domain </th><th valign="top" width="20%">Param. </th><th valign="top" width="70%">Log file / Interesting constraint
+<br></th></tr><tr align="left"><td valign="top" width="10%">LSUM-PRD
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-sum-lsum-prd-01/log.html">log/intlist-sum-lsum-prd-01/</a><br>
+x(n1) \land l=l[n1] \land S=S[n1]=v
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">LSUM-REL
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-sum-lsum-rel-01/log.html">log/intlist-sum-lsum-rel-01/</a><br>
+same as above
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">MSET
+</td><td valign="top" width="20%">Anon=(0,1)
+</td><td valign="top" width="70%"><a href="log/intlist-sum-mset-rel-01/log.html">log/intlist-sum-mset-rel-01/</a><br>
+x(n1) \land l=l[n1] \land M[n1]=M
+
+<br></td></tr><tr align="left"><td valign="top" width="10%">UCONS
+</td><td valign="top" width="20%">Anon=(0,1), P11
+</td><td valign="top" width="70%"><a href="log/intlist-sum-uconspoly-P11-01/log.html">log/intlist-sum-uconspoly-P11-01/</a><br>
+x(n1) \land l=l[n1]
+<br></td></tr></table>
+</pre>
+<!--  -->
+   </body></html>
+

@@ -1,0 +1,45 @@
+shape of size (1) and dim(3,9)
+
+***ushape 0:
+
+ushape of dim (3,9)
+	HGraphs table of size 13
+hgraph of size 3, ptrdim 9, datadim 3, not closed
+succ matrix:
+	n0 -> n0
+	n1 -> n2
+	n2 -> n0
+ptr vars labels for nodes:
+	x3 ->next^0-> n0
+	x9 ->next^0-> n1
+	x10 ->next^0-> n2
+ptr var to node:  x8(n0),  x9(n1),  x10(n2),  x11(n0), 
+
+closed bottom
+{segment constraints:
+ucons of [datadim=3, ptrdim=3] 
+polyhedron of dim (9,0)
+array of constraints of size 5
+ 0: -l0 + l[n01] + l[n02] = 0
+ 1: d(n01) = 0
+ 2: l1 - 1 = 0
+ 3: l[n01] - 1 >= 0
+ 4: l0 - l[n01] - 1 >= 0
+ /\ y1 in [n01], l[n01]>=2  ==> polyhedron of dim (11,0)
+array of constraints of size 8
+ 0: -l0 + l[n01] + l[n02] = 0
+ 1: d(n01) = 0
+ 2: l1 - 1 = 0
+ 3: -d(y1) + 1 >= 0
+ 4: d(y1) >= 0
+ 5: y1 + d(y1) - 2 >= 0
+ 6: l[n01] - y1 - d(y1) - 1 >= 0
+ 7: l0 - l[n01] - 1 >= 0
+ /\ y1 in [n02], l[n02]>=2  ==> polyhedron of dim (11,0)
+array of constraints of size 5
+ 0: -l0 + l[n01] + l[n02] = 0
+ 1: d(n01) = 0
+ 2: l1 - 1 = 0
+ 3: l[n01] - 1 >= 0
+ 4: l0 - l[n01] - 1 >= 0
+}

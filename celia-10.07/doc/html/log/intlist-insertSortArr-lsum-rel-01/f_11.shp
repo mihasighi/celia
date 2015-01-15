@@ -1,0 +1,60 @@
+shape of size (2) and dim(5,10)
+
+***ushape 0:
+
+ushape of dim (5,10)
+	HGraphs table of size 16
+hgraph of size 3, ptrdim 10, datadim 5, not closed
+succ matrix:
+	n0 -> n0
+	n1 -> n2
+	n2 -> n0
+ptr vars labels for nodes:
+	x5 ->next^0-> n0
+	x11 ->next^0-> n1
+	x12 ->next^0-> n2
+ptr var to node:  x10(n0),  x11(n1),  x12(n2),  x13(n2),  x14(n0), 
+
+closed bottom
+{segment constraints:
+lsum of (datadim=5, segmdim=3)
+	dcons=[polyhedron of dim (14,0)
+array of constraints of size 5
+ 0: -l0 + l[n01] + l[n02] = 0
+ 1: -d02 + d(n01) + d(n02) + S(n01) + S(n02) = 0
+ 2: -d(n01) + d(n02) >= 0
+ 3: l[n01] - 1 >= 0
+ 4: l0 - l[n01] - 1 >= 0
+	]
+}
+
+***ushape 1:
+
+ushape of dim (5,10)
+	HGraphs table of size 16
+hgraph of size 4, ptrdim 10, datadim 5, not closed
+succ matrix:
+	n0 -> n0
+	n1 -> n3
+	n2 -> n0
+	n3 -> n2
+ptr vars labels for nodes:
+	x5 ->next^0-> n0
+	x11 ->next^0-> n1
+	x12 ->next^0-> n2
+	x13 ->next^0-> n3
+ptr var to node:  x10(n0),  x11(n1),  x12(n2),  x13(n3),  x14(n0), 
+
+closed bottom
+{segment constraints:
+lsum of (datadim=5, segmdim=4)
+	dcons=[polyhedron of dim (17,0)
+array of constraints of size 6
+ 0: -l0 + l[n01] + l[n02] + l[n03] = 0
+ 1: -d02 + d(n01) + d(n02) + d(n03) + S(n01) + S(n02) + S(n03) = 0
+ 2: -d(n01) + d(n02) >= 0
+ 3: l[n02] - 1 >= 0
+ 4: l[n01] - 1 >= 0
+ 5: l0 - l[n01] - l[n02] - 1 >= 0
+	]
+}

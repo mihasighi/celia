@@ -1,0 +1,241 @@
+[32mProgram with its control points:[m
+var _data : real, _free : real, _len : real, _new : real, _next : real,
+    _null : real, x : real, xi : real, y : real, _l : int, _k : int, S : int,
+    max : int
+begin
+  /* [31m(L5 C5)[m */
+  assume x == 0; /* [31m(L6 C18)[m */
+  xi = _null; /* [31m(L7 C13)[m */
+  y = _null; /* [31m(L7 C24)[m */
+  xi = x; /* [31m(L8 C9)[m */
+  max = x * _data; /* [31m(L9 C18)[m */
+  while xi != _null do
+    /* [31m(L10 C22)[m */
+    if max + 1 <= xi * _data then
+      /* [31m(L11 C32)[m */
+      max = xi * _data; /* [31m(L12 C23)[m */
+    endif; /* [31m(L13 C10)[m */
+    y = xi * _next; /* [31m(L14 C17)[m */
+    xi = _null; /* [31m(L15 C15)[m */
+    xi = y; /* [31m(L16 C11)[m */
+    y = _null; /* [31m(L17 C14)[m */
+  done; /* [31m(L18 C7)[m */
+end
+
+params anon 0,1
+
+ shape_meet_tcons_array: 
+	 with constraint [ x10 == x4, ]
+	 on <file:f_0.shp>
+	 returns <file:f_1.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x9,   (i.e.  [x11 := x9, ])
+	 on <file:f_2.shp>
+	 returns <file:f_3.shp>
+ shape_assign_texpr_array:
+	 with assign x12 := x9,   (i.e.  [x12 := x9, ])
+	 on <file:f_4.shp>
+	 returns <file:f_5.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x10,   (i.e.  [x11 := x10, ])
+	 on <file:f_6.shp>
+	 returns <file:f_7.shp>
+ shape_assign_texpr_array:
+	 with assign x3 := x10 * x4,   (i.e.  [x3 := x10, ])
+	 on <file:f_8.shp>
+	 returns <file:f_9.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ x11 != x9, ]
+	 on <file:f_10.shp>
+	 returns <file:f_11.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ -x3 + x11 - 1 >= 0, ]
+	 on <file:f_12.shp>
+	 returns <file:f_13.shp>
+ shape_assign_texpr_array:
+	 with assign x3 := x11 * x4,   (i.e.  [x3 := x11, ])
+	 on <file:f_14.shp>
+	 returns <file:f_15.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ x3 - x11 + 1 > 0, ]
+	 on <file:f_16.shp>
+	 returns <file:f_17.shp>
+ shape_assign_texpr_array:
+	 with assign x12 := x11 * x8,   (i.e.  [x12 := x11->next, ])
+	 on <file:f_18.shp>
+	 returns <file:f_19.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x9,   (i.e.  [x11 := x9, ])
+	 on <file:f_20.shp>
+	 returns <file:f_21.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x12,   (i.e.  [x11 := x12, ])
+	 on <file:f_22.shp>
+	 returns <file:f_23.shp>
+ shape_assign_texpr_array:
+	 with assign x12 := x9,   (i.e.  [x12 := x9, ])
+	 on <file:f_24.shp>
+	 returns <file:f_25.shp>
+ shape_join:
+	 on <file:f_26.shp> and <file:f_27.shp>
+	 returns <file:f_28.shp>
+
+ shape_widening:
+	 on <file:f_29.shp> and <file:f_30.shp>
+	 returns <file:f_31.shp>
+
+ shape_meet_tcons_array: 
+	 with constraint [ x11 != x9, ]
+	 on <file:f_32.shp>
+	 returns <file:f_33.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ -x3 + x11 - 1 >= 0, ]
+	 on <file:f_34.shp>
+	 returns <file:f_35.shp>
+ shape_assign_texpr_array:
+	 with assign x3 := x11 * x4,   (i.e.  [x3 := x11, ])
+	 on <file:f_36.shp>
+	 returns <file:f_37.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ x3 - x11 + 1 > 0, ]
+	 on <file:f_38.shp>
+	 returns <file:f_39.shp>
+ shape_join:
+	 on <file:f_40.shp> and <file:f_41.shp>
+	 returns <file:f_42.shp>
+
+ shape_assign_texpr_array:
+	 with assign x12 := x11 * x8,   (i.e.  [x12 := x11->next, ])
+	 on <file:f_43.shp>
+	 returns <file:f_44.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x9,   (i.e.  [x11 := x9, ])
+	 on <file:f_45.shp>
+	 returns <file:f_46.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x12,   (i.e.  [x11 := x12, ])
+	 on <file:f_47.shp>
+	 returns <file:f_48.shp>
+ shape_assign_texpr_array:
+	 with assign x12 := x9,   (i.e.  [x12 := x9, ])
+	 on <file:f_49.shp>
+	 returns <file:f_50.shp>
+ shape_join:
+	 on <file:f_51.shp> and <file:f_52.shp>
+	 returns <file:f_53.shp>
+
+ shape_widening:
+	 on <file:f_54.shp> and <file:f_55.shp>
+	 returns <file:f_56.shp>
+
+ shape_meet_tcons_array: 
+	 with constraint [ x11 != x9, ]
+	 on <file:f_57.shp>
+	 returns <file:f_58.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ -x3 + x11 - 1 >= 0, ]
+	 on <file:f_59.shp>
+	 returns <file:f_60.shp>
+ shape_assign_texpr_array:
+	 with assign x3 := x11 * x4,   (i.e.  [x3 := x11, ])
+	 on <file:f_61.shp>
+	 returns <file:f_62.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ x3 - x11 + 1 > 0, ]
+	 on <file:f_63.shp>
+	 returns <file:f_64.shp>
+ shape_join:
+	 on <file:f_65.shp> and <file:f_66.shp>
+	 returns <file:f_67.shp>
+
+ shape_assign_texpr_array:
+	 with assign x12 := x11 * x8,   (i.e.  [x12 := x11->next, ])
+	 on <file:f_68.shp>
+	 returns <file:f_69.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x9,   (i.e.  [x11 := x9, ])
+	 on <file:f_70.shp>
+	 returns <file:f_71.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x12,   (i.e.  [x11 := x12, ])
+	 on <file:f_72.shp>
+	 returns <file:f_73.shp>
+ shape_assign_texpr_array:
+	 with assign x12 := x9,   (i.e.  [x12 := x9, ])
+	 on <file:f_74.shp>
+	 returns <file:f_75.shp>
+ shape_join:
+	 on <file:f_76.shp> and <file:f_77.shp>
+	 returns <file:f_78.shp>
+
+ shape_assign_texpr_array:
+	 with assign x3 := x10 * x4,   (i.e.  [x3 := x10, ])
+	 on <file:f_79.shp>
+	 returns <file:f_80.shp>
+ shape_join:
+	 on <file:f_81.shp> and <file:f_82.shp>
+	 returns <file:f_83.shp>
+
+ shape_meet_tcons_array: 
+	 with constraint [ x11 != x9, ]
+	 on <file:f_84.shp>
+	 returns <file:f_85.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ -x3 + x11 - 1 >= 0, ]
+	 on <file:f_86.shp>
+	 returns <file:f_87.shp>
+ shape_assign_texpr_array:
+	 with assign x3 := x11 * x4,   (i.e.  [x3 := x11, ])
+	 on <file:f_88.shp>
+	 returns <file:f_89.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ x3 - x11 + 1 > 0, ]
+	 on <file:f_90.shp>
+	 returns <file:f_91.shp>
+ shape_join:
+	 on <file:f_92.shp> and <file:f_93.shp>
+	 returns <file:f_94.shp>
+
+ shape_assign_texpr_array:
+	 with assign x12 := x11 * x8,   (i.e.  [x12 := x11->next, ])
+	 on <file:f_95.shp>
+	 returns <file:f_96.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x9,   (i.e.  [x11 := x9, ])
+	 on <file:f_97.shp>
+	 returns <file:f_98.shp>
+ shape_assign_texpr_array:
+	 with assign x11 := x12,   (i.e.  [x11 := x12, ])
+	 on <file:f_99.shp>
+	 returns <file:f_100.shp>
+ shape_assign_texpr_array:
+	 with assign x12 := x9,   (i.e.  [x12 := x9, ])
+	 on <file:f_101.shp>
+	 returns <file:f_102.shp>
+ shape_meet_tcons_array: 
+	 with constraint [ x11 == x9, ]
+	 on <file:f_103.shp>
+	 returns <file:f_104.shp><file:f_105.shp><file:f_106.shp><file:f_107.shp><file:f_108.shp><file:f_109.shp><file:f_110.shp><file:f_111.shp><file:f_112.shp><file:f_113.shp><file:f_114.shp><file:f_115.shp><file:f_116.shp><file:f_117.shp><file:f_118.shp>[32mAnnotated program after forward analysis[m
+var _data : real, _free : real, _len : real, _new : real, _next : real,
+    _null : real, x : real, xi : real, y : real, _l : int, _k : int, S : int,
+    max : int
+begin
+  /* [31m(L5 C5) top[m */
+  assume x == 0; /* [31m(L6 C18) [|105>=0|][m */
+  xi = _null; /* [31m(L7 C13) [|106>=0|][m */
+  y = _null; /* [31m(L7 C24) [|107>=0|][m */
+  xi = x; /* [31m(L8 C9) [|108>=0|][m */
+  max = x * _data; /* [31m(L9 C18) [|109>=0|][m */
+  while xi != _null do
+    /* [31m(L10 C22) [|110>=0|][m */
+    if max + 1 <= xi * _data then
+      /* [31m(L11 C32) [|111>=0|][m */
+      max = xi * _data; /* [31m(L12 C23) [|112>=0|][m */
+    endif; /* [31m(L13 C10) [|113>=0|][m */
+    y = xi * _next; /* [31m(L14 C17) [|114>=0|][m */
+    xi = _null; /* [31m(L15 C15) [|115>=0|][m */
+    xi = y; /* [31m(L16 C11) [|116>=0|][m */
+    y = _null; /* [31m(L17 C14) [|117>=0|][m */
+  done; /* [31m(L18 C7) [|118>=0|][m */
+end
+
