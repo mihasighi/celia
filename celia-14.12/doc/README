@@ -1,0 +1,43 @@
+
+HOW TO PRODUCE DOCUMENTATION
+============================
+Files:
+- Main:			cinv.texi celia.texi
+- Examples section:	samples.texi
+- Examples results:	../samples/log/*/log.txt
+
+Steps for CINV:
+
+1) Produce results in the directory log/ex/
+
+2) To generate HTML output for this example call
+
+	./try-doc.sh log/ex/log.txt
+
+3) To generate the HTML file 
+
+	make cinv.html
+
+4) To generate the PDF file
+
+	make cinv.pdf
+
+
+WARNING: do not copy cinv.html directly on doc directory!
+
+
+	
+
+HOW TO USE SVN
+==============
+
+About using svn:
+
+http://www.abbeyworkshop.com/howto/misc/svn01/
+
+see subversion-tools on ubuntu to generate log files
+
+see xxdiff-scripts for comparison of files/directories
+
+kdesvn for graphical interface
+

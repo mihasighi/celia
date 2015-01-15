@@ -1,0 +1,45 @@
+CC = gcc
+FLEX = flex
+BISON = bison
+CFLAGS = -std=c99 -pedantic -g -Wall
+LDFLAGS = -g -lgmp -lgmpxx -lstdc++ 
+SHARED = $(CC) -shared
+
+OBJECTS = smtlib2bisonparser.o \
+	  smtlib2flexlexer.o \
+	  smtlib2hashtable.o \
+	  smtlib2abstractparser.o \
+	  smtlib2termparser.o \
+	  smtlib2utils.o \
+	  smtlib2vector.o \
+	  smtlib2charbuf.o \
+	  smtlib2stream.o \
+	  smtlib2scanner.o
+
+all: libsmtlib2parser.so 
+
+clean:
+	rm -f $(OBJECTS) $(SL3_OBJECTS) libsmtlib2parser.a smtlib2bisonparser.c smtlib2bisonparser.h smtlib2flexlexer.c smtlib2flexlexer.h
+
+distclean: clean
+
+
+libsmtlib2parser.a: $(OBJECTS)
+	ar rc $@ $(OBJECTS)
+	ranlib $@
+
+libsmtlib2parser.so: $(OBJECTS)
+	$(SHARED) $(LDFLAGS) $(SHARED_LIBS) -o $@ $^ 
+
+
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+
+smtlib2bisonparser.c: smtlib2bisonparser.y smtlib2flexlexer.c
+	$(BISON) -o $@ $<
+
+smtlib2flexlexer.c: smtlib2flexlexer.l
+	$(FLEX) --header-file="smtlib2flexlexer.h" -o $@ $<
+

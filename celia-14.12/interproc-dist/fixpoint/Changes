@@ -1,0 +1,8 @@
+
+Release 2.2.0
+=============
+
+- Improved debugging display
+- Removed widening_first and widening_freq options
+  (first one superseded by guided, and second one not sound as is)
+- Fixed a bug in FixpointStd/FixpointDyn

@@ -1,0 +1,120 @@
+About
+=====
+This is a distribution package for the Celia tool.
+
+
+Required
+========
+apron                   version 0.9.10 (tested release 12.fc20)
+ocaml                   version 4.00.1 (tested release 3.fc20)
+ocaml-camlidl-devel     version 1.05   (tested release 19.fc20.1)
+gmp                     version 5.1.2  (tested release 2.fc20)
+mpfr                    version 3.1.2  (tested release 5.fc20)
+frama-c                 version Neon-20140301
+
+To facilitate the installation of CELIA, we provide the Fixpoint distribution
+[http://pop-art.inrialpes.fr/people/bjeannet/bjeannet-forge/interproc/index.html]
+
+To configure
+============
+[in the distribution directory]
+
+Generate configure script by executing in the cinv directory
+
+	> autoconf
+
+Configure the Makefile with the local settings by executing
+
+	> ./configure
+
+Set the environment variable CINV to the distribution directory:
+
+> export CINV=`pwd`
+
+Set also variables for the apron, ocaml, gmp, mpfr, ppl libraries 
+in Makefile.config
+
+
+To compile and install
+========================
+[To compile a debug version set $DEBUG to _debug.]
+
+All the commands below are included in the install.sh file, so:
+
+> ./install.sh
+
+It contains the following commands:
+
+* to install FIXPOINT
+
+> make -C interproc-dist all
+> make -C interproc-dist install
+
+* to compile SMTLIB parser
+
+> make -C smtlib2parser-dist all
+
+* to compile CINV abstract domains
+
+> make -C shapes all
+> make -C shapes ml
+
+* to compile SL3 decision procedure
+
+> make -C shapes sl3dp
+
+* to compile CINV engine
+
+> make -C src clim.cma
+
+* to compile CELIA plug-in
+
+> make -C frama-c-plugin frama-c-Celia.byte
+
+The plug-in is avaliable in the frama-c-plugin directory.
+
+Testing Celia plugin
+====================
+Step 1) The libraries for the abstract domains provided by CINV are loaded dynamically,
+        so you have to set the path to the directory where they are installed, e.g.:
+
+> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CINV/shapes:$CINV/smtlib2parser-dist:$CINV/apron-dist/mlgmpidl/lib:$CINV/apron-dist/apron/lib
+
+Step 2) In the directory $CINV/samples each example XXX.c comes with 
+	- a makefile XXX.makefile and a list of configuration files:
+	- XXX-yyyy.prop where yyyy fixes the domain of data words used in the analysis
+	  (mset, lsum, ucons)
+	- XXX-funs.prop where parameters for the analysis of each function are fixed
+	- XXX-cinv-ucons.txt where parameters for yyyy=ucons are fixed
+
+	PLease write the corresponding files and lines in the makefile if you want to add
+	other analyses.
+
+Step 3) Call Frama-c with plugin Celia using the XXX.makefile
+
+	> make -f XXX.makefile <analysis>
+
+	where <analysis> is one of (mset, lsum, ucons)
+
+        Do not forget to include all the source files to analyze your code. 
+        The basic declarations for linked lists can be found in cinv/samples/c/linked_list.h
+        and the sources are in cinv/samples/c/linked_list*.c
+
+
+Testing SL3 decision procedure
+==============================
+
+1) The binary is sl3dp, generated in shapes and installed in bin.
+   The environment variables mentioned above shall also be set.
+
+2) In the directory samples/smtlib examples of entailment problems in SL3
+   are given as files 
+	sl3_*.smt
+	auflia_*.smt
+
+3) Execute the decision procedure by
+
+	> sl3dp file.smt
+
+
+

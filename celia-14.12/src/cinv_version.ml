@@ -1,0 +1,6 @@
+let version = "1.0"
+let date = "Tue Jan 13 13:29:09 CET 2015"
+let libdir = "/"
+let version = "14.12"
+let date = "Thu Jan 15 14:48:17 CET 2015"
+let libdir = "/"

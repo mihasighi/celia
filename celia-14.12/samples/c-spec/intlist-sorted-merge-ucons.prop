@@ -1,0 +1,7 @@
+debug=0
+domain=shape
+dwdomain=ucons
+maxanon=0
+maxasegm=1
+main=sorted_merge
+funspec=intlist-sorted-merge-ucons-funs.prop

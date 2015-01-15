@@ -1,0 +1,28 @@
+
+#include "intlist.h"
+
+// Initializes each element of y with the corresponding element of x
+// plus v.
+// Iterative version.
+
+/*@ requires acyclic(x) && acyclic(y) && disjoint(x,y);
+ */
+void map2_addV(intlist x, intlist y, int v) {
+    intlist xi, yi, tmp;
+    xi = yi = tmp = NULL;
+    xi = x;
+    yi = y;
+    while (xi != NULL && yi != NULL) {
+        yi->data = xi->data + v;
+        tmp = xi->next;
+        xi = NULL;
+        xi = tmp;
+        tmp = NULL;
+        tmp = yi->next;
+        yi = NULL;
+        yi = tmp;
+        tmp = NULL;
+    }
+}
+
+

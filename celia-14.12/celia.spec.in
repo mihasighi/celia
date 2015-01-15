@@ -1,0 +1,38 @@
+%define name celia
+%define version @VERSION@
+%define release @RELEASE@
+
+Summary: CELIA
+Name: %{name}
+Version: %{version}
+Release: %{release}
+Copyright: LGPL v3
+Group: Development/Tools
+URL: http://www.liafa.univ-paris-diderot.fr/cinv
+Vendor: LIAFA
+Source: http://www.liafa.univ-paris-diderot.fr/cinv/download
+BuildRoot: /tmp/%{name}-%{version}
+Packager: 
+
+%description 
+TODO
+
+%prep
+%setup -q
+
+%build
+%configure @CFG@
+make
+strip trex2c
+
+%install
+%makeinstall
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%doc README COPYING INSTALL
+%{_bindir}/cinv
+%{_mandir}/man1/*

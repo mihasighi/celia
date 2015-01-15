@@ -1,0 +1,19 @@
+
+This directory includes lists of examples dealt by the tools
+of this distribution:
+
+$CINV/samples/c		C examples using singly linked lists (intlist.h)
+			and the files needed to analyze them using CELIA
+
+
+$CINV/samples/bad-c	C examples which can not be analyzed using CELIA
+			(mainly problems on C code used)
+
+$CINV/samples/c-spec	C examples annotated using ACSL fragment corresponding
+			to the SL3 logic and the files needed to verify them
+			using CELIA
+
+$CINV/samples/smtlib	Sat and entailment problems in SL3 and AULIA that can be 
+			checked using sl3dp
+
+
