@@ -1,0 +1,21 @@
+[celia] Starting Clim translation
+[kernel] preprocessing with "gcc -C -E -I.  -I /usr/local/share/frama-c  -I /usr/local/share/frama-c/libc -I /home/sighirea/Parallelisme/tools-other/frama-c-Boron-20100401-why-2.24/why/frama-c-plugin/share  intlist-initSum.c"
+[kernel] No code for function printlist, default assigns generated
+[kernel] No code for function allocate, default assigns generated
+[kernel] No code for function allocate_value, default assigns generated
+[celia] ====== Check file for Clim =====
+[celia] ====== Slice unmanaged code and specs =====
+[celia] ====== Translate to Clim =====
+:0:[celia] warning: Interp.annotation dropping (Dlemma | Dinvariant_property)
+:0:[celia] warning: Interp.annotation dropping (Dlemma | Dinvariant_property)
+:0:[celia] warning: Interp.annotation dropping (Dlemma | Dinvariant_property)
+linked_list.h:16:[celia] warning: Dropping declaration of predicate reach
+linked_list.h:21:[celia] warning: Dropping declaration of predicate acyclic
+linked_list.h:26:[celia] warning: Dropping declaration of predicate disjoint
+linked_list.h:29:[celia] warning: Dropping declaration of predicate disjoint3
+linked_list.h:35:[celia] warning: Dropping declaration of predicate len
+intlist-initSum.c:34:[celia] warning: skipping all arguments of library function printf.
+intlist-initSum.c:36:[celia] warning: skipping all arguments of library function printf.
+intlist-initSum.c:42:[celia] warning: skipping all arguments of library function printf.
+[celia] ====== Generate SPL code =====
+[celia] ====== Call Cinv analysis on input function main =====

@@ -1,0 +1,48 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+unit initSum(intlist_[..] x, intlist_[..] y, intlist_[..] z)
+  requires (C_15 : ((((C_18 : acyclic{Here}(x)) && (C_19 : acyclic{Here}(y))) &&
+                      (C_20 : acyclic{Here}(z))) &&
+                     (C_21 : disjoint3{Here}(x, y, z))));
+behavior default:
+  ensures (C_22 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var intlist_[..] yi);
+   
+   (var intlist_[..] zi);
+   
+   {  (C_1 : (xi = x));
+      (C_2 : (yi = y));
+      (C_3 : (zi = z));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then (if (yi != null) then (if (zi != null) then () else 
+                                                        (break File "intlist-sum3.c", line 10, characters 2-7)) else 
+                                  (break File "intlist-sum3.c", line 10, characters 2-7)) else 
+            (break File "intlist-sum3.c", line 10, characters 2-7));
+            (C_8 : ((C_7 : (zi :> integer)) = (C_6 : ((C_5 : (xi :> integer)) +
+                                                       (C_4 : (yi :> integer))))));
+            (C_10 : (xi = (C_9 : (xi :> intlist_[..]))));
+            (C_12 : (yi = (C_11 : (yi :> intlist_[..]))));
+            (C_14 : (zi = (C_13 : (zi :> intlist_[..]))))
+         }
+      };
+      
+      (return ())
+   }
+}

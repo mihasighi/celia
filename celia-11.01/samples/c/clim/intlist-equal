@@ -1,0 +1,102 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..8] __string_List_2__;
+
+char_P[0..8] __string_List_1__;
+
+char_P[0..27] __string_The_two_lists_are_unequal__;
+
+char_P[0..26] __string_The_two_lists_are_equal___;
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+integer printf(char_P[..] __format)
+behavior default:
+  assigns \nothing;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_6 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_7 : true);
+;
+
+integer equal(intlist_[..] x, intlist_[..] y)
+  requires (C_19 : acyclic{Here}(x));
+  requires (C_20 : acyclic{Here}(y));
+  requires (C_21 : disjoint{Here}(x, y));
+behavior default:
+  ensures (C_22 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var intlist_[..] yi);
+   
+   (var integer tmp);
+   
+   {  (C_8 : (xi = x));
+      (C_9 : (yi = y));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then (if (yi != null) then (if ((C_11 : (xi :> integer)) ==
+                                                              (C_10 : (yi :> integer))) then () else 
+                                                        (break File "intlist-equal.c", line 13, characters 2-7)) else 
+                                  (break File "intlist-equal.c", line 13, characters 2-7)) else 
+            (break File "intlist-equal.c", line 13, characters 2-7));
+            (C_13 : (xi = (C_12 : (xi :> intlist_[..]))));
+            (C_15 : (yi = (C_14 : (yi :> intlist_[..]))))
+         }
+      };
+      (if (xi == null) then (if (yi == null) then (C_18 : (tmp = 1)) else 
+                            (C_17 : (tmp = 0))) else (C_16 : (tmp = 0)));
+      
+      (return tmp)
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_37 : true);
+{  
+   (var intlist_[..] head_1);
+   
+   (var intlist_[..] head1);
+   
+   (var integer i);
+   
+   {  (C_23 : (head_1 = null));
+      (C_24 : (head1 = null));
+      (C_26 : (head_1 = (C_25 : allocate(head_1, 10))));
+      (C_28 : (head1 = (C_27 : allocate(head1, 10))));
+      (C_30 : (i = (C_29 : equal(head_1, head1))));
+      (if (i != 0) then (C_32 : printf()) else (C_31 : printf()));
+      (C_33 : printf());
+      (C_34 : printlist(head_1));
+      (C_35 : printf());
+      (C_36 : printlist(head1));
+      
+      (return ())
+   }
+}

@@ -1,0 +1,101 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..8] __string_Mod_2___;
+
+char_P[0..12] __string_List_1_is___;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_6 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_7 : true);
+;
+
+unit initMod2(intlist_[..] x)
+  requires (C_16 : acyclic{Here}(x));
+behavior default:
+  ensures (C_17 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var integer k);
+   
+   {  (C_8 : (xi = x));
+      (C_9 : (k = 0));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then () else 
+            (break File "intlist-initMod2.c", line 9, characters 2-7));
+            (C_11 : ((C_10 : (xi :> integer)) = k));
+            (C_13 : (xi = (C_12 : (xi :> intlist_[..]))));
+            (C_15 : (k = (C_14 : (1 - k))))
+         }
+      };
+      
+      (return ())
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_26 : true);
+{  
+   (var intlist_[..] head_1);
+   
+   {  (C_18 : (head_1 = null));
+      (C_20 : (head_1 = (C_19 : allocate(head_1, 10))));
+      (C_21 : printf());
+      (C_22 : printlist(head_1));
+      (C_23 : initMod2(head_1));
+      (C_24 : printf());
+      (C_25 : printlist(head_1));
+      
+      (return ())
+   }
+}

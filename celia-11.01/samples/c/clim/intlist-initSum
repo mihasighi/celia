@@ -1,0 +1,135 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..34] __string_List_3_after_adding_list1__list2__;
+
+char_P[0..12] __string_List_2_is___;
+
+char_P[0..12] __string_List_1_is___;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+intlist_[..] allocate_value(intlist_[..] head_1, integer elements_0,
+                            integer value)
+  requires (C_6 : ((C_7 : acyclic{Here}(head_1)) &&
+                    (C_8 : (elements_0 >= 1))));
+behavior default:
+  assigns head_1.data,
+  head_1.next;
+  ensures (C_9 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_10 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_11 : true);
+;
+
+unit initSum(intlist_[..] x, intlist_[..] y, intlist_[..] z)
+  requires (C_26 : acyclic{Here}(x));
+  requires (C_27 : acyclic{Here}(y));
+  requires (C_28 : acyclic{Here}(z));
+  requires (C_29 : disjoint3{Here}(x, y, z));
+behavior default:
+  ensures (C_30 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var intlist_[..] yi);
+   
+   (var intlist_[..] zi);
+   
+   {  (C_12 : (xi = x));
+      (C_13 : (yi = y));
+      (C_14 : (zi = z));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then (if (yi != null) then (if (zi != null) then () else 
+                                                        (break File "intlist-initSum.c", line 14, characters 2-7)) else 
+                                  (break File "intlist-initSum.c", line 14, characters 2-7)) else 
+            (break File "intlist-initSum.c", line 14, characters 2-7));
+            (C_19 : ((C_18 : (zi :> integer)) = (C_17 : ((C_16 : (xi :> integer)) +
+                                                          (C_15 : (yi :> integer))))));
+            (C_21 : (xi = (C_20 : (xi :> intlist_[..]))));
+            (C_23 : (yi = (C_22 : (yi :> intlist_[..]))));
+            (C_25 : (zi = (C_24 : (zi :> intlist_[..]))))
+         }
+      };
+      
+      (return ())
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_47 : true);
+{  
+   (var intlist_[..] head_2);
+   
+   (var intlist_[..] head1);
+   
+   (var intlist_[..] head2);
+   
+   {  
+      {  (C_31 : (head2 = null));
+         (C_32 : (head1 = head2));
+         (C_33 : (head_2 = head1))
+      };
+      (C_35 : (head_2 = (C_34 : allocate(head_2, 10))));
+      (C_37 : (head1 = (C_36 : allocate(head1, 10))));
+      (C_39 : (head2 = (C_38 : allocate_value(head2, 10, 0))));
+      (C_40 : printf());
+      (C_41 : printlist(head_2));
+      (C_42 : printf());
+      (C_43 : printlist(head1));
+      (C_44 : initSum(head_2, head1, head2));
+      (C_45 : printf());
+      (C_46 : printlist(head2));
+      
+      (return ())
+   }
+}

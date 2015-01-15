@@ -1,0 +1,95 @@
+About
+=====
+This is a distribution package for the CINV libraries and the plugin Celia.
+
+
+Required
+========
+APRON platform:
+	- improved version available as Ubuntu 10 package  in the Ocaml distribution
+	- original version available at [http://apron.cri.ensmp.fr/library/] which requires:
+OCaml 3.09
+Camlidl
+C  libraries: 
+  GMP (http://gmplib.org)
+  MPFR (http://www.mpfr.org/)
+
+FIXPOINT engine [http://pop-art.inrialpes.fr/people/bjeannet/bjeannet-forge/interproc/index.html]
+
+FRAMA-C platform version Boron-20100401:
+	- available as Ubuntu 10 package
+	- source distribution available at [http://www.frama-c.com/]
+
+To facilitate the installation of CINV, we provide the Apron and Fixpoint distributions.
+
+To configure
+============
+[in the distribution directory]
+
+Generate configure script by executing in the cinv directory
+
+	> autoconf
+
+Configure the Makefile with the local settings by executing
+
+	> ./configure
+
+Set the environement variable CINV to the distribution directory:
+
+> export CINV=`pwd`
+
+
+To compile and install
+========================
+[To compile a debug version set $DEBUG to _debug.]
+
+All the commands below are included in the install.sh file, so:
+
+> ./install.sh
+
+It contains the following commands:
+
+* to install FIXPOINT
+
+> make -C interproc-dist all
+> make -C interproc-dist install
+
+* to install Apron
+
+> make -C apron-dist all
+> make -C apron-dist install
+
+* to compile CINV abstract domains
+
+> make -C shapes all
+> make -C shapes ml
+
+* to compile CINV engine
+
+> make src/clim.cma
+
+* to compile CELIA plug-in
+
+> make -C frama-c-plugin frama-c-Celia.byte
+
+The plug-in is avaliable in the frama-c-plugin directory.
+
+Testing
+========
+Step 1) The libraries for the abstract domains provided by CINV are loaded dynamically,
+        so you have to set the path to the directory where they are installed, e.g.:
+
+> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CINV/shapes:$CINV/apron-dist/mlgmpidl/lib:$CINV/apron-dist/apron/lib
+
+Step 2) The input parameters for the analysis are read from the "properties" file 
+        given as input (default cinv.properties, see one example in samples/cinv.prop).
+
+Step 3) Call Frama-c with plugin Celia as follows
+
+	bash> frama-c-Celia.byte -celia -celia-cinv-opt cinv.prop <source files for map_add2>
+
+        Do not forget to include all the source files to analyze your code. 
+        The basic declarations for linked lists can be found in cinv/samples/c/linked_list.h
+        and the sources are in cinv/samples/c/linked_list*.c
+
+

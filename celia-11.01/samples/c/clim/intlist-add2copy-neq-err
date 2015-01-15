@@ -1,0 +1,106 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..64] __string_Output_after_Adding_2_and_copying_to_new_list_of_unequal_length_;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_6 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_7 : true);
+;
+
+unit add2copy_neq(intlist_[..] x, intlist_[..] y)
+  requires (C_18 : acyclic{Here}(x));
+  requires (C_19 : acyclic{Here}(y));
+  requires (C_20 : disjoint{Here}(x, y));
+behavior default:
+  ensures (C_21 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var intlist_[..] yi);
+   
+   {  (C_8 : (xi = x));
+      (C_9 : (yi = y));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then () else 
+            (break File "intlist-add2copy-neq-err.c", line 13, characters 2-7));
+            (C_13 : ((C_12 : (yi :> integer)) = (C_11 : ((C_10 : (xi :> integer)) +
+                                                          2))));
+            (C_15 : (xi = (C_14 : (xi :> intlist_[..]))));
+            (C_17 : (yi = (C_16 : (yi :> intlist_[..]))))
+         }
+      };
+      
+      (return ())
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_31 : true);
+{  
+   (var intlist_[..] head_1);
+   
+   (var intlist_[..] head1);
+   
+   {  
+      {  (C_22 : (head1 = null));
+         (C_23 : (head_1 = head1))
+      };
+      (C_25 : (head_1 = (C_24 : allocate(head_1, 10))));
+      (C_27 : (head1 = (C_26 : allocate(head1, 8))));
+      (C_28 : add2copy_neq(head_1, head1));
+      (C_29 : printf());
+      (C_30 : printlist(head1));
+      
+      (return ())
+   }
+}

@@ -1,0 +1,103 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..12] __string_Empty_List__;
+
+char_P[0..43] __string_List_after_calling_sentinel_with_2_value___;
+
+char_P[0..30] __string_list_before_calling_sentinel__;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_6 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_7 : true);
+;
+
+intlist_[..] sentinel(intlist_[..] x)
+  requires (C_12 : acyclic{Here}(x));
+behavior default:
+  ensures (C_13 : true);
+{  
+   (var intlist_[..] xi);
+   
+   {  (C_8 : (xi = x));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then (if ((C_9 : (xi :> integer)) <= 2) then () else 
+                                  (break File "intlist-sentinel2.c", line 10, characters 2-7)) else 
+            (break File "intlist-sentinel2.c", line 10, characters 2-7));
+            (C_11 : (xi = (C_10 : (xi :> intlist_[..]))))
+         }
+      };
+      
+      (return xi)
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_25 : true);
+{  
+   (var intlist_[..] head_1);
+   
+   (var integer m);
+   
+   {  (C_14 : (m = 10));
+      (C_15 : (head_1 = null));
+      (C_17 : (head_1 = (C_16 : allocate(head_1, 10))));
+      (C_18 : printf());
+      (C_19 : printlist(head_1));
+      (C_21 : (head_1 = (C_20 : sentinel(head_1))));
+      (C_22 : printf());
+      (if (head_1 == null) then (C_24 : printf()) else (C_23 : printlist(
+                                                       head_1)));
+      
+      (return ())
+   }
+}

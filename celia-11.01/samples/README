@@ -1,0 +1,47 @@
+
+HOW TO PRODUCE EXAMPLES
+=======================
+
+1. C Examples
+-------------
+A. The directories including examples in C are c and cspl.
+
+B. To analyse one example call
+
+	$CINV [options] -c c/file.c
+
+C. To do a batch run on all c examples call
+
+	./try.sh -c 
+
+
+2. SPL Examples
+---------------
+A. Directories spl and splold contains spl programs
+  with new resp. old encoding of pointer programs in spl.
+  Only the new encoding is accepted now by CINV.
+
+B. To obtain a new encoding file from an old encoding file call
+
+	./spl_io -2new file.spl
+
+C. To decode the new encoding to a more lisible format call
+
+	./spl_io -2ptr file.spl
+
+D. To encode in C an old encoding file call
+
+	./spl_io -2c file.spl
+
+E. To translate in new encoding a lisible format generated and 2.C) call
+
+	./spl_io -2new file.ptr
+
+F. To apply the analysis to an SPL file (new encoding) call
+
+	$CINV [options] -spl spl/file.spl
+
+C. To do a batch run on all c examples call
+
+	./try.sh -spl
+

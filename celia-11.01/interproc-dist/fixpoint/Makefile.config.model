@@ -1,0 +1,54 @@
+# -*- mode: makefile -*-
+
+######################################################################
+# Directories
+######################################################################
+#
+# Installation directory prefix
+#
+# binaries will be looked in $(XXX_PREFIX)/bin,
+# C include files in $(XXX_PREFIX)/include,
+# C libraries and OCaml object files and libraries
+# in $(PREFIX_INSTALL)/lib
+
+# Where to install FIXPOINT
+#
+FIXPOINT_PREFIX = /usr/local
+
+# Where to find CAMLLIB 
+#
+CAMLLIB_PREFIX = /usr/local
+
+# Where to find OCAML ($(CAML_PREFIX)/bin, $(CAML_PREFIX)/lib/ocaml, ...)
+#
+CAML_PREFIX = /usr
+
+######################################################################
+# Tools and Flags
+######################################################################
+
+RANLIB = ranlib
+INSTALL = install
+INSTALLd = install -d
+
+RM=/bin/rm -f
+
+OCAMLC = $(CAML_PREFIX)/bin/ocamlc.opt
+OCAMLOPT = $(CAML_PREFIX)/bin/ocamlopt.opt
+OCAMLLEX = $(CAML_PREFIX)/bin/ocamllex.opt
+OCAMLYACC = $(CAML_PREFIX)/bin/ocamlyacc
+OCAMLDOC = $(CAML_PREFIX)/bin/ocamldoc.opt
+OCAMLDEP = $(CAML_PREFIX)/bin/ocamldep.opt
+
+# ocamlc compilation flags
+OCAMLFLAGS = -g
+# ocamlopt compilation flags
+OCAMLOPTFLAGS = -inline 20
+
+LATEX=latex
+DVIPDF=dvipdf
+MAKEINDEX=makeindex
+TEXI2DVI=texi2dvi
+TEXI2HTML=texi2html
+
+

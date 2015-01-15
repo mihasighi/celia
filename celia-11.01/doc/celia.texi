@@ -1,0 +1,564 @@
+\input texinfo
+@c -*-texinfo-*-
+@c %**start of header
+@setfilename celia.info
+@settitle CELIA Plugin 0.1
+@c @setcontentsaftertitlepage
+@c include version.texi
+@iftex
+@afourpaper
+@end iftex
+@comment %**end of header
+
+@c This file is part of the CINV tool, released under LGPL
+@c license. Please read the COPYING file packaged in the distribution
+
+@setcontentsaftertitlepage
+
+@tex
+\global\parskip=0.5ex
+\global\baselineskip=3ex
+\global\mag=1000
+@end tex
+
+@direntry
+* celia: (celia).  CELIA: Plug-in for Static Analysis of C Programs with Dynamic Lists
+@end direntry
+
+@iftex
+@finalout
+@end iftex
+
+@ifnottex
+@node Top, Copying, (dir), (dir)
+@top CINV
+@end ifnottex
+
+@c Texinfo version 4 or up will be needed to process this into .info files.
+@c
+@c The edition number is in three places and the month/year in one, all
+@c taken from version.texi.  version.texi is created when you configure with
+@c --enable-maintainer-mode, and is included in a distribution made with
+@c "make dist".
+
+@titlepage
+@c  use the new format for titles
+
+@title CELIA
+@subtitle The CELIA plug-in
+@subtitle Edition 0.1, @today{}
+
+@author by Cezara Dragoi and Mihaela Sighireanu
+@c Include the Distribution inside the titlepage so
+@c that headings are turned off.
+@end titlepage
+
+@headings off
+@oddheading @thischapter @| @| @thispage
+@c @evenheading @thispage @| @| @thissectionname
+@everyfooting  @| @| Version: @today{}
+
+@iftex
+@page
+@vskip 0pt plus 1filll
+@end iftex
+
+
+@ifnothtml
+@contents
+@end ifnothtml
+
+@menu
+* Copying::
+* Introduction::
+* Installing::
+* Inputs::
+* Options::
+* Outputs::
+* References::
+@end menu
+
+@c *******************************************************************
+@node Copying, Introduction, Top, Top
+@chapter CELIA Copying Conditions (LGPL)
+@c *******************************************************************
+
+The CELIA tool is copyright @copyright{} by the
+@uref{http://www.liafa.jussieu.fr/celia/,CELIA project}, and its partners.
+
+This license applies to all files distributed in the CELIA and CINV tools,
+including all source code, libraries, binaries, and documentation.
+
+@c lgpl.texi
+
+@c *******************************************************************
+@node Introduction, Installing, Copying, Top
+@chapter Introduction
+@c *******************************************************************
+
+@b{CELIA} is a plug-in of the 
+@uref{http://www.frama-c.com/,Frama-C} platform 
+which performs static analysis of C programs manipulating (singly linked) lists.
+More precisely:
+@itemize @bullet
+@item 
+@b{CELIA} computes for each line of the program reachable from
+the main function, an assertion expressing the properties of the lists 
+in the heap of the program.
+@item 
+@b{CELIA} verifies assertions on the program heap given in the C file.
+@end itemize
+
+For this, @b{CELIA} does a symbolic reachability analysis based on abstract interpretation techniques [Cousot&Cousot'79] 
+and uses special domains and decision procedures for lists.
+
+@b{CELIA} is based on several tools released on LGPL licence:
+@itemize @bullet
+@item 
+@uref{http://www.frama-c.com/,Frama-C} platform for the parsing, typing, and manipulation of C programs,
+
+@item 
+@uref{http://pop-art.inrialpes.fr/people/bjeannet/bjeannet-forge/fixpoint/index.html, Fixpoint library} as symbolic fix-point engine on inter-procedural control flow graphs,
+
+@item 
+@uref{http://www.liafa.jussieu.fr/cinv, CINV tool} for the abstract domains on lists,
+
+@item 
+@uref{http://apron.cri.ensmp.fr/library/, Apron library} for the numerical abstract domains.
+
+@end itemize
+
+@c *******************************************************************
+@node Installing, Inputs, Introduction, Top
+@chapter Installing
+@c *******************************************************************
+
+
+@menu
+* Requirements::
+* Configuring::
+* Compiling::
+* Executing::
+@end menu
+
+@c -------------------------------------------------------------------
+@node Requirements, Configuring, , Installing
+@section Requirements
+@c -------------------------------------------------------------------
+
+The installation procedure is also described in the @code{README} file of the @b{CELIA} distribution.
+It requires the following software:
+
+@itemize
+@item Project tools:
+autoconf and automake
+
+@item C libraries: 
+@uref{http://gmplib.org, GMP} and @uref{http://www.mpfr.org/,MPFR}
+
+@item OCaml system,
+
+@item Camlidl system,
+
+@item Apron library, 
+
+@item Fixpoint and camllib libraries,
+
+@item FRAMA-C platform version (at least) Boron-20100401
+@end itemize
+
+To facilitate the installation, @b{CELIA} distribution contains packages for:
+@itemize
+
+@item Apron library, 
+directory @code{apron-dist}
+
+@item Fixpoint and camllib libraries,
+directory @code{interproc-dist}
+@end itemize
+
+
+@c -------------------------------------------------------------------
+@node Configuring, Compiling, Requirements, Installing
+@section Configuring
+@c -------------------------------------------------------------------
+
+@code{automake} tools are used to discover your configuration (Frama-C directory, C compiler, etc.) as follows:
+
+@itemize
+
+@item 
+Generate configure script by executing in the distribution directory
+
+@code{> autoconf}
+
+@item
+Configure the @code{Makefile} with the local settings by executing in the same directory
+
+@code{> ./configure}
+
+@item 
+Set the environment variable @code{CINV} to the distribution directory:
+
+@code{> export CINV=`pwd`}
+
+@end itemize
+
+
+@c -------------------------------------------------------------------
+@node Compiling, Executing, Configuring, Installing
+@section Compiling
+@c -------------------------------------------------------------------
+
+
+The distribution file @code{install.sh} does the installation procedure.
+
+During the installation, the following steps are done:
+
+@itemize
+
+@item 
+to install FIXPOINT
+
+@code{> make -C interproc-dist all}
+
+@code{> make -C interproc-dist install}
+
+
+@item
+to install Apron
+
+@code{> make -C apron-dist all}
+
+@code{> make -C apron-dist install}
+
+
+@item
+to compile CINV abstract domains
+
+@code{> make -C shapes all}
+
+@code{> make -C shapes ml}
+
+
+@item
+to compile CINV engine
+
+@code{make src/clim.cma}
+
+@item
+to compile CELIA plug-in
+
+@code{make -C frama-c-plugin frama-c-Celia.byte}
+
+@end itemize
+
+The binary of the plug-in, @code{frama-c-Celia.byte}, is available in the @code{frama-c-plugin} directory.
+
+
+
+@c -------------------------------------------------------------------
+@node Executing, , Compiling, Installing
+@section Executing
+@c -------------------------------------------------------------------
+
+The @b{CELIA} plug-in uses dynamic libraries included in the distribution.
+To find these libraries, please set the environment variable @code{LD_LIBRARY_PATH}
+as follows:
+
+@code{> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CINV/shapes}
+
+@code{> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CINV/apron-dist/mlgmpidl/lib}
+
+@code{> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CINV/apron-dist/apron/lib}
+
+The  plug-in is called as follows:
+
+@code{frama-c-Celia.opt -celia <input c files>}
+
+
+@c *******************************************************************
+@node Inputs, Options, Installing, Top
+@chapter Inputs
+@c *******************************************************************
+
+@b{CELIA} plug-in shall receive as inputs the list of C files containing:
+@itemize
+@item
+the C function to be analyzed called the entry point of the analysis (by default @code{main}) and
+@item
+all the C functions called by the entry point.
+@end itemize
+(See the @ref{Options} section to change by default value of the entry point.)
+
+The C functions that can be analyzed with @b{CELIA} shall satisfy the following constraints:
+@itemize
+@item
+they shall use only variables of type @code{int} and @code{intlist} (the last defined in the file 
+@uref{http://www.liafa.jussieu.fr/celia/samples/intlist/intlist.h, intlist.h}),
+
+@item
+the assignment statements for pointer variables shall be elementary, i.e., 
+a pointer can be assigned only if it is @code{NULL}, 
+only the pointer left values @code{x}, @code{x->data}, and @code{x->next} are allowed,
+
+@i{This limitation will be removed in future versions of CELIA.}
+
+@item
+the conditions on pointer variables shall also be elementary, i.e., only terms @code{x} and @code{x->data} are allowed,
+
+@i{This limitation will be removed in future versions of CELIA.}
+
+@item
+the Boolean conditions used in @code{if} and@code{while} statements shall be atomic,
+
+@i{This limitation will be removed in future versions of CELIA.}
+
+@item
+the actual parameters in function calls shall be variables,
+
+@i{This limitation will be removed in future versions of CELIA.}
+
+@item
+the output actual parameters in function calls shall be pointers to lists.
+
+@end itemize
+
+The C file in input of @b{CELIA} can be annotated with specifications in the 
+ACSL logic of 
+@uref{http://www.frama-c.com, Frama-C}.
+The file @uref{http://www.liafa.jussieu.fr/celia/samples/intlist/intlist.h, @code{intlist.h}}
+defines several predicates that can be used in these annotations.
+@i{Currently, only these predicates are considered by CELIA. 
+Also, only annotations corresponding to function pre-conditions are interpreted.} 
+The semantics of these predicates is explained 
+@uref{http://www.liafa.jussieu.fr/cinv/doc/Specification-logic.html#Specification-logic, here}.
+
+
+@c *******************************************************************
+@node Options, Outputs, Inputs, Top
+@chapter Options
+@c *******************************************************************
+
+The @b{CELIA} plugin is called as follows:
+
+@code{frama-c-Celia.byte <Frama-C options> -celia <input C files>}
+
+The @uref{http://www.frama-c.com, Frama-C} options external to @b{CELIA} are explained in the Frama-C documentation. 
+
+The options relevant for @b{CELIA} are:
+
+@table @kbd
+@item -celia
+activates the @b{CELIA} plug-in in Frama-C,
+
+@item -celia-cinv-opt
+specifies the property file from which the options for the analysis has to be read.
+@end table
+
+The property file is a list of lines
+
+@code{key=value}
+
+where @code{key} specifies the option and @code{value} specifies the value of the option.
+
+The following tuples of keys and values are known to @b{CELIA}:
+
+@table @kbd
+@item domain
+the abstract domain to use (default: shape).
+
+@item dwdomain
+abstract domain used for list segments; possible values are lsum (default),
+mset, and ucons. If this appear several times with different values, it specifies  a product of these domains.
+
+@item maxanon
+default maximum number of anonymous nodes per segment (default 0);
+this number can be changed for each function (see option @code{funspec}).
+
+@item maxasegm
+default maximum number of segments with anonymous nodes (default 1, may only be more);
+this number can be changed for each function (see option @code{funspec}).
+
+@item funspec
+the property file in which are given specific parameters of analysis for each function, see @ref{FunctionOptions}.
+
+@item depth
+(option for Fixpoint) depth of recursive iterations (default 2, may only be more).
+
+@item guided
+(option for Fixpoint) if true, guided analysis of Gopand and Reps (default: false).
+
+@item wdelay
+(option for Fixpoint) specifies usage of widening delay steps (default: 1).
+
+@item wdesc
+specifies usage of widening number of descending steps (default: 2).
+
+@item main
+entry point function for the analysis (default: main).
+
+@end table
+
+
+@subsubheading Options specific for functions
+@anchor{FunctionOptions}
+The format of this file is a sequence of line, each line having the form:
+
+@code{function_name: n s p}
+
+where:
+
+@itemize
+@item 
+@code{n} gives @code{maxanon} parameter (positive integer), 
+
+@item
+@code{s} gives @code{maxsegm} parameter (strictly positive integer),
+
+@item
+@code{p} gives patterns to be used in the UCONS domain; it is an integer value obtained from the binary or of the following values:
+
+@itemize
+@item 1
+for pattern @i{forall y in n} (default value)
+
+@item 2
+for pattern @i{forall y1 in n1, y2 in n2. y1==y2} 
+
+@item 4
+for pattern @i{forall y1,y2 in n1. y1<=y2} 
+
+@end itemize
+
+@end itemize
+
+
+@c *******************************************************************
+@node Outputs, References, Options, Top
+@chapter Outputs
+@c *******************************************************************
+
+@b{CELIA} outputs the following files:
+
+@table @kbd
+@item @code{pan-nm.c}
+contains the C code normalized by Frama-C where each statement has a unique identifier (C comment containing @code{sid}). This file contains the full coded needed by the analysis.
+
+
+@item @code{pan.eq} 
+contains the inter-procedural control flow graph (ICFG) considered by the analysis. Also, it provides (section @code{penv}) the encoding of each function variable into a domain variable.
+
+@item @code{pan.abs} 
+contains the result of the analysis, i.e., for each statement the number of the file @code{.shp} containing the invariant computed by @b{CELIA}.
+
+@item @code{f_XXX.shp}
+shape files containing the invariants computed by @b{CELIA}. 
+To obtain a @uref{www.graphviz.com, dot} representation of this file please use the program @code{com/shp2dot.sh}.
+@end table
+
+@subsubheading How to read shape files?
+
+A shape file @code{f_XXX.shp} is a @b{list} of tuples built from
+@itemize
+
+@item @b{a shape graph}
+ (see CAV'10 publication) which is an abstraction of the heap:
+@itemize
+@item 
+the nodes of the graph represent heap sub-lists which are not pointed by pointer program variables; nods are named by @code{n0} (NULL), @code{n1, n2}, ... and are labelled by the pointer programs variables which points to the head of the sub-list, and
+@item 
+the arcs represent reachability relations (via @code{next} field) between sub-lists.
+@end itemize
+For example,
+the shape graph in the invariant @uref{http://www.liafa.jussieu.fr/celia/samples/intlist-lib-add/mset/sid_6.png, intlist-lib-add.c:sid:6} represents
+a heap with three sub-lists (nodes @code{n1, n2, n3}) such that the sub-list
+stating in @code{n1} is labeled by the program variables @code{x2} and @code{x5} and reaches the sub-list starting in node @code{n2};
+the sub-list starting in @code{n3} is disjoint from the other sub-lists.
+
+@item @b{a list of constraints}
+for each data word abstract domain (in LSUM, MSET, UCONS) used in the analysis.
+@end itemize
+
+For the domains LSUM and MSET, the constraints attached to the graph are conjunctions of linear constraints involving the following terms:
+
+@table @kbd
+@item xi
+represents the value stored in a scalar program variable (see file @code{pan.eq} to obtain the variable name),
+
+@item data(n)
+represents the value stored in the head of the sub-list represented by the  node @code{n},
+
+@item len(n)
+represents the number of nodes in the sub-list represented by the node @code{n},
+
+@item sum(n)
+represents the sum of values stored in the tail of the sub-list represented by the  node @code{n},
+
+@item mshd(n)
+represents the singleton mouldiest containing only the value stored in the first element (head) of the sub-list represented by node @code{n},
+
+@item mstl(n)
+represents the multiset containing the values stored in the tail  of the sub-list represented by node @code{n},
+
+@end table
+
+For example, the constraint
+
+@i{-mstl(n2)+mstl(n3)=0}
+
+in the multi-set constraints in the first shape graph of @uref{http://www.liafa.jussieu.fr/celia/samples/intlist-lib-add/mset/sid_6.png, intlist-lib-add.c:sid:6} says that the multisets of tails of sub-lists represented by nodes @code{n2} and @code{n3} are equal.
+
+
+For the domain UCONS, the constraints attached to the graph are conjunction structured as follows:
+
+@itemize
+
+@item
+the @b{econs} block are linear constraints on the @code{data(n)}, @code{len(n)} and integer program variables @code{x},
+
+@item
+the following blocks represent universal formulas in the form, e.g., 
+
+@i{forall y in n. patter-constraint => data-constraint}
+
+which express properties on the data in the sub-lists starting in the node @i{n}.
+@end itemize
+
+For example, the UCONS constraints in the file 
+@uref{http://www.liafa.jussieu.fr/celia/samples/intlist-sort-insert/ucons/sid_40.png, intlist-sort-insert:sid:40}
+contains two universally quantified constraints, both concerning the 
+node @code{n1}:
+
+@itemize
+
+@item
+the first constraint expresses the property that for all cells in the sub-lists @code{n1}, represented by @code{y}, the data stored in these cells is greater or equal than the data stored in the head of @code{n1}, and
+
+@item
+the second constraint expresses the property that for all two cells @code{y1} and  @code{y2} in the sub-lists @code{n1} such that @code{y1 <= y2}, the data stored in these cells is ordered.
+@end itemize
+
+@c *******************************************************************
+@node References, , Outputs, Top
+@chapter References
+@c *******************************************************************
+
+@itemize
+
+@item [Apron] 
+Apron project, 
+@url{http://apron.cri.ensmp.fr/library/}
+
+@item [Cousot&Cousot,79] 
+P. Cousot and R. Cousot, Systematic Design of Program Analysis Frameworks, POPL'79
+
+@item [Fixpoint]
+B. Jeannet, @url{http://pop-art.inrialpes.fr/people/bjeannet/bjeannet-forge/fixpoint/index.html}
+
+@item [Frama-C]
+@url{http://www.frama-c.com/}
+@end itemize
+
+
+@bye

@@ -1,0 +1,88 @@
+************************************************
+Notes about the integration of CINV with Frama-C
+************************************************
+
+Name convention 
+===============
+- plug-in name: Celia
+- tool name: cinv
+- c fragment: clim
+
+
+Steps for the plug-in
+=====================
+
+0. Parse file with Cil
+    - options???
+
+1. Apply rewrite and normalize from Jessie
+    - after these steps,
+	o the CFG of the program is built
+	o each function have an unique return statement
+	(last of the list of statements)
+	with one value (tmp variables are added to expand ()?: constructs)
+	o each statement has an unique sid
+	o there exists breaks, continue, goto
+	o location for each statements points with both fields to the 
+	line at the begining of the statement
+
+   So, a unique identifier for a statement is obtained from
+	- sid of the statement
+	- Lexing.position (to be able to introduce a node for functions calls)
+ 
+1. Signal unmanaged code and specs
+   { Module available only here because in our Clim, we have a 
+     restricted C syntax }
+    - type definition which are not intlist
+    - variables which are not of type int, float or intlist
+    - statements:
+        o pointer arithmetics
+	o access to structures only by pointers
+	o non-linear expressions
+    - specifications:
+	o only predicates reach, disjoint, =null
+	o terms sum, mset
+
+2. Slice unmanaged code & specs
+    - collect managed info and apply slicing plug-in of Frama-C
+        o first to each function
+	o then to the main program
+    - can we slice specifications?
+
+3. Translate to Clim AST
+    - propose an AST for Clim
+    - compute correspondances between Clim AST and Cil AST
+
+4. Apply CINV on the AST
+   ( in CINV )
+   o make place in the AST for the computation of other analysis, e.g.,
+     value analysis....
+
+   o compute CFG and then apply graph algos to compute widening points
+
+   o extend the APRON interface to sets of types
+     (int, real, but also enum, intlist, etc)
+      ==# extend tree expressions and operations to those types
+      ==# extend statements to call/ret
+
+   o consider analysis starting from a function
+     (take as input the function pre-condition ...)
+
+
+3'. Apply CINV on Cil AST
+   o inter/intra procedural
+
+   o Define Hashtbl for
+	- functions visited with info
+		o list of input params, local vars, output params
+		o output point 
+		o if widening in call (recursive call)
+		o the precondition in APRON format
+		o its tabulation:
+			abstracth (input), abstracth(input/output)
+
+	- each location for a statement
+		o coding of the expr/cond operation in the Apron interface
+		o 
+
+	- for each 

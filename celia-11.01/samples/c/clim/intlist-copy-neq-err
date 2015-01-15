@@ -1,0 +1,119 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..53] __string_Output_after_copying_to_new_list_of_not_equal_length_;
+
+char_P[0..54] __string_values_in_list_2_before_copying_values_of_list_1_are__;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+intlist_[..] allocate_value(intlist_[..] head_1, integer elements_0,
+                            integer value)
+  requires (C_6 : ((C_7 : acyclic{Here}(head_1)) &&
+                    (C_8 : (elements_0 >= 1))));
+behavior default:
+  assigns head_1.data,
+  head_1.next;
+  ensures (C_9 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_10 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_11 : true);
+;
+
+unit listCopy(intlist_[..] x, intlist_[..] y)
+  requires (C_21 : acyclic{Here}(x));
+  requires (C_22 : acyclic{Here}(y));
+  requires (C_23 : disjoint{Here}(x, y));
+behavior default:
+  ensures (C_24 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var intlist_[..] yi);
+   
+   {  (C_12 : (xi = x));
+      (C_13 : (yi = y));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then () else 
+            (break File "intlist-copy-neq-err.c", line 12, characters 2-7));
+            (C_16 : ((C_15 : (yi :> integer)) = (C_14 : (xi :> integer))));
+            (C_18 : (xi = (C_17 : (xi :> intlist_[..]))));
+            (C_20 : (yi = (C_19 : (yi :> intlist_[..]))))
+         }
+      };
+      
+      (return ())
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_36 : true);
+{  
+   (var intlist_[..] head_2);
+   
+   (var intlist_[..] head1);
+   
+   {  
+      {  (C_25 : (head1 = null));
+         (C_26 : (head_2 = head1))
+      };
+      (C_28 : (head_2 = (C_27 : allocate(head_2, 10))));
+      (C_30 : (head1 = (C_29 : allocate_value(head1, 8, 0))));
+      (C_31 : printf());
+      (C_32 : printlist(head1));
+      (C_33 : listCopy(head_2, head1));
+      (C_34 : printf());
+      (C_35 : printlist(head1));
+      
+      (return ())
+   }
+}

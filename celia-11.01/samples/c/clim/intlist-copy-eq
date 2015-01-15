@@ -1,0 +1,41 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+unit listCopy(intlist_[..] x, intlist_[..] y)
+  requires (C_10 : acyclic{Here}(x));
+  requires (C_11 : acyclic{Here}(y));
+  requires (C_12 : disjoint{Here}(x, y));
+behavior default:
+  ensures (C_13 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var intlist_[..] yi);
+   
+   {  (C_1 : (xi = x));
+      (C_2 : (yi = y));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then () else 
+            (break File "intlist-copy-eq.c", line 12, characters 2-7));
+            (C_5 : ((C_4 : (yi :> integer)) = (C_3 : (xi :> integer))));
+            (C_7 : (xi = (C_6 : (xi :> intlist_[..]))));
+            (C_9 : (yi = (C_8 : (yi :> intlist_[..]))))
+         }
+      };
+      
+      (return ())
+   }
+}

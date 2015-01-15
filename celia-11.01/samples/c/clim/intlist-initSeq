@@ -1,0 +1,100 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..41] __string_sequential_initialization_after_value_5__;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate_value(intlist_[..] head_0, integer elements,
+                            integer value)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_6 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_7 : true);
+;
+
+unit seqInit(intlist_[..] x, integer m)
+  requires (C_17 : acyclic{Here}(x));
+behavior default:
+  ensures (C_18 : true);
+{  
+   (var integer mp);
+   
+   (var intlist_[..] xi);
+   
+   (var integer __jc_off_mp);
+   
+   {  (C_8 : (__jc_off_mp = 0));
+      (C_9 : (xi = x));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then () else 
+            (break File "intlist-initSeq.c", line 10, characters 2-7));
+            (C_12 : ((C_11 : (xi :> integer)) = (C_10 : (m + __jc_off_mp))));
+            (C_14 : (xi = (C_13 : (xi :> intlist_[..]))));
+            (C_16 : (__jc_off_mp = (C_15 : (__jc_off_mp + 1))))
+         }
+      };
+      
+      (return ())
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_25 : true);
+{  
+   (var intlist_[..] head_1);
+   
+   {  (C_19 : (head_1 = null));
+      (C_21 : (head_1 = (C_20 : allocate_value(head_1, 10, 0))));
+      (C_22 : seqInit(head_1, 5));
+      (C_23 : printf());
+      (C_24 : printlist(head_1));
+      
+      (return ())
+   }
+}

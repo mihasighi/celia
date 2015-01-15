@@ -1,0 +1,12 @@
+
+BUGS 
+====
+
+BUG
+- the execeptions raised by shapes library is not visible in mode without DEBUG
+  in Frama-C
+
+BUG
+- example intlist-fold-copyGeV_rec with ucons and pattern P1 does not
+  obtain a precise result
+

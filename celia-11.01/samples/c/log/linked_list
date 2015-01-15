@@ -1,0 +1,17 @@
+[celia] Starting Clim translation
+[kernel] preprocessing with "gcc -C -E -I.  -I /usr/local/share/frama-c  -I /usr/local/share/frama-c/libc -I /home/sighirea/Parallelisme/tools-other/frama-c-Boron-20100401-why-2.24/why/frama-c-plugin/share  linked_list.c"
+linked_list.c:53:[kernel] user error: Error during annotations analysis: unbound logic variable elements
+[kernel] user error: skipping file "linked_list.c" that has errors.
+linked_list.c:53:[celia] failure: Unexpected exception.
+                 Please submit bug report (Ref. "Log.AbortError("kernel")").
+[kernel] The full backtrace is:
+         Raised at file "src/kernel/log.ml", line 506, characters 30-31
+         Called from file "src/kernel/log.ml", line 500, characters 2-9
+         Re-raised at file "src/kernel/log.ml", line 503, characters 8-9
+         Called from file "src/lib/type.ml", line 746, characters 40-45
+         Called from file "queue.ml", line 134, characters 6-20
+         Called from file "src/kernel/boot.ml", line 50, characters 4-20
+         Called from file "src/kernel/cmdline.ml", line 170, characters 4-8
+         
+         Plug-in celia aborted because of an internal error.
+         Please report as 'crash' at http://bts.frama-c.com

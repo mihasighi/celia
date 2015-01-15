@@ -1,0 +1,138 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..41] __string_List_after_calling_insertion_sort__list__;
+
+char_P[0..42] __string_List_before_calling_insertion_sort__list__;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_6 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_7 : true);
+;
+
+intlist_[..] insertSortLst(intlist_[..] x)
+  requires (C_39 : acyclic{Here}(x));
+behavior default:
+  ensures (C_40 : true);
+{  
+   (var intlist_[..] xi);
+   
+   (var intlist_[..] y);
+   
+   (var intlist_[..] yi);
+   
+   (var intlist_[..] z);
+   
+   (var intlist_[..] r);
+   
+   {  
+      {  (C_8 : (y = null));
+         (C_9 : (yi = y));
+         (C_10 : (xi = yi));
+         (C_11 : (z = xi))
+      };
+      
+      {  (C_12 : (z = x));
+         (C_13 : (r = z))
+      };
+      (C_15 : (xi = (C_14 : (x :> intlist_[..]))));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then () else 
+            (break File "intlist-insertSortLst.c", line 12, characters 2-7));
+            (C_16 : (yi = null));
+            (C_17 : (y = r));
+            
+            loop 
+            while (true)
+            {  
+               {  (if (y != xi) then (if ((C_19 : (y :> integer)) <
+                                           (C_18 : (xi :> integer))) then () else 
+                                     (break File "intlist-insertSortLst.c", line 16, characters 6-11)) else 
+                  (break File "intlist-insertSortLst.c", line 16, characters 6-11));
+                  (C_20 : (yi = y));
+                  (C_22 : (y = (C_21 : (y :> intlist_[..]))))
+               }
+            };
+            (if (yi == null) then 
+            {  (C_32 : ((C_31 : (z :> intlist_[..])) = (C_30 : (xi :> intlist_[..]))));
+               (C_34 : ((C_33 : (xi :> intlist_[..])) = r));
+               (C_35 : (r = xi))
+            } else 
+            {  (C_25 : ((C_24 : (z :> intlist_[..])) = (C_23 : (xi :> intlist_[..]))));
+               (C_27 : ((C_26 : (yi :> intlist_[..])) = xi));
+               (C_29 : ((C_28 : (xi :> intlist_[..])) = y))
+            });
+            (C_36 : (xi = null));
+            (C_38 : (xi = (C_37 : (z :> intlist_[..]))))
+         }
+      };
+      
+      (return r)
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_50 : true);
+{  
+   (var intlist_[..] head_1);
+   
+   {  (C_41 : (head_1 = null));
+      (C_43 : (head_1 = (C_42 : allocate(head_1, 10))));
+      (C_44 : printf());
+      (C_45 : printlist(head_1));
+      (C_47 : (head_1 = (C_46 : insertSortLst(head_1))));
+      (C_48 : printf());
+      (C_49 : printlist(head_1));
+      
+      (return ())
+   }
+}

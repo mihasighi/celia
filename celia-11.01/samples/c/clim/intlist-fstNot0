@@ -1,0 +1,125 @@
+
+tag char_P = {
+  integer char_M: 8;
+}
+
+tag void_P = {
+}
+
+char_P[0..11] __string_Empty_list_;
+
+char_P[0..27] __string_Output_from_not_zero_node__;
+
+char_P[0..8] __string_list_2__;
+
+char_P[0..42] __string_Output_after_removing_nodes_with_value____;
+
+char_P[0..7] __string_List_1_;
+
+tag __fc_pos_t = {
+  integer __fc_stdio_position: 32;
+}
+
+tag __fc_FILE = {
+  __fc_pos_t[0] __fc_stdio_fpos: 32; 
+  char_P[..] __fc_stdio_buffer: 32; 
+  integer __fc_stdio_error: 8; 
+  integer __fc_stdio_eof: 8; 
+  integer __fc_stdio_id: 32;
+}
+
+tag intlist_ = {
+  integer data: 32; 
+  intlist_[..] next: 32;
+}
+
+__fc_FILE[..] __fc_stdout;
+
+integer printf(char_P[..] format)
+behavior default:
+  assigns __fc_stdout.__fc_stdio_fpos.__fc_stdio_position,
+  __fc_stdout.__fc_stdio_buffer,
+  __fc_stdout.__fc_stdio_error,
+  __fc_stdout.__fc_stdio_eof,
+  __fc_stdout.__fc_stdio_id;
+  ensures (C_1 : true);
+;
+
+intlist_[..] allocate(intlist_[..] head_0, integer elements)
+  requires (C_2 : ((C_3 : acyclic{Here}(head_0)) && (C_4 : (elements >= 1))));
+behavior default:
+  assigns head_0.data,
+  head_0.next;
+  ensures (C_5 : true);
+;
+
+intlist_[..] allocate_value(intlist_[..] head_1, integer elements_0,
+                            integer value)
+  requires (C_6 : ((C_7 : acyclic{Here}(head_1)) &&
+                    (C_8 : (elements_0 >= 1))));
+behavior default:
+  assigns head_1.data,
+  head_1.next;
+  ensures (C_9 : true);
+;
+
+unit printlist(intlist_[..] head)
+  requires (C_10 : acyclic{Here}(head));
+behavior default:
+  assigns head.data,
+  head.next;
+  ensures (C_11 : true);
+;
+
+intlist_[..] fstNot0(intlist_[..] x)
+  requires (C_16 : acyclic{Here}(x));
+behavior default:
+  ensures (C_17 : true);
+{  
+   (var intlist_[..] xi);
+   
+   {  (C_12 : (xi = x));
+      
+      loop 
+      while (true)
+      {  
+         {  (if (xi != null) then (if ((C_13 : (xi :> integer)) == 0) then () else 
+                                  (break File "intlist-fstNot0.c", line 9, characters 2-7)) else 
+            (break File "intlist-fstNot0.c", line 9, characters 2-7));
+            (C_15 : (xi = (C_14 : (xi :> intlist_[..]))))
+         }
+      };
+      
+      (return xi)
+   }
+}
+
+unit main()
+behavior default:
+  ensures (C_37 : true);
+{  
+   (var intlist_[..] head_2);
+   
+   (var intlist_[..] head1);
+   
+   {  
+      {  (C_18 : (head1 = null));
+         (C_19 : (head_2 = head1))
+      };
+      (C_21 : (head_2 = (C_20 : allocate(head_2, 10))));
+      (C_22 : printf());
+      (C_23 : printlist(head_2));
+      (C_25 : (head_2 = (C_24 : fstNot0(head_2))));
+      (C_26 : printf());
+      (C_27 : printlist(head_2));
+      (C_29 : (head1 = (C_28 : allocate_value(head1, 4, 0))));
+      (C_30 : printf());
+      (C_31 : printlist(head1));
+      (C_33 : (head1 = (C_32 : fstNot0(head1))));
+      (C_34 : printf());
+      (if (head1 == null) then (C_36 : printf()) else (C_35 : printlist(
+                                                      head1)));
+      
+      (return ())
+   }
+}
