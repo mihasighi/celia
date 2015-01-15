@@ -1,0 +1,28 @@
+var _data:real, _free:real, _len:real,
+    _new:real, _next:real, _null:real,
+    x:real, xi:real, xin:real,
+    _l:int, _k:int, S:int, v:int;
+begin
+  assume (x == 0);
+  xi = _null; xin = _null;
+  _k = 1;
+  while _k==1 do
+    _k = 0;
+    xi = x;
+    xin = x * _next;
+    while xi != _null and xin != _null do
+      if (xi * _data >= xin * _data +1) then
+        v = xi * _data;
+        xi = (xin * _data) / _data;
+        xin = v / _data;
+        _k = 1;
+      endif;
+      xi = _null;
+      xi = xin;
+      xin = _null;
+      xin = xi * _next;
+    done;
+    xi = _null;
+    xin = _null;
+  done;
+end

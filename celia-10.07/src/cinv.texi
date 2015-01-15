@@ -1,0 +1,334 @@
+\input texinfo
+@c -*-texinfo-*-
+@c %**start of header
+@setfilename cinv.info
+@settitle CINV 0.2
+@c @setcontentsaftertitlepage
+@c include version.texi
+@iftex
+@afourpaper
+@end iftex
+@comment %**end of header
+
+@c This file is part of the CINV tool, released under LGPL
+@c license. Please read the COPYING file packaged in the distribution
+
+@setcontentsaftertitlepage
+
+@tex
+\global\parskip=0.5ex
+\global\baselineskip=3ex
+\global\mag=1000
+@end tex
+
+@direntry
+* cinv: (cinv).  CINV tool for analysis of dynamic programs.
+@end direntry
+
+@iftex
+@finalout
+@end iftex
+
+@ifnottex
+@node Top, Copying, (dir), (dir)
+@top CINV
+@end ifnottex
+
+@c Texinfo version 4 or up will be needed to process this into .info files.
+@c
+@c The edition number is in three places and the month/year in one, all
+@c taken from version.texi.  version.texi is created when you configure with
+@c --enable-maintainer-mode, and is included in a distribution made with
+@c "make dist".
+
+@titlepage
+@c  use the new format for titles
+
+@title CINV
+@subtitle The CINV tool
+@subtitle Edition 0.1, January 2010
+
+@author by Cezara Dragoi and Mihaela Sighireanu
+@c Include the Distribution inside the titlepage so
+@c that headings are turned off.
+@end titlepage
+
+@headings off
+@oddheading @thischapter @| @| @thispage
+@c @evenheading @thispage @| @| @thissectionname
+@everyfooting  @| @| Version: @today{}
+
+@iftex
+@page
+@vskip 0pt plus 1filll
+@end iftex
+
+
+@ifnothtml
+@contents
+@end ifnothtml
+
+@menu
+* Copying::
+* Introduction::
+* Examples::
+@end menu
+
+@c *******************************************************************
+@node Copying, Introduction, Top, Top
+@chapter CINV Copying Conditions (LGPL)
+@c *******************************************************************
+
+The CINV tool is copyright @copyright{} by the
+@uref{http://www.liafa.jussieu.fr/cinv/,CINV project}, and its partners.
+
+This license applies to all files distributed in the CINV tool,
+including all source code, libraries, binaries, and documentation.
+
+@include lgpl.texi
+
+@c *******************************************************************
+@node Introduction,  Examples, Copying, Top
+@chapter Introduction
+@c *******************************************************************
+
+The CINV tool provides several @emph{abstract domains} for abstract reachability analysis of programs manipulating
+singly linked lists with numerical contents.
+
+CINV generates for each control point specifications which constrain both the shape of the list and the data inside the list. In the present version, two kinds of specifications can be generated: 
+(1) specifications relating data, lenghts, and sums of the data of the list and
+(2) specifications relating lenghts, data, and universal properties on the list segments.
+
+The input of CINV is an SPL program containing an initial condition on the lists used by the program. Another input of CINV is the @code{cinv.txt} file giving the maximum number of simple nodes on the heap graph.
+
+The output is the program annotated by program specifications given on files with extension @code{.shp}. 
+These files contain a list of constrained heap graphs, i.e., in constraint is given in the form of a graph and a numerical or logical constraint relating the data, the sum of data, and the length of list segments in the graph.
+
+We provide in the following more details on the inputs and output of CINV as well as the presentation of the results obtained when applying CINV on our benchmark.
+
+@menu
+* C code::
+* Spl encoding::
+* Specification logic::           
+* Parameters of the analysis::    
+* Results::
+@end menu
+
+@c -------------------------------------------------------------------
+@node C code, Spl encoding,, Introduction
+@section C code
+@c -------------------------------------------------------------------
+
+Each example is given as a C function. 
+The function has at least one list parameter of type @code{intlist}.
+The C definition of type @code{intlist} corresponds to a singly linked list with an integer data field as follows:
+@smallformat
+@verbatiminclude ../samples/src/intlist.h
+@end smallformat
+
+The C code given for examples corresponds to a desired future input of the tool.
+However, it cannot be used for the moment as it is because the statements and the expressions allowed are not elementary.
+For instance, composed terms (e.g., @code{x->next->data}) and statements (e.g., @code{x=y} with @code{x} not pointing to @code{NULL}) are used.
+
+The C functions are specified using the logic presented in @ref{Specification logic}.
+ 
+@c -------------------------------------------------------------------
+@node Spl encoding, Specification logic, C code, Introduction
+@section Spl encoding
+@c -------------------------------------------------------------------
+
+The Spl language is the input language of the @uref{http://pop-art.inrialpes.fr/people/bjeannet/bjeannet-forge/interproc/index.html, Interproc tool}.
+Since Spl deals only with numeric (integer or real) variables, we encode our 
+programs on lists as follows:
+@itemize @bullet
+@item
+Variables of type @code{intlist} are coded by real variables. 
+
+@item
+Data variables are encoded by integer variables. 
+By convention, length variables are the first @b{two} integer variables.
+(This is a constant fixed in the code.)
+The other integer variables are considered data variables.
+This separation of length and data variables is used only by the domains which deal differently with these variables, e.g., the @code{LSUM-PRD} or the @code{MSET-PRD} domains (see @ref{Domains}).
+
+@item
+The following real variables shall be present in any Spl encoding program in the first positions of the declaration list for real variables:
+@code{_data}, @code{_free}, @code{_len}, @code{_new}, @code{_next}, and @code{_null}.
+They are used to encode operations on list variables, e.g., the @code{data} field access for a list variable @code{x}, @code{x->data}, is encoded into the expression @code{x*_data}. Similarly, the @code{_next} variable is used to encode the  @code{next} field access.
+The @code{_free} (resp. @code{_new}) variable is used to encode the @code{free} (resp. @code{new}) statement for the memory deallocation (resp. allocation) of pointers.
+The @code{_len} variable cannot be used for the moment.
+The @code{_null} variable encodes the predefined @code{NULL} constant in C.
+
+@item
+All statements are elementary:
+ (1) the only terms used on pointer variables are @code{x}, @code{x->data}, and @code{x->next},
+ (2) the statements have as left hand side one of the terms above, and 
+ (3) when terms @code{x} and @code{x->next} are assigned, they have to be @code{NULL}.
+
+@item 
+Since Spl considers only numerical variables, the left hand side of an assignment shall be a variable. However, to assign fields of list variables, we need expressions for the left hand sides of assignments, e.g., @code{x->data} encoded into @code{x * _data}.
+To encode such assignments we use the divisibility operation on reals, i.e.,  
+@code{x->field=expr} is encode by @code{x=expr/field}.
+
+@item 
+The specification properties (see @ref{Specification logic}) of the code are encoded into an initial @code{assume} statement of the form @code{assume(x==<code>);} with the following semantics:
+@table @kbd
+@item x==0
+@math{acyclic(x)} and @math{l[x]=l} and @math{data(x)},
+e.g. @math{data(x): S[x]=S} with @math{S} a program data variable,
+or @math{data(x): M[x]=M} with @math{M} a ghost multiset variable 
+
+@item x==1
+@math{acyclic(x)} and @math{l[x]+l[y]=l} and @math{l>=1} 
+and @math{data(x,y)} and @math{reach(x,y)}, 
+e.g., @math{data(x,y): S[x]+S[y]=S}
+
+@item x==2
+@math{acyclic(x)} and @math{l[x]=l} and @math{data(x)} and
+@math{acyclic(y)} and @math{l[y]=l} and @math{data(y)} and
+@math{_l>=1} and @math{disjoint(x,y)}
+
+@item x==3
+@math{acyclic(x)} and @math{l[x]=l} and @math{data(x)} and
+@math{acyclic(y)} and @math{l[y]+1<=l} and @math{data(y)} and 
+@math{_l>=1} and @math{disjoint(x,y)}
+
+@item x==4
+@math{acyclic(x)} and @math{l[x]=l} and @math{data(x)} and
+@math{acyclic(y)} and @math{l[y]=l} and @math{data(y)} and
+@math{acyclic(z)} and @math{l[z]=l} and @math{data(z)} and
+@math{l>= 1} and @math{disjoint(x,y,z)}
+@end table
+@end itemize
+
+
+
+@c -------------------------------------------------------------------
+@node Specification logic, Parameters of the analysis, Spl encoding, Introduction
+@section Specification logic
+@c -------------------------------------------------------------------
+
+The initial constraint on the program analysed is given in a logic which is a restriction of the CSL logic defined in [Bouajjani and al. CONCUR-09].
+This logic is a multi-sorted first order logic with reachability predicates.
+More precisely, in this logic one can use the following terms:
+@table @kbd
+@item l[n]
+the length of the heap segment stating from node @code{n}, i.e., the number of edges of the segment.
+
+@item d(n)
+the data stored in the node @code{n}.
+
+@item S(n)
+the sum of the data stored in the heap segment starting from node @code{n} except @code{n} itself;
+we denote by @code{S[n]=S(n)+d(n)}.
+
+@item M(n)
+the multiset of data stored in the heap segment starting from node @code{n} except @code{n} itself;
+we denote by @code{M[n]=M(n) U d(n)}.
+@end table
+
+The atomic constraints of the logic are the following:
+
+@table @kbd
+@item x(n)
+variable @code{x} is labeling a node of a heap called @code{n}.
+
+@item expr op 0 
+where op in @math{=,!=,<=,>=,!=,<,>} is a linear constraints on terms.
+
+@item acyclic(x)
+variable @code{x} labels a node from which starts a segment which is acyclic.
+
+@item reach(x,y)
+variable @code{x} labels a node from which starts a segment which reaches another node labeled by @code{y}.
+
+@item disjoint(x,y)
+variable @code{x} labels a node from which starts a segment which is disjoint from (does not share nodes with) the list segment which starting node is labeled by @code{y}.
+
+@end table
+
+
+@c -------------------------------------------------------------------
+@node Parameters of the analysis, Results, Specification logic, Introduction
+@section Parameters of the analysis
+@c -------------------------------------------------------------------
+
+The analysis done by the CINV tool is parametrized by the following inputs:
+
+@itemize @bullet
+@item @emph{Domain:}
+@anchor{Domains}
+The abstract domain used to represent heap segments. This domain is used by the global domain of @code{Shapes}. The following domains are implemented in CINV:
+@table @kbd
+@item LSUM-PRD
+the domain of sums over heap segments which is a Cartesian product of a domain for lengths of segments and a domain for data of segments.
+
+@item LSUM-REL
+the domain of sums over heap segments where lengths and data are put together.
+
+@item MSET-PRD
+the domain of multisets over heap segments which is a Cartesian product of a domain for lengths of segments, a domain for data of segments, and a multiset domain.
+
+@item MSET-REL
+the domain of multisets over heap segments where lengths and data are put together.
+
+@item UCONS
+the domain of universally constrained heap segments; this domain is parametrized by the set of patterns used by the universally quantified constraints. 
+Actually, for efficiency reasons, the following patterns are implemented:
+@table @kbd
+@item P11
+@math{\forall y \in n \Rightarrow ...}
+@item P21
+@math{\forall y1 \in n, y2 \in m, y1=y2 \Rightarrow ...}
+@item P12
+@math{\forall y1,y2 \in n, y1<y2 \Rightarrow ...}
+@item P13
+@math{\forall y1,y2,y3 \in n, y1 <_1 y2 <_1 y3 \Rightarrow ...}
+@end table
+@end table
+
+@item @emph{Number of simple nodes:}
+The computation of the post abstract transformer is parameterized by the maximum number of simple nodes (nodes not labeled by a program variable or representing a sharing point) in the heap graph. 
+In CINV, this number is obtained from the following two parameters:
+@table @kbd
+@item max_anon
+the maximum number of simple nodes in a heap segment, and
+
+@item segm_anon
+the number of segments shall divide the number of simple nodes.
+@end table
+These two parameters shall be given (in this order) in the file @code{cinv.txt} in the directory chosen for the execution of CINV.
+@end itemize
+
+
+@c -------------------------------------------------------------------
+@node Results, , Parameters of the analysis, Introduction
+@section Results
+@c -------------------------------------------------------------------
+
+The results are given for each domain and each parameter using:
+@itemize
+@item @emph{Log file}:
+is a directory in @code{sample/log} containing a log file and the files storing the shapes generated
+@item @emph{Constraint}:
+is the most interesting constraint synthesized by the analysis; this constraint is given in the specification language (see @ref{Specification logic}).
+@end itemize
+In the HTML version of this manual, it is possible to browse the log directory.
+The present time and memory performances have been  obtained on an Intel 686 2GHz and 1 Go of RAM.
+
+@c ===================================================================
+@node Examples, , Introduction, Top
+@chapter Examples
+@c ===================================================================
+
+@menu
+* Computing on data::
+* Initializing data::
+* Changing data::
+* Changing structure::
+@end menu
+
+@include ../samples/samples.texi 
+
+
+@bye

@@ -1,0 +1,142 @@
+
+DO NOT MODIFY:
+--------------
+1) - shape.ml - shape.mli - shape_caml.c
+   All are generated from shape.idl
+
+2) uthash.h - utlist.h
+  Implementation (external) of htables.
+  
+  
+CONVENTIONS FOR NAMING FILES:
+------------------------------
+(in importance order)
+
+XXX.h	
+	Public definitions for the XXX APRON library,
+	contains only manager allocation function
+
+XXX_fun.h
+	Direct access to high level XXX functions bypassing the APRON manager.
+    The only file you need to include to use XXX domain outside APRON.
+    Declaration of the type XXX_t
+    
+XXX_internal.h
+	Private definitions, access to internal structures and algorithms.
+	Definition of the internal manager, here always called shape_internal_t
+	
+XXX_representation.c
+	Implementation of representation related algorithms:
+	internal representation, memory, constructors, accessors.
+	
+XXX_print.c
+	Implementation of printing, serialization.
+
+XXX_predicate.c
+	Implementation of tests and property extraction.
+
+XXX_nary.c
+	Implementation of AI operations meet, joint, widen, narrow
+	
+XXX_transfer.c
+	Implementation of assign, substitution, and guard transfer operations.
+
+XXX_resize.c
+	Implement projection, expansion and change of dimension algorithms.
+	
+XXX_closure.c
+	Implementation of the topological closure.
+	
+XXX.idl
+	Interface between the C interface and the ML code.
+	The declarations put here comes from:
+	- file shape.h : for additional functions not in the apron interface
+	- makefile
+
+shape_manager.h
+	Private definition of the local part of the manager for all
+	structures of the library (hgraphs, ushapes, shapes).
+	Define memory management macros.
+
+shape_doc.html
+	Small documentation for all domains.
+
+
+
+CONVENTIONS FOR TODOs:
+------------------------------
+Some TODO are not important for a first version of the tool.
+A priority from 0 (low) to 3 (high) is given to each TODO.
+
+
+Informal description of operations/notions:
+-------------------------------------------
+
+Operations:
+  - meet* = greatest lower elem, used by stmts: assert, if(c)
+  - assign* = post-image, used by stmts: assign
+  - join = lower upper elem, used by stmts: if, while
+
+Canonical form:
+  
+
+Top:
+- shape  = singleton uchqpe top
+- ushape = top_hgraph, top_scons
+- hgraph = 1 node null + all vars to NODE_T_TOP
+- ucons  = top excons, all nodes to { (top, top) }
+
+Bottom:
+- shape  = empty set
+- ushape = null
+- hgraph = 1 node null + all vars to null
+- ucons  = bot excons, all nodes to null
+
+
+
+
+Informal description of files:
+------------------------------
+
+Library manager:
+---------------
+
+
+shape_closure.c
+---------------
+Implements the closure algorithm for shapes:
+since a shape is a set of ushapes, it ensures:
+- no top is present
+- no bot is present
+- all ushapes are canonical (?)
+- all ushapes are disjoint (no inclusion between two shapes)
+
+
+hgraph_t 
+	defines the structure storing the heap-graph for 1 selector heaps; 
+	nodes are ordered depending on the prg variables pointing to  
+    these nodes and distance by the next field ==> normal form;
+    there is a canonical (?) form in which no more than anondim nodes are
+    anonymous (not cut points) ==> see shape_closure.c
+    there is a table of hgraphs stored in the manager 
+    but this is used only in shape_internal...
+
+
+STATUS of IMPLEMENTATION
+=========================
+(see also TODOs in code)
+
+ucons:
+- closure :
+- nary :
+- predicate :
+- print :
+- representation :
+- resize :
+- test :
+- transfer :
+
+TESTS of memory usage
+=====================
+
+../../../tools-other/valgrind-3.5.0/bin/valgrind --tool=memcheck --verbose --leak-check=yes --show-reachable=yes --dsymutil=yes ./shapetest &> log.txt

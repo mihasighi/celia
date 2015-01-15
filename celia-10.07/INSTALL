@@ -1,0 +1,29 @@
+
+1. Set directories for APRON and INTERPROC in configure.in
+   i.e., variables APRONDIR and IPDIR
+
+2. Generate configure script by executing in the cinv directory
+
+	> autoconf
+
+3. Configure the Makefile with the local settings by executing
+
+	> ./configure
+
+4. Generate libraries for shapes by executing
+
+	> cd shapes
+	> make Sl; make ml
+	> cd ../
+
+   Settings for the Makefile are in the file cinv/Makefile.config.
+
+5. Generate cinv tool for each abstract domain on segments (bin/cinv<AS>.opt)
+
+	> make bin/cinv<AS>.opt
+
+6. To test an example, try in the sample directory
+
+	> ../bin/cinv<AS>.opt -debug 2 -domain hgraph add2r.spl
+
+

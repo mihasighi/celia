@@ -1,0 +1,48 @@
+About
+=====
+This is a distribution package for CINV.
+
+Required
+========
+APRON platform [http://apron.cri.ensmp.fr/library/] which requires:
+OCaml
+Camlidl
+C  libraries: 
+  GMP (http://gmplib.org)
+  MPFR (http://www.mpfr.org/)
+INTERPROC engine [http://pop-art.inrialpes.fr/people/bjeannet/bjeannet-forge/interproc/index.html]
+
+To configure
+============
+- set in configure.in the installation information about APRON and INTERPROC
+
+To compile and install
+========================
+[see also INSTALL]
+
+Generate configure script by executing in the cinv directory
+
+	> autoconf
+
+Configure the Makefile with the local settings by executing
+
+	> ./configure
+
+Generate libraries for shapes by executing
+
+	> cd shapes
+	> make Sl; make ml
+	> cd ../
+
+Settings for the Makefile are in the file cinv/Makefile.config.
+
+Generate cinv tool for each abstract domain on segments (bin/cinv<AS>.opt)
+
+	> make bin/cinv<AS>.opt
+
+Testing
+========
+To test an example, try in the sample directory
+
+	> ../bin/cinv<AS>.opt -debug 2 -domain hgraph add2r.spl
+

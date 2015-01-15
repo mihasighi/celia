@@ -1,0 +1,66 @@
+var _data:real, _free:real, _len:real,
+    _new:real, _next:real, _null:real,
+    x:real, xi:real, y:real, yi:real, z:real, t:real, ti:real,
+    _l:int, _S:int, m:int, flag:int ; 
+begin
+  assume (x == 2);
+  xi = _null; yi = _null; z = _null;
+  t = _null;
+  ti = _null; 
+  m = 0;
+  flag = 0 ;
+  xi = x; yi = y;
+  while xi != _null do
+    xi = m / _data;
+    z = xi*_next;
+    xi = _null;
+    xi = z;
+    z = _null;
+    m = m+2;
+  done;
+  while yi != _null do
+    yi = m / _data;
+    z = yi*_next;
+    yi = _null;
+    yi = z;
+    z = _null;
+    m = m+2;
+  done;
+  yi = _null;
+  yi = y;
+  xi = _null;
+  xi = x;
+  z = _null;
+  while ( xi != _null or  yi != _null ) do
+    z = _new;
+    if xi != _null then
+         z = ( xi * _data) / _data;
+         flag = 0;
+    else 
+         z = (yi * _data ) / _data;
+         flag = 1;
+    endif;
+    z = _null / _next;
+    if (ti == _null) then
+      t = z;
+    else
+      ti = _null / _next;
+      ti = z /_next;
+    endif;
+    ti = _null;
+    ti = z;
+    z = _null;
+    if flag <= 0 then 
+    	z = xi * _next;
+    	xi = _null;
+    	xi = z;
+    	z = _null;
+    else 
+        z = yi * _next;
+        yi = _null;
+        yi = z;
+        z = _null;
+    endif;
+done;     
+end
+

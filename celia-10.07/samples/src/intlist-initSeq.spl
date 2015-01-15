@@ -1,0 +1,18 @@
+var _data:real, _free:real, _len:real, 
+    _new:real, _next:real, _null:real,
+    x:real, xi:real, z:real,
+    _l:int, _k: int, S:int, m:int, mp:int;
+begin
+  assume (x == 0);
+  xi = _null; z = _null;
+  mp = m;
+  xi = x;
+  while xi != _null do
+    xi = mp / _data;
+    z = xi*_next;
+    xi = _null;
+    xi = z;
+    z = _null;
+    mp = mp+1;
+  done;
+end

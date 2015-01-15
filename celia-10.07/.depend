@@ -1,0 +1,12 @@
+src/cinv.cmo: /usr/local/src/interproc-dist/interproc/spl_syn.cmi \
+    shapes/shape.cmi /usr/local/src/interproc-dist/interproc/pSpl_syn.cmi \
+    /usr/local/src/interproc-dist/interproc/frontend.cmi src/cinv_options.cmi \
+    /usr/local/src/interproc-dist/lib/box.cmi src/cinv.cmi 
+src/cinv.cmx: /usr/local/src/interproc-dist/interproc/spl_syn.cmx \
+    shapes/shape.cmx /usr/local/src/interproc-dist/interproc/pSpl_syn.cmx \
+    /usr/local/src/interproc-dist/interproc/frontend.cmx src/cinv_options.cmx \
+    /usr/local/src/interproc-dist/lib/box.cmx src/cinv.cmi 
+src/cinv_options.cmo: /usr/local/src/interproc-dist/interproc/solving.cmi \
+    src/cinv_options.cmi 
+src/cinv_options.cmx: /usr/local/src/interproc-dist/interproc/solving.cmx \
+    src/cinv_options.cmi 

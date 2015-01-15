@@ -1,0 +1,1409 @@
+@c This file is part of the CINV tool, released under LGPL
+@c license. Please read the COPYING file packaged in the distribution
+
+@c to be included from cinv.texi
+
+
+@c -------------------------------------------------------------------
+@node Computing on data, Initializing data, , Examples
+@section Computing on data
+@c -------------------------------------------------------------------
+
+Examples in this class iterate over a list to return some information (data value, pointer inside the list, etc.) on the current list.
+
+@menu
+* First not null::
+* Get max::
+* Sentinel::
+* List equality::
+* Sum of elements::
+@end menu
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node First not null, Get max, , Computing on data
+@subsection First not null
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-fstNot0.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-fstNot0.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-fstNot0-lsum-prd-01/log.html,log/intlist-fstNot0-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)=0 \land S(n1)=0 \land S[n2]=S \land l=l[n1]+l[n2]}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-fstNot0-lsum-rel-01/log.html,log/intlist-fstNot0-lsum-rel-01}@*
+same as above
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-fstNot0-mset-rel-01/log.html,log/intlist-fstNot0-mset-rel-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)=0 \land M[n1]+M[n2]=M \land l=l[n1]+l[n2]}
+
+@item UCONS
+@tab Anon=(0,1), P11
+@tab @uref{log/intlist-fstNot0-uconspoly-P11-01/log.html,log/intlist-fstNot0-uconspoly-P11-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)=0 \land \forall y \in n1 \Rightarrow d(y)=0}
+@end multitable
+@end smallformat
+
+Because we did experiments only with  numerical abstract domains which are not able to represent the inequality constraints (e.g., polyhedron), the invariant obtained at the control point corresponding to the end of the loop does not contain the constraint @code{xi->data!=0}.
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Get max, Sentinel, First not null, Computing on data
+@subsection Get maximum
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-getMax.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-getMax.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-getMax-lsum-prd-01/log.html,log/intlist-getMax-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le max \land l=l[n1]+l[n2]}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-getMax-lsum-rel-01/log.html,log/intlist-getMax-lsum-rel-01}@*
+same as above
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-getMax-mset-rel-01/log.html,log/intlist-getMax-mset-rel-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le max \land M[n1]+M[n2]=M \land l=l[n1]+l[n2]}
+
+@item UCONS
+@tab Anon=(0,1), P11
+@tab @uref{log/intlist-getMax-uconspoly-P11-01/log.html,log/intlist-getMax-uconspoly-P11-01}@*
+@math{x(n1) \land d(n1)\le max \land l=l[n1]+l[n2] \land \forall y \in n1 \Rightarrow d(y)\le max} 
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Sentinel, List equality, Get max, Computing on data
+@subsection Sentinel
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+In its original version @cite{Halbwach-Peron-08}, this program uses a test @code{xi->data!=m}. We have changed it below to @code{xi->data<=m} in order to avoid disequality constraints.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-sentinel.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-sentinel.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-sentinel-lsum-prd-01/log.html,log/intlist-sentinel-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land l=l[n1]+l[n2]}
+
+@item LSUM-PRD
+@tab Anon=(0,1), m=2
+@tab @uref{log/intlist-sentinel2-lsum-prd-01/log.html,log/intlist-sentinel2-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le 2 \land d(n2)\le 2 \land l=l[n1]+l[n2]}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-sentinel-lsum-rel-01/log.html,log/intlist-sentinel-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land l=l[n1]+l[n2]}
+
+@item LSUM-REL
+@tab Anon=(0,1), m=2
+@tab @uref{log/intlist-sentinel2-lsum-rel-01/log.html,log/intlist-sentinel2-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le 2 \land S[n1]\le 2l[n1] \land d(n2)\le 2 \land l=l[n1]+l[n2]}
+
+@item MSET
+@tab 
+@tab @uref{log/intlist-sentinel-mset-rel-01/log.html,log/intlist-sentinel-mset-rel-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land M=M[n1]+M[n2] \land l=l[n1]+l[n2]}
+
+@item UCONS
+@tab Anon=(0,1), P11
+@tab @uref{log/intlist-sentinel-uconspoly-P11-01/log.html,log/intlist-sentinel-uconspoly-P11-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le m \land d(n2)\le m \land l=l[n1]+l[n2] \land \forall y \in n1 \Rightarrow d(y)\le m}
+
+@item UCONS
+@tab Anon=(0,1), P11, m=2
+@tab @uref{log/intlist-sentinel2-uconspoly-P11-01/log.html,log/intlist-sentinel2-uconspoly-P11-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)\le 2 \land d(n2)\le 2 \land l=l[n1]+l[n2] \land \forall y \in n1 \Rightarrow d(y)\le 2}
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node List equality, Sum of elements, Sentinel, Computing on data
+@subsection List equality
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-equal.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-equal.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-equal-lsum-prd-01/log.html,log/intlist-equal-lsum-prd-01/}@*
+@math{x(n1) \land y(n3) \land d(n1)=d(n3) \land S(n1)=S(n3) \land l=l[n1]=l[n3]}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-equal-lsum-rel-01/log.html,log/intlist-equal-lsum-rel-01/}@*
+same as above
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-equal-mset-rel-01/log.html,log/intlist-equal-mset-rel-01/}@*
+@math{x(n1) \land y(n2) \land M[n1]=M[n2] \land l=l[n1]=l[n2]}
+
+@item UCONS
+@tab Anon=(0,2), P21
+@tab @uref{log/intlist-equal-uconspoly-P21-02/log.html,log/intlist-equal-uconspoly-P21-02/}@*
+@math{x(n1) \land y(n2) \land d(n1)=d(n2) \land \forall y1 \in n1, y2\in n2, y1=y2 \Rightarrow d(y1)=d(y2)} 
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Sum of elements, , List equality, Computing on data
+@subsection Sum of elements
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-sum.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-sum.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-sum-lsum-prd-01/log.html,log/intlist-sum-lsum-prd-01/}@*
+@math{x(n1) \land l=l[n1] \land S=S[n1]=v}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-sum-lsum-rel-01/log.html,log/intlist-sum-lsum-rel-01/}@*
+same as above
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-sum-mset-rel-01/log.html,log/intlist-sum-mset-rel-01/}@*
+@math{x(n1) \land l=l[n1] \land M[n1]=M}
+
+@item UCONS
+@tab Anon=(0,1), P11
+@tab @uref{log/intlist-sum-uconspoly-P11-01/log.html,log/intlist-sum-uconspoly-P11-01/}@*
+@math{x(n1) \land l=l[n1]}
+@end multitable
+@end smallformat
+
+
+@c -------------------------------------------------------------------
+@node Initializing data, Changing data, Computing on data, Examples
+@section Initializing data
+@c -------------------------------------------------------------------
+
+The examples in this class iterate over a list from its begining and initialize the data fields from scratch, i.e., without using the initial data values of the list.
+
+@menu
+* Initialization modulo 2::
+* Initialization with first integers::
+* Initialization with first even numbers::
+* Initialization in sequence::
+* Initialization with Fibonacci::
+* Partial reset::
+* Sum of lists::
+@end menu
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Initialization modulo 2, Initialization with first integers, , Initializing data
+@subsection Initialization modulo 2
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+The encoding of this example in Spl has been changed in order to replace the boolean variable by an integer variable. The test used in the @code{if} statement has been changed to avoid disequality constraints.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-initMod2.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-initMod2.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initMod2-lsum-prd-01/log.html,log/intlist-initMod2-lsum-prd-01}@*
+@math{x(n1) \land 0\le d(n1)\le 1 \land S(n1)\ge 0}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initMod2-lsum-rel-01/log.html,log/intlist-initMod2-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)=0 \land 0\le k\le 1 \land 2*S(n1)+k \ge l \land l\ge S(n1)+1}
+
+@item LSUM-REL
+@tab Anon=(1,1)
+@tab @uref{log/intlist-initMod2-lsum-rel-11/log.html,log/intlist-initMod2-lsum-rel-11}@*
+@math{x(n1) \land xi(n2) \land d(n1)=0 \land 0\le k\le 1 \land 2*S(n1)+1=l[n1]}
+
+@item MSET
+@tab Anon=(1,1) 
+@tab @uref{log/intlist-initMod2-mset-rel-11/log.html,log/intlist-initMod2-mset-rel-11}@*
+ none
+
+@item UCONS
+@tab Anon=(1,1), P11
+@tab @uref{log/intlist-initMod2-uconspoly-P11-11/log.html,log/intlist-initMod2-uconspoly-P11-11}@*
+@math{x(n1) \land xi(n2) \land d(n1)=0 \land 0\le k\le 1 \land \forall y1 <_1 y2 <_1 y3 \in n1 \Rightarrow d(y1)+d(y2)=1 \land d(y2)+d(y3)=1 \land l=l[n1]+l[n2]}
+@end multitable
+@end smallformat
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Initialization with first integers, Initialization with first even numbers, Initialization modulo 2, Initializing data
+@subsection Initialization with first integers
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-initN.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-initN.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initN-lsum-prd-01/log.html,log/intlist-initN-lsum-prd-01}@*
+@math{x(n1) \land d(n1)=0}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initN-lsum-rel-01/log.html,log/intlist-initN-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land d(n1)=0 \land l[n1]=m \land l=l[n1]+l[n2]}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initN-mset-rel-01/log.html,log/intlist-initN-mset-rel-01}@*
+none
+
+@item UCONS
+@tab Anon=(0,1), P11
+@tab @uref{log/intlist-initN-uconspoly-P11-01/log.html,log/intlist-initN-uconspoly-P11-01}@*
+@math{x(n1)\land l=l[n1] \land \forall y \in n1 \Rightarrow d(y)=y }
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Initialization with first even numbers, Initialization in sequence, Initialization with first integers, Initializing data
+@subsection Initialization with first even numbers
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-init2N.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-init2N.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-init2N-lsum-prd-01/log.html,log/intlist-init2N-lsum-prd-01}@*
+@math{x(n1) \land d(n1)=0}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-init2N-lsum-rel-01/log.html,log/intlist-init2N-lsum-rel-01}@*
+@math{x(n1) \land 2l[n1]=m-2 \land d(n1)=0 \land l=l[n1]}
+
+@c @item LSUM-REL
+@c @tab Anon=(0,1)
+@c @tab TODO
+@c @tab with grid constraints
+
+@item MSET
+@tab Anon=(0,1) 
+@tab @uref{log/intlist-init2N-mset-rel-01/log.html,log/intlist-init2N-mset-rel-01}@*
+none
+
+@item UCONS
+@tab Anon=(0,1), P11
+@tab @uref{log/intlist-init2N-uconspoly-P11-01/log.html,log/intlist-init2N-uconspoly-P11-01}@*
+@math{x(n1) \land d(n1)=0 \land l=l[n1] \land \forall y \in n1 \Rightarrow d(y)=2y} 
+@c and \forall y1 <_1 y2 \in n1 \implies d(y2)=d(y1)+2
+
+@item UCONS
+@tab Anon=(1,1), P11
+@tab @uref{log/intlist-init2N-uconspoly-P11-11/log.html,log/intlist-init2N-uconspoly-P11-11}@*
+@math{x(n1) \land d(n1)=0 \land l=l[n1] \land \forall y \in n1 \Rightarrow d(y)=2y} 
+@c and \forall y1 <_1 y2 \in n1 \implies d(y2)=d(y1)+2
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Initialization in sequence, Initialization with Fibonacci, Initialization with first even numbers, Initializing data
+@subsection Initialization in sequence
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-initSeq.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-initSeq.spl
+@end multitable
+@end smallformat
+
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initSeq-lsum-prd-01/log.html,log/intlist-initSeq-lsum-prd-01}@*
+@math{x(n1) \land d(n1)=m \land mp\ge m+1}
+
+@item LSUM-REL 
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initSeq-lsum-rel-01/log.html,log/intlist-initSeq-lsum-rel-01}@*
+@math{x(n1) \land d(n1)=m \land l=l[n1]=mp-m}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initSeq-mset-rel-01/log.html,log/intlist-initSeq-mset-rel-01}@*
+none
+
+@item UCONS 
+@tab Anon=(0,1), P11
+@c or  Anon=(2,1)P211
+@tab @uref{log/intlist-initSeq-uconspoly-P11-01/log.html,log/intlist-initSeq-uconspoly-P11-01}@*
+@math{x(n1) \land d(n1)=m \land \forall y \in n1 \Rightarrow d(y)=y+m}
+@c \land \forall y1 <_1 y2 \in n1 \Rightarrow d(y2)=d(y1)+1
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Initialization with Fibonacci, Partial reset, Initialization in sequence, Initializing data
+@subsection Initialization with Fibonacci
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-initFibo.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-initFibo.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initFibo-lsum-prd-01/log.html,log/intlist-initFibo-lsum-prd-01}@*
+@math{x(n1) \land d(n1)=1 \land S(n1)+2=m1+2m2 \land m2\ge m1 \land 2m1+1\ge m2 \ge 1}
+
+@item LSUM-PRD
+@tab Anon=(2,1)
+@tab @uref{log/intlist-initFibo-lsum-prd-21/log.html,log/intlist-initFibo-lsum-prd-21}@*
+@math{x(n1) \land d(n1)=1 \land S(n1)+2=m1+2m2 \land m2\ge m1 \land 2m1+1\ge m2\ge 15 \land 5m1-3m2+3\ge 0}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initFibo-lsum-rel-01/log.html,log/intlist-initFibo-lsum-rel-01}@*
+@math{x(n1) \land d(n1)=1 \land S(n1)+2=m1+2m2 \land m2\ge m1 \land 2m1+1\ge m2\ge 1}
+
+@item MSET
+@tab  Anon=(0,1)
+@tab @uref{log/intlist-initFibo-mset-rel-01/log.html,log/intlist-initFibo-mset-rel-01}@* 
+none
+
+@item UCONS
+@tab Anon=(0,1), P11
+@c or (2,1), P21 or P13
+@tab @uref{log/intlist-initFibo-uconspoly-P11-01/log.html,log/intlist-initFibo-uconspoly-P11-01}@*
+@math{x(n1) \land d(n1)=1 \land \forall y\in n1 \Rightarrow d(y)\ge y}
+@c and \forall y1,y2\in n1 y1<_1 y2 \implies d(y2)>=d(y1)+1 
+@c and \forall y1,y2,y3\in n1 y1<_1 y2<_1 y3 \implies d(y3)=d(y2)+d(y1) 
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Partial reset, Sum of lists, Initialization with Fibonacci, Initializing data
+@subsection Partial reset
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-pInit.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-pInit.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-pInit-lsum-prd-01/log.html,log/intlist-pInit-lsum-prd-01/}@*
+@math{x(n1) \land y(n2) \land l[n1]+l[n2]=l \land S(n2)=0 \land d(n2)=0}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-pInit-lsum-rel-01/log.html,log/intlist-pInit-lsum-rel-01/}@*
+@math{x(n1) \land y(n2) \land l[n1]+l[n2]=_l \land S(n2)=0 \land d(n2)=0}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-pInit-msetm-rel-01/log.html,log/intlist-pInit-mset-01/}@*
+none
+
+@item UCONS
+@tab Anon=(0,1),P11
+@tab @uref{log/intlist-pInit-uconspoly-P11-01/log.html,log/intlist-pInit-uconspoly-P11-01/}@*
+@math{x(n1) \land y(n2) \land \forall y1\in n2 \Rightarrow d(y1)=0}
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Sum of lists, , Partial reset, Initializing data
+@subsection Sum of lists
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-initSum.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-initSum.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initSum-lsum-prd-01/log.html,log/intlist-initSum-lsum-prd-01/}@*
+@math{x(n1) \land y(n2) \land z(n3) \land d(n3)=d(n1)+d(n2) \land S(n3)=S(n1)+S(n2)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initSum-lsum-rel-01/log.html,log/intlist-initSum-lsum-rel-01/}@*
+@math{x(n1) \land y(n2) \land z(n3) \land d(n3)=d(n1)+d(n2) \land S(n3)=S(n1)+S(n2)}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-initSum-mset-rel-01/log.html,log/intlist-initSum-mset-rel-01/}@*
+none
+
+@item UCONS
+@tab Anon=(0,3)
+@tab NYI@*
+@math{x(n1) \land y(n2) \land z(n3) \land  \forall y1\in n1, y2\in n2, y3\in n3 y1=y2=y3 \Rightarrow d(y3)=d(y1)+d(y2)}
+@end multitable
+@end smallformat
+
+
+@c -------------------------------------------------------------------
+@node Changing data, Changing structure, Initializing data, Examples
+@section Changing data
+@c -------------------------------------------------------------------
+
+The examples in this class iterate over one or several lists and update the data field based on its old value.
+
+@menu
+* Copy a list (1)::
+* Copy a list (2)::
+* Copy a list (3)::
+* Add some constant::
+* Copy and add (1)::
+* Copy and add (2)::
+* Set the flag::
+* Insertion sort array::
+* Bubble sort array::
+@end menu
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Copy a list (1), Copy a list (2), , Changing data
+@subsection Copy a list (1)
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Copy the data of a list into another equal length list.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-copy-eq.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-copy-eq.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD 
+@tab Anon=(0,2)
+@tab @uref{log/intlist-copy-eq-lsum-prd-02/log.html,log/intlist-copy-eq-lsum-prd-02/}@*
+@math{x(n1) \land y(n2) \land d(n1)=d(n2) \land d(n1)+S(n1) = d(n2)+S(n2) = S}
+
+@item LSUM-REL
+@tab Anon=(0,2)
+@tab @uref{log/intlist-copy-eq-lsum-rel-02/log.html,log/intlist-copy-eq-lsum-rel-02/}@*
+@math{x(n1) \land y(n2) \land d(n1)=d(n2) \land d(n1)+S(n1) = d(n2)+S(n2) = S}
+
+@item MSET
+@tab Anon=(0,2)
+@tab @uref{log/intlist-copy-eq-mset-rel-02/log.html,log/intlist-copy-eq-mset-rel-02/}@*
+@math{x(n1) \land y(n2) \land d(n1)=d(n2) \land M[n1]=M[n2]=M}
+
+@item UCONS
+@tab Anon=(0,2), P21
+@tab @uref{log/intlist-copy-eq-uconspoly-P21-02/log.html,log/intlist-copy-eq-uconspoly-P21-02/}@*
+@math{x(n1) \land y(n2) \land d(n1)=d(n2) \land \forall y1\in n1, y2\in n2 y1=y2 \Rightarrow d(y1)=d(y2)}
+@end multitable
+@end smallformat
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Copy a list (2), Copy a list (3), Copy a list (1), Changing data
+@subsection Copy a list (2)
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+This example is the correct version of copying the data of a list into another list of different length.
+@c The only interesting part is that the bug detected for the next example is not found here.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-copy-neq.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-copy-neq.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-copy-neq-lsum-prd-01/log.html,log/intlist-copy-neq-lsum-prd-01/}@*
+@math{ x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land S(n1) = S(n3)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-copy-neq-lsum-rel-01/log.html,log/intlist-copy-neq-lsum-rel-01/}@*
+@math{ x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land S(n1) = S(n3)}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-copy-neq-mset-rel-01/log.html,log/intlist-copy-neq-mset-rel-01/}@*
+@math{ x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land M(n1) = M(n3)}
+
+@item UCONS
+@tab Anon=(0,1),P21
+@tab @uref{log/intlist-copy-neq-uconspoly-P21-01/log.html,log/intlist-copy-neq-uconspoly-P21-01/}@*
+@math{x(n1) \land xi(n2) \land y(n3) \land yi=null \land d(n1)=d(n3) \land \forall y1\in n1, y2\in n2. y1=y2 \Rightarrow d(y1)=d(y2)}
+@end multitable
+@end smallformat
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Copy a list (3), Add some constant, Copy a list (2), Changing data
+@subsection Copy a list (3)
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+This example is the erroneous version of copying the data of a list into another list of different length. 
+CINV reports a dereference of a NULL pointer.
+The invariant generated at the end of the loop is bottom.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-copy-neq-err.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-copy-neq-err.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-copy-neq-err-lsum-prd-01/log.html,log/intlist-copy-neq-err-lsum-prd-01/}@*
+null pointer dereference at line z = yi*_next
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-copy-neq-err-lsum-rel-01/log.html,log/intlist-copy-neq-err-lsum-rel-01/}@*
+null pointer dereference at line z = yi*_next
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Add some constant, Copy and add (1), Copy a list (3), Changing data
+@subsection Add some constant
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-add2.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-add2.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2-lsum-prd-01/log.html,log/intlist-add2-lsum-prd-01/}@*
+@math{x(n1) and S[n1]>=S+2}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2-lsum-rel-01/log.html,log/intlist-add2-lsum-rel-01/}@*
+@math{x(n1) and S[n1]=S+2*l[n1]}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2-mset-rel-01/log.html,log/intlist-add2-mset-rel-01/}@*
+none
+
+@item UCONS
+@tab Anon=(0,1),P11
+@tab @uref{log/intlist-add2-uconspoly-P11-01/log.html,log/intlist-add2-uconspoly-P11-01/}@*
+@math{ x(n1)}
+@end multitable
+@end smallformat
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Copy and add (1), Copy and add (2), Add some constant, Changing data
+@subsection Copy a list and add some constant (1)
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+This program copy the data of a list into another list by adding a constant. 
+The two lists have the same length.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-add2copy-eq.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-add2copy-eq.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2copy-eq-lsum-prd-01/log.html,log/intlist-add2copy-eq-lsum-prd-01/}@*
+@math{x(n1) \land y(n2) \land l[n1]=l[n2] \land d(n1)+2=d(n2) \land S(n1)<=S(n2)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2copy-eq-lsum-rel-01/log.html,log/intlist-add2copy-eq-lsum-rel-01/}@*
+@math{x(n1) \land xi(n2) \land y(n3) \land yi(n4) \land l[n1]=l[n3] \land l[n2]=l[n4] \land d(n1)+2=d(n3) \land S(n1)+2l(n1)=S(n3)+2}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2copy-eq-mset-rel-01/log.html,log/intlist-add2copy-eq-mset-rel-01/}@*
+none
+
+@item UCONS
+@tab Anon=(0,2),P21
+@tab @uref{log/intlist-add2copy-eq-uconspoly-P21-02/log.html,log/intlist-add2copy-eq-uconspoly-P21-02/}@*
+@math{x(n1) \land y(n2) \land \forall y1\in n1, y2\in n2 y1=y2 \Rightarrow d(y2)=d(y1)+2}
+@end multitable
+@end smallformat
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Copy and add (2), Set the flag, Copy and add (1), Changing data
+@subsection Copy a list and add some constant (2)
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+This program copy the data of a list into another list by adding a constant. 
+The two lists have different lengths, but the program correctly tests this case.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-add2copy-neq.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-add2copy-neq.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2copy-neq-lsum-prd-01/log.html,log/intlist-add2copy-neq-lsum-prd-01/}@*
+@math{x(n1) \land y(n2) \land l[n1]=l[n2] \land d(n1)+2=d(n2) \land S(n1)\ge S(n2)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2copy-neq-lsum-rel-01/log.html,log/intlist-add2copy-neq-lsum-rel-01/}@*
+@math{x(n1) \land xi(n2) \land y(n3) \land yi(n4) \land l[n1]=l[n3] \land l[n4]\le l[n2]-1 \land d(n1)+2=d(n3) \land S(n1)+2l(n1)=S(n3)+2}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2copy-neq-mset-rel-01/log.html,log/intlist-add2copy-neq-mset-rel-01/}@*
+none
+
+@item UCONS
+@tab Anon=(0,2),P21
+@tab @uref{log/intlist-add2copy-neq-uconspoly-P21-02/log.html,log/intlist-add2copy-neq-uconspoly-P21-02/}@*
+@math{x(n1) \land y(n2) \land \forall y1\in n1, y2\in n2 y1=y2 \Rightarrow d(y2)=d(y1)+2}
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Set the flag, Insertion sort array, Copy and add (2), Changing data
+@subsection Set the flag
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-setFlag.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-setFlag.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-setFlag-lsum-prd-01/log.html,log/intlist-setFlag-lsum-prd-01/}@*
+@math{x(n1) \land S(n1)+d(n1) \ge S}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-setFlag-lsum-rel-01/log.html,log/intlist-setFlag-lsum-rel-01/}@*
+@math{x(n1) \land S(n1)+d(n1) \ge S \land S(n1)+d(n1) \le S+l[n1]}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-setFlag-mset-rel-01/log.html,log/intlist-setFlag-mset-rel-01/}@*
+none
+
+@item UCONS
+@tab Anon=(0,1),P11
+@tab @uref{log/intlist-setFlag-uconspoly-P11-01/log.html,log/intlist-setFlag-uconspoly-P11-01/}@*
+@math{x(n1) \land \forall y1\in n1 \Rightarrow d(y1)!=0}
+@end multitable
+@end smallformat
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Insertion sort array, Bubble sort array, Set the flag, Changing data
+@subsection Insertion sort array 
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+This version of the insertion sort algorithm does not move cells of the list but only moves data between cells. Then, it simulates the insertion sort algorithm  on arrays.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-insertSortArr.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-insertSortArr.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-insertSortArr-lsum-prd-01/log.html,log/intlist-insertSortArr-lsum-prd-01/}@*
+@math{x(n1) \land S(n1)+d(n1)=S \land l[n1]=l}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-insertSortArr-lsum-rel-01/log.html,log/intlist-insertSortArr-lsum-rel-01/}@*
+@math{x(n1) \land S(n1)+d(n1)=S \land l[n1]=l}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-insertSortArr-mset-rel-01/log.html,log/intlist-insertSortArr-mset-rel-01/}@*
+@math{x(n1) \land M[n1]=M \land l[n1]=l}
+
+@item UCONS
+@tab Anon=(0,1),P11
+@tab @uref{log/intlist-insertSortArr-uconspoly-P11-01/log.html,log/intlist-insertSortArr-uconspoly-P11-01/}@*
+@c math{x(n1) \land \forall y1\in n1 \Rightarrow d(n1) \le d(y1) \land \forall y1, y2\in n1 y1 < y2 \Rightarrow d(y1) \le d(y2) }
+@math{x(n1) \land \forall y1\in n1 \Rightarrow d(n1) \le d(y1) }
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Bubble sort array, , Insertion sort array, Changing data
+@subsection Bubble sort array
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-bubbleSortArr.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-bubbleSortArr.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-bubbleSortArr-lsum-prd-01/log.html,log/intlist-bubbleSortArr-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land S=S[n1]+S[n2]+S[n3]}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-bubbleSortArr-lsum-rel-01/log.html,log/intlist-bubbleSortArr-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land S=S[n1]+S[n2]+S[n3]}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-bubbleSortArr-mset-rel-01/log.html,log/intlist-bubbleSortArr-mset-rel-01}@*
+@math{x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land M=M[n1]+M[n2]+M[n3]}
+
+@item UCONS
+@tab Anon=(2,1),P21
+@tab @uref{log/intlist-bubbleSortArr-uconspoly-p21-21/log.html,log/intlist-bubbleSortArr-uconspoly-p21-21}@*
+@math{x(n1) \land xi(n2) \land xin(n3) \land l=l[n1]+l[n3]+1 \land l[n2]=1 \land \forall y1,y2\in n3, y1 < y2 \Rightarrow d(y1)\le d(y2)}
+@end multitable
+@end smallformat
+
+
+
+@c -------------------------------------------------------------------
+@node Changing structure, , Changing data, Examples
+@section Changing structure
+@c -------------------------------------------------------------------
+
+The examples in this class create, destroy, or change the position of cells in the list.
+
+@menu
+* New copy of a list::
+* New copy and add::
+* New copy on condition::
+* Delete on condition::
+* Insertion sort list::
+* Dispatch lists::
+* Copy and reverse::
+@end menu
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node New copy of a list, New copy and add, , Changing structure
+@subsection New copy of a list
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-newCopy.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-newCopy.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-newCopy-lsum-prd-01/log.html,log/intlist-newCopy-lsum-prd-01}@*
+@math{x(n1) \land y(n2) \land yi(n3) \land l=l[n1]=l[n2]+1 \land l[n3]=1 \land d(n1)=d(n2) \land S(n3)=0 \land S[n1]=S[n2]+d(n3)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-newCopy-lsum-rel-01/log.html,log/intlist-newCopy-lsum-rel-01}@*
+same as above
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-newCopy-mset-rel-01/log.html,log/intlist-newCopy-mset-rel-01}@*
+@math{x(n1) \land y(n2) \land yi(n3) \land l=l[n1]=l[n2]+1 \land l[n3]=1 \land d(n1)=d(n2) \land M[n1]=M[n2]+d(n3)}
+
+@item UCONS
+@tab Anon=(0,2),P21
+@tab @uref{log/intlist-newCopy-uconspoly-P21-02/log.html,log/intlist-newCopy-uconspoly-P21-02}@*
+@math{x(n1) \land y(n2) \land yi(n3) \land l=l[n1]=l[n2]+1 \land l[n3]=1 \land d(n1)=d(n2) \land \forall y1\in n1, y2\in n2, y1=y2 \Rightarrow d(y1)=d(y2)}
+@end multitable
+@end smallformat
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node New copy and add, New copy on condition, New copy of a list, Changing structure
+@subsection New copy and add
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-add2new.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-add2new.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2new-lsum-prd-01/log.html,log/intlist-add2new-lsum-prd-01}@*
+@math{x(n1) \land y(n2) \land yi(n3) \land l[n1]=l[n2]+1 \land l[n3]=1 \land d(n2)=d(n1)+2 \land S(n3)=0 \land S[n2]+d(n3)\ge S+2 \land S=S[n1]}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2new-lsum-rel-01/log.html,log/intlist-add2new-lsum-rel-01}@*
+@math{x(n1) \land y(n2) \land yi(n3) \land l=l[n1]=l[n2]+1 \land l[n3]=1 \land d(n2)=d(n1)+2 \land S(n3)=0 \land S[n2]+d(n3)+2=S+2l \land S[n1]=S}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-add2new-mset-rel-01/log.html,log/intlist-add2new-mset-rel-01}@*
+ none
+
+@item UCONS
+@tab Anon=(0,2),P21
+@tab @uref{log/intlist-add2new-uconspoly-P21-02/log.html,log/intlist-add2new-uconspoly-P21-02}@*
+@math{x(n1) \land y(n2) \land yi(n3) \land l=l[n1]=l[n2]+1 \land l[n3]=1 \land d(n1)=d(n2) \land \forall y1\in n1, y2\in n2, y1=y2 \Rightarrow d(y1)=d(y2)}
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node New copy on condition, Delete on condition, New copy and add, Changing structure
+@subsection New copy on condition
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-copyAllGeV.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-copyAllGeV.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-copyAllGeV-lsum-prd-01/log.html,log/intlist-copyAllGeV-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 \land d(n1)+1\le v \land d(n2)+1\le v}
+
+@item LSUM-PRD
+@tab Anon=(0,1), v=5
+@tab @uref{log/intlist-copyAllGe5-lsum-prd-01/log.html,log/intlist-copyAllGe5-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 \land d(n1)+1\le 5 \land d(n2)+1\le 5 \land S\ge d(n1)+d(n2)+S(n1)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-copyAllGeV-lsum-rel-01/log.html,log/intlist-copyAllGeV-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 \land d(n1)+1\le v \land d(n2)+1\le v}
+
+@item LSUM-REL
+@tab Anon=(0,1), v=5
+@tab @uref{log/intlist-copyAllGe5-lsum-rel-01/log.html,log/intlist-copyAllGe5-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 \land d(n1)+1\le 5 \land d(n2)+1\le 5 \land 4l[n1] \ge S(n1)+4}
+
+@item MSET
+@tab Anon=(0,1), v=5
+@tab @uref{log/intlist-copyAllGe5-mset-rel-01/log.html,log/intlist-copyAllGe5-mset-rel-01}@*
+none
+
+@item UCONS
+@tab Anon=(0,1),P11
+@tab @uref{log/intlist-copyAllGeV-uconspoly-P11-01/log.html,log/intlist-copyAllGeV-uconspoly-P11-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land d(n1)+1\le v  \land d(n2)+1\le v \land \forall y1\in n1 \Rightarrow d(y1)+1\le v}
+
+@item UCONS
+@tab Anon=(0,1),P11,v=5
+@tab @uref{log/intlist-copyAllGe5-uconspoly-P11-01/log.html,log/intlist-copyAllGe5-uconspoly-P11-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land d(n1)\le 4  \land d(n2)\le 4 \land \forall y1\in n1 \Rightarrow d(y1)\le 4}
+@end multitable
+@end smallformat
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Delete on condition, Insertion sort list, New copy on condition, Changing structure
+@subsection Delete on condition
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-delAllGeV.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-delAllGeV.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-delAllGeV-lsum-prd-01/log.html,log/intlist-delAllGeV-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 \land d(n1)+1\le v \land d(n2)+1\le v}
+
+@item LSUM-PRD
+@tab Anon=(0,1), v=5
+@tab @uref{log/intlist-delAllGe5-lsum-prd-01/log.html,log/intlist-delAllGe5-lsum-prd-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 \land d(n1)\le 4  \land d(n2)\le 4 \land S \ge d(n1)+d(n2)+S(n1)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-delAllGeV-lsum-rel-01/log.html,log/intlist-delAllGeV-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 and d(n1)+1\le v \land d(n2)+1\le v}
+
+@item LSUM-REL
+@tab Anon=(0,1), v=5
+@tab @uref{log/intlist-delAllGe5-lsum-rel-01/log.html,log/intlist-delAllGe5-lsum-rel-01}@*
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land S(n2)=0 \land d(n1)\le 4 \land d(n2)\le 4 \land 4l[n1] >= S(n1)+4}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-delAllGeV-mset-rel-01/log.html,log/intlist-delAllGeV-mset-rel-01}@* 
+none
+
+@item UCONS
+@tab Anon=(0,1),P11
+@tab @uref{log/intlist-delAllGeV-uconspoly-P11-01/log.html,log/intlist-delAllGeV-uconspoly-P11-01}@* 
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land d(n1)+1\le v  \land d(n2)+1\le v \land \forall y1\in n1 \Rightarrow d(y1)+1\le v}
+
+@item UCONS
+@tab Anon=(0,1),P11,v=5
+@tab @uref{log/intlist-delAllGe5-uconspoly-P11-01/log.html,log/intlist-delAllGe5-uconspoly-P11-01}@* 
+@math{x(n1) \land xi(n2) \land l[n2]=1 \land l\ge l[n1]+1 \land d(n1)\le 4  \land d(n2)\le 4 \land \forall y1\in n1 \Rightarrow d(y1)\le 4}
+@end multitable
+@end smallformat
+
+
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Insertion sort list, Dispatch lists, Delete on condition, Changing structure
+@subsection Insertion sort list
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+This version of the insertion sort algorithm changes position of cells.
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-insertSortLst.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-insertSortLst.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(2,1)
+@tab @uref{log/intlist-insertSortLst-lsum-prd-21/log.html,log/intlist-insertSortLst-lsum-prd-21}@*
+@math{x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land S(n2)=0 \land S[n1]+S[n2]=S}
+
+@item LSUM-REL
+@tab Anon=(2,1)
+@tab @uref{log/intlist-insertSortLst-lsum-rel-21/log.html,log/intlist-insertSortLst-lsum-rel-21}@*
+@math{x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land S(n2)=0 \land S[n1]+S[n2]=S}
+
+@item MSET
+@tab Anon=(2,1)
+@tab @uref{log/intlist-insertSortLst-mset-rel-21/log.html,log/intlist-insertSortLst-mset-rel-21}@*
+@math{x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land M[n1]+M[n2]=M}
+
+@item UCONS
+@c tab Anon=(2,1), P12
+@tab Anon=(1,1), P11
+@c tab @uref{log/intlist-insertSortLst-uconspoly-p21-21/log.html,log/intlist-insertSortLst-uconspoly-p21-21}@*
+@tab @uref{log/intlist-insertSortLst-uconspoly-P11-11/log.html,log/intlist-insertSortLst-uconspoly-P11-11}@*
+@c math{x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land \forall y1,y2\in n1, y1 < y2 \Rightarrow d(y1)\le d(y2)}
+@math{x(n1) \land xi(n2) \land l=l[n1]+l[n2] \land \forall y1\in n1 \Rightarrow d(n1)\le d(y1)}
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Dispatch lists, Copy and reverse, Insertion sort list, Changing structure
+@subsection Dispatch lists
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-dispatch.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-dispatch.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,1)
+@tab @uref{log/intlist-dispatch-lsum-prd-01/log.html,log/intlist-dispatch-lsum-prd-01}@*
+@math{x(null) \land y(n1) \land z(n2) \land l=l[n1]+l[n2] \land l[n1]\ge 1 \land l[n2]\ge 1 \land S=S[n1]+S[n2] \land v\ge d(n2) \land v+1\le d(n1)}
+
+@item LSUM-REL
+@tab Anon=(0,1)
+@tab @uref{log/intlist-dispatch-lsum-rel-01/log.html,log/intlist-dispatch-lsum-rel-01}@*
+@math{x(null) \land y(n1) \land z(n2) \land l=l[n1]+l[n2] \land l[n1]\ge 1 and l[n2]\ge 1 \land S=S[n1]+S[n2] \land v\ge d(n2) \land v+1\le d(n1)}
+
+@item LSUM-PRD
+@tab Anon=(0,1), v=5
+@tab @uref{log/intlist-dispatch5-lsum-prd-01/log.html,log/intlist-dispatch5-lsum-prd-01}@*
+@math{x(null) \land y(n1) \land z(n2) \land l=l[n1]+l[n2] \land l[n1]\ge 1 \land l[n2]\ge 1 \land S=S[n1]+S[n2] \land 5\ge d(n2) \land 6\le d(n1)}
+
+@item LSUM-REL
+@tab Anon=(0,1), v=5
+@tab @uref{log/intlist-dispatch5-lsum-rel-01/log.html,log/intlist-dispatch5-lsum-rel-01}@*
+@math{x(null) \land y(n1) \land z(n2) \land l=l[n1]+l[n2] \land l[n1]\ge 1 and l[n2]\ge 1 \land S=S[n1]+S[n2] \land 5\ge d(n2) \land 6\le d(n1) \land S[n1]\ge 6l[n1] and S[n2]\le 5l[n2]}
+
+@item MSET
+@tab Anon=(0,1)
+@tab @uref{log/intlist-dispatch-mset-rel-01/log.html,log/intlist-dispatch-mset-rel-01}@*
+@math{x(null) \land y(n1) \land z(n2) \land l=l[n1]+l[n2] \land l[n1]\ge 1 and l[n2]\ge 1 \land M=M[n1]+M[n2] \land v\ge d(n2) \land v+1\le d(n1)}
+
+@item UCONS
+@tab Anon=(0,1),P11
+@tab @uref{log/intlist-dispatch-uconspoly-P11-01/log.html,log/intlist-dispatch-mset-P11-01}@*
+@math{x(null) \land y(n1) \land z(n2) \land l=l[n1]+l[n2] \land l[n1]\ge 1 and l[n2]\ge 1 \land v\ge d(n2) \land v+1\le d(n1) \land \forall y1\in n1 \Rightarrow d(y1)\ge v+1 \land \forall y1\in n2 \Rightarrow d(y1)\le v}
+
+@item UCONS
+@tab Anon=(0,1),P11,v=5
+@tab @uref{log/intlist-dispatch5-uconspoly-P11-01/log.html,log/intlist-dispatch5-uconspoly-P11-01}@*
+@math{x(null) \land y(n1) \land z(n2) \land l=l[n1]+l[n2] \land l[n1]\ge 1 and l[n2]\ge 1 \land v\ge d(n2) \land 6\le d(n1) \land \forall y1\in n1 \Rightarrow d(y1)\ge 6 \land \forall y1\in n2 \Rightarrow d(y1)\le 5}
+@end multitable
+@end smallformat
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@node Copy and reverse, , Dispatch lists, Changing structure
+@subsection Copy and reverse
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@smallformat
+@multitable @columnfractions .5 .5
+@headitem  C code @tab Spl encoding
+@item
+@verbatiminclude ../samples/src/intlist-copyRev.c
+
+@tab
+@verbatiminclude ../samples/src/intlist-copyRev.spl
+@end multitable
+@end smallformat
+
+@subsubheading Results
+@smallformat
+@multitable @columnfractions .1 .2 .7
+@headitem  Domain @tab Param. @tab Log file / Interesting constraint
+@item LSUM-PRD
+@tab Anon=(0,2)
+@tab @uref{log/intlist-copyRev-lsum-prd-02/log.html,log/intlist-copyRev-lsum-prd-02}@*
+@math{x(n1) \land y(n2) \land l[n1]=l=l[n2]\ge 1 \land S=S[n1]=S[n2]}
+
+@item LSUM-REL
+@tab Anon=(0,2)
+@tab @uref{log/intlist-copyRev-lsum-rel-02/log.html,log/intlist-copyRev-lsum-rel-02}@*
+same as above
+
+@item MSET
+@tab Anon=(0,2)
+@tab @uref{log/intlist-copyRev-mset-prd-02/log.html,log/intlist-copyRev-mset-prd-02}@*
+@math{x(n1) \land y(n2) \land l[n1]=l=l[n2]\ge 1 \land M=M[n1]=M[n2]}
+
+
+@item UCONS
+@tab Anon=(0,2),P11
+@tab @uref{log/intlist-copyRev-uconspoly-P11-02/log.html,log/intlist-copyRev-uconspoly-P11-02}@*
+@math{x(n1) \land y(n2) \land l[n1]=l=l[n2]\ge 1}
+@c and \forall y1\in n1, y2\in n2 y1=l-y2 \implies d(y1)=d(y2)
+@end multitable
+@end smallformat
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@c node Merge sorted lists, , , Changing structure
+@c subsection Merge sorted lists
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+@c node Concat lists, , , Changing structure
+@c subsection Concat lists
+@c '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+

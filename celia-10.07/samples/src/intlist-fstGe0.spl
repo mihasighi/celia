@@ -1,0 +1,15 @@
+var _data:real, _free:real, _len:real, 
+    _new:real, _next:real, _null:real,
+    x:real, xi:real, y:real, yi:real,
+    _l:int, _k:int, S:int;
+begin
+  assume (x == 0); 
+  xi = _null; y = _null; 
+  xi = x;
+  while xi != _null and (xi* _data < 0) do
+    y = xi*_next;
+    xi = _null;
+    xi = y;
+    y = _null;
+  done;
+end

@@ -1,0 +1,32 @@
+var _data:real, _free:real, _len:real, 
+    _new:real, _next:real, _null:real,
+    x:real, xgtv:real, xi:real, xlev:real, y:real, z:real, 
+    _l:int, _k:int, S: int, v:int;
+begin
+  assume (x == 0); 
+  xgtv = _null; xi = _null; xlev = _null; y = _null; z = _null;
+  xi = x;
+  x = _null;
+  while xi != _null do
+    y = xi;
+    z = xi * _next;
+    xi = _null;
+    xi = z;
+    z = _null;
+    y = _null/_next;
+    if (y * _data <= v) then
+      y = xlev / _next;
+      z = xlev;
+      xlev = _null;
+      xlev = y;
+    else
+      y = xgtv / _next;
+      z = xgtv;
+      xgtv = _null;
+      xgtv = y;
+    endif;
+    z = _null;
+    y = _null;
+  done;
+end
+

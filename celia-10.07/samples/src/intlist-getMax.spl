@@ -1,0 +1,19 @@
+var _data:real, _free:real, _len:real, 
+    _new:real, _next:real, _null:real,
+    x:real, xi:real, y:real,
+    _l:int, _k:int, S:int, max:int;
+begin
+  assume (x == 0); 
+  xi = _null; y = _null;
+  xi = x;
+  max = x * _data;
+  while xi != _null do
+    if (max+1 <= xi* _data) then
+      max = xi * _data;
+    endif;
+    y = xi*_next;
+    xi = _null;
+    xi = y;
+    y = _null;
+  done;
+end

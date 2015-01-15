@@ -1,0 +1,31 @@
+var _data:real, _free:real, _len:real,  
+    _new:real, _next:real, _null:real,
+    x:real, xi:real, y:real, yi:real, z:real,
+    _l:int , _k: int, S:int;
+begin
+  assume (x == 0);
+  y = _null;
+  yi = _null;
+  z = _null;
+  xi = _null;
+  xi = x;
+  while xi != _null do
+    z = _new;
+    z = (xi * _data + 2) / _data;
+    z = _null / _next;
+    if (yi == _null) then
+      y = z;
+    else
+      yi = _null/_next;
+      yi = z/_next;
+    endif;
+    yi = _null;
+    yi = z;
+    z = _null;
+    z = xi * _next;
+    xi = _null;
+    xi = z;
+    z = _null;
+  done;
+end
+

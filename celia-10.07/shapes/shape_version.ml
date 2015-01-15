@@ -1,0 +1,6 @@
+let version = "0.1"
+let date = "Wed Feb 10 15:09:34 CET 2010"
+let libdir = "/usr/local/lib/lib/libshape.a"
+let version = "0.1"
+let date = "Wed Feb 10 15:32:27 CET 2010"
+let libdir = "/usr/local/lib/lib/libshape.a"
