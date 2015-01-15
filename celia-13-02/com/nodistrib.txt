@@ -1,0 +1,12 @@
+shad/*
+tst/*
+*TODO
+*.o
+*.so
+*.a
+.svn
+*.cmo
+*.cmi
+*.cma
+*.annot
+

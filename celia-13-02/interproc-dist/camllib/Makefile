@@ -1,0 +1,118 @@
+include Makefile.config
+
+#---------------------------------------
+# Directories
+#---------------------------------------
+
+SRCDIR = $(shell pwd)
+PREFIX = $(CAMLLIB_PREFIX)
+
+FILES = print sette pSette mappe pMappe hashhe pHashhe \
+	setteI setteS mappeI mappeS hashheI hashheIB hashheS \
+	dMappe pDMappe dHashhe pDHashhe \
+	setList multiSetList \
+	ilist fGraph1 fGraph sHGraph pSHGraph symbol union \
+	statistic time rational parse
+
+SRC = $(FILES:%=%.mli) $(FILES:%=%.ml)
+
+INT = $(FILES:%=%.cmi)
+OBJS = $(FILES:%=%.cmo)
+OBJSx = $(FILES:%=%.cmx)
+
+LIB_TOINSTALL = $(INT) $(FILES:%=%.mli) camllib.cma
+LIB_TOINSTALLx = $(OBJSx) camllib.a camllib.cmxa
+
+all: $(LIB_TOINSTALL) $(OBJSx) camllib.cmxa
+
+byte: $(INT) $(OBJS) camllib.cma
+opt: $(INT) $(OBJSx) camllib.cmxa
+
+camllib.cma: $(OBJS)
+	$(OCAMLC) $(OCAMLFLAGS) -a $^ -o $@
+
+camllib.cmxa: $(OBJSx)
+	$(OCAMLOPT) $(OCAMLOPTFLAGS) -a $^ -o $@
+
+install:
+	$(INSTALLd) $(PREFIX)/lib
+	for i in $(LIB_TOINSTALL) $(LIB_TOINSTALLx); do \
+		if test -f $$i; then $(INSTALL) $$i $(PREFIX)/lib; fi; \
+	done
+
+mostlyclean: clean
+	/bin/rm Makefile.depend
+
+clean:
+	/bin/rm -f *.cm[ioxa] *.o *.a *.cmxa *.annot *.html *.ps *.pdf *.dvi *.out
+	/bin/rm -f *.aux *.bbl *.blg *.dvi *.pdf *.log *.toc *.idx *.ilg *.ind ocamldoc*.tex ocamldoc.sty
+	/bin/rm -fr html
+
+distclean: clean
+	(cd $(PREFIX)/lib; rm -f $(LIB_TOINSTALL) $(LIB_TOINSTALLx))
+
+wc: $(SRC)
+	wc $^
+
+tar: $(SRC) Makefile Makefile.config.model camllib.tex camllib.pdf README
+	@echo "*** Archiving source files in ~/camllib.tgz ***"
+	(cd ..; tar zcf $(HOME)/camllib.tgz $(^:%=camllib/%))
+	@echo "*** Files archived in ~/camllib.tgz ***"
+
+# TEX rules
+.PHONY: camllib.dvi camllib.pdf html depend
+.PRECIOUS: $(INT) $(OBJS) $(OBJSx)
+
+camllib.pdf: camllib.dvi
+	$(DVIPDF) camllib.dvi camllib.pdf
+
+camllib.dvi: $(INT) $(FILES:%=%.mli) $(FILES:%=%.ml)
+	$(OCAMLDOC) -latextitle 1,chapter -latextitle 2,section -latextitle 3,subsection -latextitle 4,subsubsection -latextitle 5,paragraph -noheader -notrailer -latex -o ocamldoc.tex $(FILES:%=%.mli)
+	$(LATEX) camllib
+	$(MAKEINDEX) camllib
+	$(LATEX) camllib
+	$(LATEX) camllib
+
+html: $(INT) $(FILES:%=%.mli) $(FILES:%=%.ml)
+	mkdir -p html
+	$(OCAMLDOC) -html -d html -colorize-code -intro camllib.odoc $(FILES:%=%.mli)
+
+#t: $(FILES:%=%.mli) $(FILES:%=%.mli)
+#	ocamlpack2 -o t -title Camllib $(FILES)
+#
+#html: t.cmi t.mli
+#	mkdir -p html
+#	$(OCAMLDOC) -html -d html -colorize-code t.mli
+#
+#camllib.dvi: t.cmi t.mli
+#	$(OCAMLDOC) -latextitle 1,chapter -latextitle 2,section -latextitle 3,subsection -latextitle 4,subsubsection -latextitle 5,paragraph -noheader -notrailer -latex -o ocamldoc.tex t.mli
+#	$(LATEX) camllib
+#	$(MAKEINDEX) camllib
+#	$(LATEX) camllib
+#	$(LATEX) camllib
+
+dot: $(INT) $(FILES:%=%.mli)
+	$(OCAMLDOC) -dot $(FILES:%=%.mli)
+	dot -Tps ocamldoc.out >ocamldoc.ps
+
+homepage: html camllib.pdf
+	hyperlatex index
+	scp -r index.html html camllib.pdf \
+		johns:/home/wwwpop-art/people/bjeannet/bjeannet-forge/camllib
+	ssh johns chmod -R ugoa+rx /home/wwwpop-art/people/bjeannet/bjeannet-forge/camllib
+.SUFFIXES: .ml .mli .cmo .cmi .cmx .mll .mly .dvi .tex .ps
+
+%.cmi: %.mli
+	$(OCAMLC) $(OCAMLFLAGS) -c $(SRCDIR)/$<
+%.cmo: %.ml %.cmi
+	$(OCAMLC) $(OCAMLFLAGS) -c $(SRCDIR)/$<
+%.cmx: %.ml %.cmi
+	$(OCAMLOPT) $(OCAMLOPTFLAGS) -c $(SRCDIR)/$<
+
+depend: 
+	$(OCAMLDEP) $(SRC) > Makefile.depend
+
+Makefile.depend:
+	$(OCAMLDEP) $(SRC) > Makefile.depend
+
+-include Makefile.depend

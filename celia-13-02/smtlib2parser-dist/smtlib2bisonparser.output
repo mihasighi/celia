@@ -1,0 +1,2271 @@
+Terminaux inutilisés dans la grammaire
+
+   TK_EOF
+   "get-model"
+
+
+Grammaire
+
+    0 $accept: single_command $end
+
+    1 single_command: command
+
+    2 command: cmd_set_logic
+    3        | cmd_declare_sort
+    4        | cmd_define_sort
+    5        | cmd_declare_fun
+    6        | cmd_define_fun
+    7        | cmd_push
+    8        | cmd_pop
+    9        | cmd_assert
+   10        | cmd_check_sat
+   11        | cmd_get_assertions
+   12        | cmd_get_unsat_core
+   13        | cmd_get_proof
+   14        | cmd_set_option
+   15        | cmd_get_info
+   16        | cmd_set_info
+   17        | cmd_get_assignment
+   18        | cmd_get_value
+   19        | cmd_exit
+   20        | cmd_internal_parse_terms
+   21        | cmd_error
+
+   22 cmd_error: /* vide */
+
+   23 cmd_set_logic: '(' "set-logic" logic_name ')'
+
+   24 cmd_declare_sort: '(' "declare-sort" SYMBOL NUMERAL ')'
+
+   25 cmd_define_sort: '(' "define-sort" SYMBOL '(' ')' a_sort ')'
+   26                | '(' "define-sort" SYMBOL '(' sort_param_list ')' a_sort ')'
+
+   27 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' ')' a_sort ')'
+   28                | '(' "declare-fun" SYMBOL '(' sort_list ')' a_sort ')'
+
+   29 cmd_define_fun: '(' "define-fun" SYMBOL '(' ')' a_sort a_term ')'
+   30               | '(' "define-fun" SYMBOL '(' quant_var_list ')' a_sort a_term ')'
+
+   31 cmd_push: '(' "push" NUMERAL ')'
+
+   32 cmd_pop: '(' "pop" NUMERAL ')'
+
+   33 cmd_assert: '(' "assert" a_term ')'
+
+   34 cmd_check_sat: '(' "check-sat" ')'
+
+   35 cmd_get_assertions: '(' "get-assertions" ')'
+
+   36 cmd_get_unsat_core: '(' "get-unsat-core" ')'
+
+   37 cmd_get_proof: '(' "get-proof" ')'
+
+   38 cmd_set_option: '(' "set-option" KEYWORD NUMERAL ')'
+   39               | '(' "set-option" KEYWORD RATCONSTANT ')'
+   40               | '(' "set-option" KEYWORD SYMBOL ')'
+   41               | '(' "set-option" KEYWORD STRING ')'
+
+   42 cmd_get_info: '(' "get-info" KEYWORD ')'
+
+   43 cmd_set_info: '(' "set-info" KEYWORD info_argument ')'
+
+   44 info_argument: NUMERAL
+   45              | RATCONSTANT
+   46              | SYMBOL
+   47              | STRING
+
+   48 cmd_get_assignment: '(' "get-assignment" ')'
+
+   49 cmd_get_value: '(' "get-value" '(' verbatim_term_list ')' ')'
+
+   50 cmd_exit: '(' "exit" ')'
+
+   51 cmd_internal_parse_terms: '(' ".internal-parse-terms" '(' term_list ')' ')'
+
+   52 a_term: annotated_term
+   53       | plain_term
+
+   54 annotated_term: '(' "!" a_term term_attribute_list ')'
+
+   55 plain_term: '(' begin_let_scope '(' let_bindings ')' a_term ')'
+   56           | '(' "forall" '(' quant_var_list ')' a_term ')'
+   57           | '(' "exists" '(' quant_var_list ')' a_term ')'
+   58           | term_num_constant
+   59           | term_symbol
+   60           | '(' term_symbol term_list ')'
+
+   61 term_symbol: term_unqualified_symbol
+   62            | '(' "as" term_unqualified_symbol a_sort ')'
+
+   63 term_unqualified_symbol: SYMBOL
+   64                        | '(' "_" SYMBOL num_list ')'
+
+   65 term_num_constant: NUMERAL
+   66                  | RATCONSTANT
+   67                  | BINCONSTANT
+   68                  | HEXCONSTANT
+   69                  | '(' "_" BVCONSTANT NUMERAL ')'
+
+   70 term_attribute_list: term_attribute
+   71                    | term_attribute_list term_attribute
+
+   72 term_attribute: KEYWORD attribute_value
+
+   73 attribute_value: info_argument
+   74                | "let"
+   75                | '(' ')'
+   76                | '(' attribute_value_list ')'
+
+   77 attribute_value_list: attribute_value
+   78                     | attribute_value_list attribute_value
+
+   79 num_list: NUMERAL
+   80         | num_list NUMERAL
+
+   81 int_list: NUMERAL
+   82         | int_list NUMERAL
+
+   83 term_list: a_term
+   84          | term_list a_term
+
+   85 quant_var_list: '(' SYMBOL a_sort ')'
+   86               | quant_var_list '(' SYMBOL a_sort ')'
+
+   87 begin_let_scope: "let"
+
+   88 let_bindings: let_binding
+   89             | let_binding let_bindings
+
+   90 let_binding: '(' SYMBOL a_term ')'
+
+   91 logic_name: SYMBOL
+   92           | SYMBOL '[' NUMERAL ']'
+
+   93 sort_list: a_sort
+   94          | sort_list a_sort
+
+   95 a_sort: SYMBOL
+   96       | '(' "_" SYMBOL int_list ')'
+   97       | '(' SYMBOL sort_list ')'
+
+   98 sort_param_list: a_sort_param
+   99                | sort_param_list a_sort_param
+
+  100 a_sort_param: SYMBOL
+
+  101 verbatim_term_list: verbatim_term
+  102                   | verbatim_term_list verbatim_term
+
+  103 verbatim_term: attribute_value
+  104              | KEYWORD
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+$end (0) 0
+'(' (40) 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42
+    43 48 49 50 51 54 55 56 57 60 62 64 69 75 76 85 86 90 96 97
+')' (41) 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42
+    43 48 49 50 51 54 55 56 57 60 62 64 69 75 76 85 86 90 96 97
+'[' (91) 92
+']' (93) 92
+error (256)
+BINCONSTANT (258) 67
+HEXCONSTANT (259) 68
+BVCONSTANT (260) 69
+RATCONSTANT (261) 39 45 66
+NUMERAL (262) 24 31 32 38 44 65 69 79 80 81 82 92
+STRING (263) 41 47
+SYMBOL (264) 24 25 26 27 28 29 30 40 46 63 64 85 86 90 91 92 95 96
+    97 100
+KEYWORD (265) 38 39 40 41 42 43 72 104
+TK_EOF (266)
+"as" (267) 62
+"_" (268) 64 69 96
+"let" (269) 74 87
+"!" (270) 54
+"forall" (271) 56
+"exists" (272) 57
+"set-logic" (273) 23
+"declare-sort" (274) 24
+"define-sort" (275) 25 26
+"declare-fun" (276) 27 28
+"define-fun" (277) 29 30
+"push" (278) 31
+"pop" (279) 32
+"assert" (280) 33
+"check-sat" (281) 34
+"get-assertions" (282) 35
+"get-unsat-core" (283) 36
+"get-proof" (284) 37
+"set-option" (285) 38 39 40 41
+"get-info" (286) 42
+"set-info" (287) 43
+"get-assignment" (288) 48
+"get-model" (289)
+"get-value" (290) 49
+"exit" (291) 50
+".internal-parse-terms" (292) 51
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (42)
+    à gauche: 0
+single_command (43)
+    à gauche: 1, à droite: 0
+command (44)
+    à gauche: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21,
+    à droite: 1
+cmd_error (45)
+    à gauche: 22, à droite: 21
+cmd_set_logic (46)
+    à gauche: 23, à droite: 2
+cmd_declare_sort (47)
+    à gauche: 24, à droite: 3
+cmd_define_sort (48)
+    à gauche: 25 26, à droite: 4
+cmd_declare_fun (49)
+    à gauche: 27 28, à droite: 5
+cmd_define_fun (50)
+    à gauche: 29 30, à droite: 6
+cmd_push (51)
+    à gauche: 31, à droite: 7
+cmd_pop (52)
+    à gauche: 32, à droite: 8
+cmd_assert (53)
+    à gauche: 33, à droite: 9
+cmd_check_sat (54)
+    à gauche: 34, à droite: 10
+cmd_get_assertions (55)
+    à gauche: 35, à droite: 11
+cmd_get_unsat_core (56)
+    à gauche: 36, à droite: 12
+cmd_get_proof (57)
+    à gauche: 37, à droite: 13
+cmd_set_option (58)
+    à gauche: 38 39 40 41, à droite: 14
+cmd_get_info (59)
+    à gauche: 42, à droite: 15
+cmd_set_info (60)
+    à gauche: 43, à droite: 16
+info_argument (61)
+    à gauche: 44 45 46 47, à droite: 43 73
+cmd_get_assignment (62)
+    à gauche: 48, à droite: 17
+cmd_get_value (63)
+    à gauche: 49, à droite: 18
+cmd_exit (64)
+    à gauche: 50, à droite: 19
+cmd_internal_parse_terms (65)
+    à gauche: 51, à droite: 20
+a_term (66)
+    à gauche: 52 53, à droite: 29 30 33 54 55 56 57 83 84 90
+annotated_term (67)
+    à gauche: 54, à droite: 52
+plain_term (68)
+    à gauche: 55 56 57 58 59 60, à droite: 53
+term_symbol (69)
+    à gauche: 61 62, à droite: 59 60
+term_unqualified_symbol (70)
+    à gauche: 63 64, à droite: 61 62
+term_num_constant (71)
+    à gauche: 65 66 67 68 69, à droite: 58
+term_attribute_list (72)
+    à gauche: 70 71, à droite: 54 71
+term_attribute (73)
+    à gauche: 72, à droite: 70 71
+attribute_value (74)
+    à gauche: 73 74 75 76, à droite: 72 77 78 103
+attribute_value_list (75)
+    à gauche: 77 78, à droite: 76 78
+num_list (76)
+    à gauche: 79 80, à droite: 64 80
+int_list (77)
+    à gauche: 81 82, à droite: 82 96
+term_list (78)
+    à gauche: 83 84, à droite: 51 60 84
+quant_var_list (79)
+    à gauche: 85 86, à droite: 30 56 57 86
+begin_let_scope (80)
+    à gauche: 87, à droite: 55
+let_bindings (81)
+    à gauche: 88 89, à droite: 55 89
+let_binding (82)
+    à gauche: 90, à droite: 88 89
+logic_name (83)
+    à gauche: 91 92, à droite: 23
+sort_list (84)
+    à gauche: 93 94, à droite: 28 94 97
+a_sort (85)
+    à gauche: 95 96 97, à droite: 25 26 27 28 29 30 62 85 86 93 94
+sort_param_list (86)
+    à gauche: 98 99, à droite: 26 99
+a_sort_param (87)
+    à gauche: 100, à droite: 98 99
+verbatim_term_list (88)
+    à gauche: 101 102, à droite: 49 102
+verbatim_term (89)
+    à gauche: 103 104, à droite: 101 102
+
+
+état 0
+
+    0 $accept: . single_command $end
+
+    '('  décalage et aller à l'état 1
+
+    $défaut  réduction par utilisation de la règle 22 (cmd_error)
+
+    single_command            aller à l'état 2
+    command                   aller à l'état 3
+    cmd_error                 aller à l'état 4
+    cmd_set_logic             aller à l'état 5
+    cmd_declare_sort          aller à l'état 6
+    cmd_define_sort           aller à l'état 7
+    cmd_declare_fun           aller à l'état 8
+    cmd_define_fun            aller à l'état 9
+    cmd_push                  aller à l'état 10
+    cmd_pop                   aller à l'état 11
+    cmd_assert                aller à l'état 12
+    cmd_check_sat             aller à l'état 13
+    cmd_get_assertions        aller à l'état 14
+    cmd_get_unsat_core        aller à l'état 15
+    cmd_get_proof             aller à l'état 16
+    cmd_set_option            aller à l'état 17
+    cmd_get_info              aller à l'état 18
+    cmd_set_info              aller à l'état 19
+    cmd_get_assignment        aller à l'état 20
+    cmd_get_value             aller à l'état 21
+    cmd_exit                  aller à l'état 22
+    cmd_internal_parse_terms  aller à l'état 23
+
+
+état 1
+
+   23 cmd_set_logic: '(' . "set-logic" logic_name ')'
+   24 cmd_declare_sort: '(' . "declare-sort" SYMBOL NUMERAL ')'
+   25 cmd_define_sort: '(' . "define-sort" SYMBOL '(' ')' a_sort ')'
+   26                | '(' . "define-sort" SYMBOL '(' sort_param_list ')' a_sort ')'
+   27 cmd_declare_fun: '(' . "declare-fun" SYMBOL '(' ')' a_sort ')'
+   28                | '(' . "declare-fun" SYMBOL '(' sort_list ')' a_sort ')'
+   29 cmd_define_fun: '(' . "define-fun" SYMBOL '(' ')' a_sort a_term ')'
+   30               | '(' . "define-fun" SYMBOL '(' quant_var_list ')' a_sort a_term ')'
+   31 cmd_push: '(' . "push" NUMERAL ')'
+   32 cmd_pop: '(' . "pop" NUMERAL ')'
+   33 cmd_assert: '(' . "assert" a_term ')'
+   34 cmd_check_sat: '(' . "check-sat" ')'
+   35 cmd_get_assertions: '(' . "get-assertions" ')'
+   36 cmd_get_unsat_core: '(' . "get-unsat-core" ')'
+   37 cmd_get_proof: '(' . "get-proof" ')'
+   38 cmd_set_option: '(' . "set-option" KEYWORD NUMERAL ')'
+   39               | '(' . "set-option" KEYWORD RATCONSTANT ')'
+   40               | '(' . "set-option" KEYWORD SYMBOL ')'
+   41               | '(' . "set-option" KEYWORD STRING ')'
+   42 cmd_get_info: '(' . "get-info" KEYWORD ')'
+   43 cmd_set_info: '(' . "set-info" KEYWORD info_argument ')'
+   48 cmd_get_assignment: '(' . "get-assignment" ')'
+   49 cmd_get_value: '(' . "get-value" '(' verbatim_term_list ')' ')'
+   50 cmd_exit: '(' . "exit" ')'
+   51 cmd_internal_parse_terms: '(' . ".internal-parse-terms" '(' term_list ')' ')'
+
+    "set-logic"              décalage et aller à l'état 24
+    "declare-sort"           décalage et aller à l'état 25
+    "define-sort"            décalage et aller à l'état 26
+    "declare-fun"            décalage et aller à l'état 27
+    "define-fun"             décalage et aller à l'état 28
+    "push"                   décalage et aller à l'état 29
+    "pop"                    décalage et aller à l'état 30
+    "assert"                 décalage et aller à l'état 31
+    "check-sat"              décalage et aller à l'état 32
+    "get-assertions"         décalage et aller à l'état 33
+    "get-unsat-core"         décalage et aller à l'état 34
+    "get-proof"              décalage et aller à l'état 35
+    "set-option"             décalage et aller à l'état 36
+    "get-info"               décalage et aller à l'état 37
+    "set-info"               décalage et aller à l'état 38
+    "get-assignment"         décalage et aller à l'état 39
+    "get-value"              décalage et aller à l'état 40
+    "exit"                   décalage et aller à l'état 41
+    ".internal-parse-terms"  décalage et aller à l'état 42
+
+
+état 2
+
+    0 $accept: single_command . $end
+
+    $end  décalage et aller à l'état 43
+
+
+état 3
+
+    1 single_command: command .
+
+    $défaut  réduction par utilisation de la règle 1 (single_command)
+
+
+état 4
+
+   21 command: cmd_error .
+
+    $défaut  réduction par utilisation de la règle 21 (command)
+
+
+état 5
+
+    2 command: cmd_set_logic .
+
+    $défaut  réduction par utilisation de la règle 2 (command)
+
+
+état 6
+
+    3 command: cmd_declare_sort .
+
+    $défaut  réduction par utilisation de la règle 3 (command)
+
+
+état 7
+
+    4 command: cmd_define_sort .
+
+    $défaut  réduction par utilisation de la règle 4 (command)
+
+
+état 8
+
+    5 command: cmd_declare_fun .
+
+    $défaut  réduction par utilisation de la règle 5 (command)
+
+
+état 9
+
+    6 command: cmd_define_fun .
+
+    $défaut  réduction par utilisation de la règle 6 (command)
+
+
+état 10
+
+    7 command: cmd_push .
+
+    $défaut  réduction par utilisation de la règle 7 (command)
+
+
+état 11
+
+    8 command: cmd_pop .
+
+    $défaut  réduction par utilisation de la règle 8 (command)
+
+
+état 12
+
+    9 command: cmd_assert .
+
+    $défaut  réduction par utilisation de la règle 9 (command)
+
+
+état 13
+
+   10 command: cmd_check_sat .
+
+    $défaut  réduction par utilisation de la règle 10 (command)
+
+
+état 14
+
+   11 command: cmd_get_assertions .
+
+    $défaut  réduction par utilisation de la règle 11 (command)
+
+
+état 15
+
+   12 command: cmd_get_unsat_core .
+
+    $défaut  réduction par utilisation de la règle 12 (command)
+
+
+état 16
+
+   13 command: cmd_get_proof .
+
+    $défaut  réduction par utilisation de la règle 13 (command)
+
+
+état 17
+
+   14 command: cmd_set_option .
+
+    $défaut  réduction par utilisation de la règle 14 (command)
+
+
+état 18
+
+   15 command: cmd_get_info .
+
+    $défaut  réduction par utilisation de la règle 15 (command)
+
+
+état 19
+
+   16 command: cmd_set_info .
+
+    $défaut  réduction par utilisation de la règle 16 (command)
+
+
+état 20
+
+   17 command: cmd_get_assignment .
+
+    $défaut  réduction par utilisation de la règle 17 (command)
+
+
+état 21
+
+   18 command: cmd_get_value .
+
+    $défaut  réduction par utilisation de la règle 18 (command)
+
+
+état 22
+
+   19 command: cmd_exit .
+
+    $défaut  réduction par utilisation de la règle 19 (command)
+
+
+état 23
+
+   20 command: cmd_internal_parse_terms .
+
+    $défaut  réduction par utilisation de la règle 20 (command)
+
+
+état 24
+
+   23 cmd_set_logic: '(' "set-logic" . logic_name ')'
+
+    SYMBOL  décalage et aller à l'état 44
+
+    logic_name  aller à l'état 45
+
+
+état 25
+
+   24 cmd_declare_sort: '(' "declare-sort" . SYMBOL NUMERAL ')'
+
+    SYMBOL  décalage et aller à l'état 46
+
+
+état 26
+
+   25 cmd_define_sort: '(' "define-sort" . SYMBOL '(' ')' a_sort ')'
+   26                | '(' "define-sort" . SYMBOL '(' sort_param_list ')' a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 47
+
+
+état 27
+
+   27 cmd_declare_fun: '(' "declare-fun" . SYMBOL '(' ')' a_sort ')'
+   28                | '(' "declare-fun" . SYMBOL '(' sort_list ')' a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 48
+
+
+état 28
+
+   29 cmd_define_fun: '(' "define-fun" . SYMBOL '(' ')' a_sort a_term ')'
+   30               | '(' "define-fun" . SYMBOL '(' quant_var_list ')' a_sort a_term ')'
+
+    SYMBOL  décalage et aller à l'état 49
+
+
+état 29
+
+   31 cmd_push: '(' "push" . NUMERAL ')'
+
+    NUMERAL  décalage et aller à l'état 50
+
+
+état 30
+
+   32 cmd_pop: '(' "pop" . NUMERAL ')'
+
+    NUMERAL  décalage et aller à l'état 51
+
+
+état 31
+
+   33 cmd_assert: '(' "assert" . a_term ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 58
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 32
+
+   34 cmd_check_sat: '(' "check-sat" . ')'
+
+    ')'  décalage et aller à l'état 64
+
+
+état 33
+
+   35 cmd_get_assertions: '(' "get-assertions" . ')'
+
+    ')'  décalage et aller à l'état 65
+
+
+état 34
+
+   36 cmd_get_unsat_core: '(' "get-unsat-core" . ')'
+
+    ')'  décalage et aller à l'état 66
+
+
+état 35
+
+   37 cmd_get_proof: '(' "get-proof" . ')'
+
+    ')'  décalage et aller à l'état 67
+
+
+état 36
+
+   38 cmd_set_option: '(' "set-option" . KEYWORD NUMERAL ')'
+   39               | '(' "set-option" . KEYWORD RATCONSTANT ')'
+   40               | '(' "set-option" . KEYWORD SYMBOL ')'
+   41               | '(' "set-option" . KEYWORD STRING ')'
+
+    KEYWORD  décalage et aller à l'état 68
+
+
+état 37
+
+   42 cmd_get_info: '(' "get-info" . KEYWORD ')'
+
+    KEYWORD  décalage et aller à l'état 69
+
+
+état 38
+
+   43 cmd_set_info: '(' "set-info" . KEYWORD info_argument ')'
+
+    KEYWORD  décalage et aller à l'état 70
+
+
+état 39
+
+   48 cmd_get_assignment: '(' "get-assignment" . ')'
+
+    ')'  décalage et aller à l'état 71
+
+
+état 40
+
+   49 cmd_get_value: '(' "get-value" . '(' verbatim_term_list ')' ')'
+
+    '('  décalage et aller à l'état 72
+
+
+état 41
+
+   50 cmd_exit: '(' "exit" . ')'
+
+    ')'  décalage et aller à l'état 73
+
+
+état 42
+
+   51 cmd_internal_parse_terms: '(' ".internal-parse-terms" . '(' term_list ')' ')'
+
+    '('  décalage et aller à l'état 74
+
+
+état 43
+
+    0 $accept: single_command $end .
+
+    $défaut  accepter
+
+
+état 44
+
+   91 logic_name: SYMBOL .
+   92           | SYMBOL . '[' NUMERAL ']'
+
+    '['  décalage et aller à l'état 75
+
+    $défaut  réduction par utilisation de la règle 91 (logic_name)
+
+
+état 45
+
+   23 cmd_set_logic: '(' "set-logic" logic_name . ')'
+
+    ')'  décalage et aller à l'état 76
+
+
+état 46
+
+   24 cmd_declare_sort: '(' "declare-sort" SYMBOL . NUMERAL ')'
+
+    NUMERAL  décalage et aller à l'état 77
+
+
+état 47
+
+   25 cmd_define_sort: '(' "define-sort" SYMBOL . '(' ')' a_sort ')'
+   26                | '(' "define-sort" SYMBOL . '(' sort_param_list ')' a_sort ')'
+
+    '('  décalage et aller à l'état 78
+
+
+état 48
+
+   27 cmd_declare_fun: '(' "declare-fun" SYMBOL . '(' ')' a_sort ')'
+   28                | '(' "declare-fun" SYMBOL . '(' sort_list ')' a_sort ')'
+
+    '('  décalage et aller à l'état 79
+
+
+état 49
+
+   29 cmd_define_fun: '(' "define-fun" SYMBOL . '(' ')' a_sort a_term ')'
+   30               | '(' "define-fun" SYMBOL . '(' quant_var_list ')' a_sort a_term ')'
+
+    '('  décalage et aller à l'état 80
+
+
+état 50
+
+   31 cmd_push: '(' "push" NUMERAL . ')'
+
+    ')'  décalage et aller à l'état 81
+
+
+état 51
+
+   32 cmd_pop: '(' "pop" NUMERAL . ')'
+
+    ')'  décalage et aller à l'état 82
+
+
+état 52
+
+   67 term_num_constant: BINCONSTANT .
+
+    $défaut  réduction par utilisation de la règle 67 (term_num_constant)
+
+
+état 53
+
+   68 term_num_constant: HEXCONSTANT .
+
+    $défaut  réduction par utilisation de la règle 68 (term_num_constant)
+
+
+état 54
+
+   66 term_num_constant: RATCONSTANT .
+
+    $défaut  réduction par utilisation de la règle 66 (term_num_constant)
+
+
+état 55
+
+   65 term_num_constant: NUMERAL .
+
+    $défaut  réduction par utilisation de la règle 65 (term_num_constant)
+
+
+état 56
+
+   63 term_unqualified_symbol: SYMBOL .
+
+    $défaut  réduction par utilisation de la règle 63 (term_unqualified_symbol)
+
+
+état 57
+
+   54 annotated_term: '(' . "!" a_term term_attribute_list ')'
+   55 plain_term: '(' . begin_let_scope '(' let_bindings ')' a_term ')'
+   56           | '(' . "forall" '(' quant_var_list ')' a_term ')'
+   57           | '(' . "exists" '(' quant_var_list ')' a_term ')'
+   60           | '(' . term_symbol term_list ')'
+   62 term_symbol: '(' . "as" term_unqualified_symbol a_sort ')'
+   64 term_unqualified_symbol: '(' . "_" SYMBOL num_list ')'
+   69 term_num_constant: '(' . "_" BVCONSTANT NUMERAL ')'
+
+    SYMBOL    décalage et aller à l'état 56
+    "as"      décalage et aller à l'état 83
+    "_"       décalage et aller à l'état 84
+    "let"     décalage et aller à l'état 85
+    "!"       décalage et aller à l'état 86
+    "forall"  décalage et aller à l'état 87
+    "exists"  décalage et aller à l'état 88
+    '('       décalage et aller à l'état 89
+
+    term_symbol              aller à l'état 90
+    term_unqualified_symbol  aller à l'état 62
+    begin_let_scope          aller à l'état 91
+
+
+état 58
+
+   33 cmd_assert: '(' "assert" a_term . ')'
+
+    ')'  décalage et aller à l'état 92
+
+
+état 59
+
+   52 a_term: annotated_term .
+
+    $défaut  réduction par utilisation de la règle 52 (a_term)
+
+
+état 60
+
+   53 a_term: plain_term .
+
+    $défaut  réduction par utilisation de la règle 53 (a_term)
+
+
+état 61
+
+   59 plain_term: term_symbol .
+
+    $défaut  réduction par utilisation de la règle 59 (plain_term)
+
+
+état 62
+
+   61 term_symbol: term_unqualified_symbol .
+
+    $défaut  réduction par utilisation de la règle 61 (term_symbol)
+
+
+état 63
+
+   58 plain_term: term_num_constant .
+
+    $défaut  réduction par utilisation de la règle 58 (plain_term)
+
+
+état 64
+
+   34 cmd_check_sat: '(' "check-sat" ')' .
+
+    $défaut  réduction par utilisation de la règle 34 (cmd_check_sat)
+
+
+état 65
+
+   35 cmd_get_assertions: '(' "get-assertions" ')' .
+
+    $défaut  réduction par utilisation de la règle 35 (cmd_get_assertions)
+
+
+état 66
+
+   36 cmd_get_unsat_core: '(' "get-unsat-core" ')' .
+
+    $défaut  réduction par utilisation de la règle 36 (cmd_get_unsat_core)
+
+
+état 67
+
+   37 cmd_get_proof: '(' "get-proof" ')' .
+
+    $défaut  réduction par utilisation de la règle 37 (cmd_get_proof)
+
+
+état 68
+
+   38 cmd_set_option: '(' "set-option" KEYWORD . NUMERAL ')'
+   39               | '(' "set-option" KEYWORD . RATCONSTANT ')'
+   40               | '(' "set-option" KEYWORD . SYMBOL ')'
+   41               | '(' "set-option" KEYWORD . STRING ')'
+
+    RATCONSTANT  décalage et aller à l'état 93
+    NUMERAL      décalage et aller à l'état 94
+    STRING       décalage et aller à l'état 95
+    SYMBOL       décalage et aller à l'état 96
+
+
+état 69
+
+   42 cmd_get_info: '(' "get-info" KEYWORD . ')'
+
+    ')'  décalage et aller à l'état 97
+
+
+état 70
+
+   43 cmd_set_info: '(' "set-info" KEYWORD . info_argument ')'
+
+    RATCONSTANT  décalage et aller à l'état 98
+    NUMERAL      décalage et aller à l'état 99
+    STRING       décalage et aller à l'état 100
+    SYMBOL       décalage et aller à l'état 101
+
+    info_argument  aller à l'état 102
+
+
+état 71
+
+   48 cmd_get_assignment: '(' "get-assignment" ')' .
+
+    $défaut  réduction par utilisation de la règle 48 (cmd_get_assignment)
+
+
+état 72
+
+   49 cmd_get_value: '(' "get-value" '(' . verbatim_term_list ')' ')'
+
+    RATCONSTANT  décalage et aller à l'état 98
+    NUMERAL      décalage et aller à l'état 99
+    STRING       décalage et aller à l'état 100
+    SYMBOL       décalage et aller à l'état 101
+    KEYWORD      décalage et aller à l'état 103
+    "let"        décalage et aller à l'état 104
+    '('          décalage et aller à l'état 105
+
+    info_argument       aller à l'état 106
+    attribute_value     aller à l'état 107
+    verbatim_term_list  aller à l'état 108
+    verbatim_term       aller à l'état 109
+
+
+état 73
+
+   50 cmd_exit: '(' "exit" ')' .
+
+    $défaut  réduction par utilisation de la règle 50 (cmd_exit)
+
+
+état 74
+
+   51 cmd_internal_parse_terms: '(' ".internal-parse-terms" '(' . term_list ')' ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 110
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+    term_list                aller à l'état 111
+
+
+état 75
+
+   92 logic_name: SYMBOL '[' . NUMERAL ']'
+
+    NUMERAL  décalage et aller à l'état 112
+
+
+état 76
+
+   23 cmd_set_logic: '(' "set-logic" logic_name ')' .
+
+    $défaut  réduction par utilisation de la règle 23 (cmd_set_logic)
+
+
+état 77
+
+   24 cmd_declare_sort: '(' "declare-sort" SYMBOL NUMERAL . ')'
+
+    ')'  décalage et aller à l'état 113
+
+
+état 78
+
+   25 cmd_define_sort: '(' "define-sort" SYMBOL '(' . ')' a_sort ')'
+   26                | '(' "define-sort" SYMBOL '(' . sort_param_list ')' a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 114
+    ')'     décalage et aller à l'état 115
+
+    sort_param_list  aller à l'état 116
+    a_sort_param     aller à l'état 117
+
+
+état 79
+
+   27 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' . ')' a_sort ')'
+   28                | '(' "declare-fun" SYMBOL '(' . sort_list ')' a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+    ')'     décalage et aller à l'état 120
+
+    sort_list  aller à l'état 121
+    a_sort     aller à l'état 122
+
+
+état 80
+
+   29 cmd_define_fun: '(' "define-fun" SYMBOL '(' . ')' a_sort a_term ')'
+   30               | '(' "define-fun" SYMBOL '(' . quant_var_list ')' a_sort a_term ')'
+
+    '('  décalage et aller à l'état 123
+    ')'  décalage et aller à l'état 124
+
+    quant_var_list  aller à l'état 125
+
+
+état 81
+
+   31 cmd_push: '(' "push" NUMERAL ')' .
+
+    $défaut  réduction par utilisation de la règle 31 (cmd_push)
+
+
+état 82
+
+   32 cmd_pop: '(' "pop" NUMERAL ')' .
+
+    $défaut  réduction par utilisation de la règle 32 (cmd_pop)
+
+
+état 83
+
+   62 term_symbol: '(' "as" . term_unqualified_symbol a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 56
+    '('     décalage et aller à l'état 126
+
+    term_unqualified_symbol  aller à l'état 127
+
+
+état 84
+
+   64 term_unqualified_symbol: '(' "_" . SYMBOL num_list ')'
+   69 term_num_constant: '(' "_" . BVCONSTANT NUMERAL ')'
+
+    BVCONSTANT  décalage et aller à l'état 128
+    SYMBOL      décalage et aller à l'état 129
+
+
+état 85
+
+   87 begin_let_scope: "let" .
+
+    $défaut  réduction par utilisation de la règle 87 (begin_let_scope)
+
+
+état 86
+
+   54 annotated_term: '(' "!" . a_term term_attribute_list ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 130
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 87
+
+   56 plain_term: '(' "forall" . '(' quant_var_list ')' a_term ')'
+
+    '('  décalage et aller à l'état 131
+
+
+état 88
+
+   57 plain_term: '(' "exists" . '(' quant_var_list ')' a_term ')'
+
+    '('  décalage et aller à l'état 132
+
+
+état 89
+
+   62 term_symbol: '(' . "as" term_unqualified_symbol a_sort ')'
+   64 term_unqualified_symbol: '(' . "_" SYMBOL num_list ')'
+
+    "as"  décalage et aller à l'état 83
+    "_"   décalage et aller à l'état 133
+
+
+état 90
+
+   60 plain_term: '(' term_symbol . term_list ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 110
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+    term_list                aller à l'état 134
+
+
+état 91
+
+   55 plain_term: '(' begin_let_scope . '(' let_bindings ')' a_term ')'
+
+    '('  décalage et aller à l'état 135
+
+
+état 92
+
+   33 cmd_assert: '(' "assert" a_term ')' .
+
+    $défaut  réduction par utilisation de la règle 33 (cmd_assert)
+
+
+état 93
+
+   39 cmd_set_option: '(' "set-option" KEYWORD RATCONSTANT . ')'
+
+    ')'  décalage et aller à l'état 136
+
+
+état 94
+
+   38 cmd_set_option: '(' "set-option" KEYWORD NUMERAL . ')'
+
+    ')'  décalage et aller à l'état 137
+
+
+état 95
+
+   41 cmd_set_option: '(' "set-option" KEYWORD STRING . ')'
+
+    ')'  décalage et aller à l'état 138
+
+
+état 96
+
+   40 cmd_set_option: '(' "set-option" KEYWORD SYMBOL . ')'
+
+    ')'  décalage et aller à l'état 139
+
+
+état 97
+
+   42 cmd_get_info: '(' "get-info" KEYWORD ')' .
+
+    $défaut  réduction par utilisation de la règle 42 (cmd_get_info)
+
+
+état 98
+
+   45 info_argument: RATCONSTANT .
+
+    $défaut  réduction par utilisation de la règle 45 (info_argument)
+
+
+état 99
+
+   44 info_argument: NUMERAL .
+
+    $défaut  réduction par utilisation de la règle 44 (info_argument)
+
+
+état 100
+
+   47 info_argument: STRING .
+
+    $défaut  réduction par utilisation de la règle 47 (info_argument)
+
+
+état 101
+
+   46 info_argument: SYMBOL .
+
+    $défaut  réduction par utilisation de la règle 46 (info_argument)
+
+
+état 102
+
+   43 cmd_set_info: '(' "set-info" KEYWORD info_argument . ')'
+
+    ')'  décalage et aller à l'état 140
+
+
+état 103
+
+  104 verbatim_term: KEYWORD .
+
+    $défaut  réduction par utilisation de la règle 104 (verbatim_term)
+
+
+état 104
+
+   74 attribute_value: "let" .
+
+    $défaut  réduction par utilisation de la règle 74 (attribute_value)
+
+
+état 105
+
+   75 attribute_value: '(' . ')'
+   76                | '(' . attribute_value_list ')'
+
+    RATCONSTANT  décalage et aller à l'état 98
+    NUMERAL      décalage et aller à l'état 99
+    STRING       décalage et aller à l'état 100
+    SYMBOL       décalage et aller à l'état 101
+    "let"        décalage et aller à l'état 104
+    '('          décalage et aller à l'état 105
+    ')'          décalage et aller à l'état 141
+
+    info_argument         aller à l'état 106
+    attribute_value       aller à l'état 142
+    attribute_value_list  aller à l'état 143
+
+
+état 106
+
+   73 attribute_value: info_argument .
+
+    $défaut  réduction par utilisation de la règle 73 (attribute_value)
+
+
+état 107
+
+  103 verbatim_term: attribute_value .
+
+    $défaut  réduction par utilisation de la règle 103 (verbatim_term)
+
+
+état 108
+
+   49 cmd_get_value: '(' "get-value" '(' verbatim_term_list . ')' ')'
+  102 verbatim_term_list: verbatim_term_list . verbatim_term
+
+    RATCONSTANT  décalage et aller à l'état 98
+    NUMERAL      décalage et aller à l'état 99
+    STRING       décalage et aller à l'état 100
+    SYMBOL       décalage et aller à l'état 101
+    KEYWORD      décalage et aller à l'état 103
+    "let"        décalage et aller à l'état 104
+    '('          décalage et aller à l'état 105
+    ')'          décalage et aller à l'état 144
+
+    info_argument    aller à l'état 106
+    attribute_value  aller à l'état 107
+    verbatim_term    aller à l'état 145
+
+
+état 109
+
+  101 verbatim_term_list: verbatim_term .
+
+    $défaut  réduction par utilisation de la règle 101 (verbatim_term_list)
+
+
+état 110
+
+   83 term_list: a_term .
+
+    $défaut  réduction par utilisation de la règle 83 (term_list)
+
+
+état 111
+
+   51 cmd_internal_parse_terms: '(' ".internal-parse-terms" '(' term_list . ')' ')'
+   84 term_list: term_list . a_term
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+    ')'          décalage et aller à l'état 146
+
+    a_term                   aller à l'état 147
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 112
+
+   92 logic_name: SYMBOL '[' NUMERAL . ']'
+
+    ']'  décalage et aller à l'état 148
+
+
+état 113
+
+   24 cmd_declare_sort: '(' "declare-sort" SYMBOL NUMERAL ')' .
+
+    $défaut  réduction par utilisation de la règle 24 (cmd_declare_sort)
+
+
+état 114
+
+  100 a_sort_param: SYMBOL .
+
+    $défaut  réduction par utilisation de la règle 100 (a_sort_param)
+
+
+état 115
+
+   25 cmd_define_sort: '(' "define-sort" SYMBOL '(' ')' . a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 149
+
+
+état 116
+
+   26 cmd_define_sort: '(' "define-sort" SYMBOL '(' sort_param_list . ')' a_sort ')'
+   99 sort_param_list: sort_param_list . a_sort_param
+
+    SYMBOL  décalage et aller à l'état 114
+    ')'     décalage et aller à l'état 150
+
+    a_sort_param  aller à l'état 151
+
+
+état 117
+
+   98 sort_param_list: a_sort_param .
+
+    $défaut  réduction par utilisation de la règle 98 (sort_param_list)
+
+
+état 118
+
+   95 a_sort: SYMBOL .
+
+    $défaut  réduction par utilisation de la règle 95 (a_sort)
+
+
+état 119
+
+   96 a_sort: '(' . "_" SYMBOL int_list ')'
+   97       | '(' . SYMBOL sort_list ')'
+
+    SYMBOL  décalage et aller à l'état 152
+    "_"     décalage et aller à l'état 153
+
+
+état 120
+
+   27 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' ')' . a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 154
+
+
+état 121
+
+   28 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' sort_list . ')' a_sort ')'
+   94 sort_list: sort_list . a_sort
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+    ')'     décalage et aller à l'état 155
+
+    a_sort  aller à l'état 156
+
+
+état 122
+
+   93 sort_list: a_sort .
+
+    $défaut  réduction par utilisation de la règle 93 (sort_list)
+
+
+état 123
+
+   85 quant_var_list: '(' . SYMBOL a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 157
+
+
+état 124
+
+   29 cmd_define_fun: '(' "define-fun" SYMBOL '(' ')' . a_sort a_term ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 158
+
+
+état 125
+
+   30 cmd_define_fun: '(' "define-fun" SYMBOL '(' quant_var_list . ')' a_sort a_term ')'
+   86 quant_var_list: quant_var_list . '(' SYMBOL a_sort ')'
+
+    '('  décalage et aller à l'état 159
+    ')'  décalage et aller à l'état 160
+
+
+état 126
+
+   64 term_unqualified_symbol: '(' . "_" SYMBOL num_list ')'
+
+    "_"  décalage et aller à l'état 133
+
+
+état 127
+
+   62 term_symbol: '(' "as" term_unqualified_symbol . a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 161
+
+
+état 128
+
+   69 term_num_constant: '(' "_" BVCONSTANT . NUMERAL ')'
+
+    NUMERAL  décalage et aller à l'état 162
+
+
+état 129
+
+   64 term_unqualified_symbol: '(' "_" SYMBOL . num_list ')'
+
+    NUMERAL  décalage et aller à l'état 163
+
+    num_list  aller à l'état 164
+
+
+état 130
+
+   54 annotated_term: '(' "!" a_term . term_attribute_list ')'
+
+    KEYWORD  décalage et aller à l'état 165
+
+    term_attribute_list  aller à l'état 166
+    term_attribute       aller à l'état 167
+
+
+état 131
+
+   56 plain_term: '(' "forall" '(' . quant_var_list ')' a_term ')'
+
+    '('  décalage et aller à l'état 123
+
+    quant_var_list  aller à l'état 168
+
+
+état 132
+
+   57 plain_term: '(' "exists" '(' . quant_var_list ')' a_term ')'
+
+    '('  décalage et aller à l'état 123
+
+    quant_var_list  aller à l'état 169
+
+
+état 133
+
+   64 term_unqualified_symbol: '(' "_" . SYMBOL num_list ')'
+
+    SYMBOL  décalage et aller à l'état 129
+
+
+état 134
+
+   60 plain_term: '(' term_symbol term_list . ')'
+   84 term_list: term_list . a_term
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+    ')'          décalage et aller à l'état 170
+
+    a_term                   aller à l'état 147
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 135
+
+   55 plain_term: '(' begin_let_scope '(' . let_bindings ')' a_term ')'
+
+    '('  décalage et aller à l'état 171
+
+    let_bindings  aller à l'état 172
+    let_binding   aller à l'état 173
+
+
+état 136
+
+   39 cmd_set_option: '(' "set-option" KEYWORD RATCONSTANT ')' .
+
+    $défaut  réduction par utilisation de la règle 39 (cmd_set_option)
+
+
+état 137
+
+   38 cmd_set_option: '(' "set-option" KEYWORD NUMERAL ')' .
+
+    $défaut  réduction par utilisation de la règle 38 (cmd_set_option)
+
+
+état 138
+
+   41 cmd_set_option: '(' "set-option" KEYWORD STRING ')' .
+
+    $défaut  réduction par utilisation de la règle 41 (cmd_set_option)
+
+
+état 139
+
+   40 cmd_set_option: '(' "set-option" KEYWORD SYMBOL ')' .
+
+    $défaut  réduction par utilisation de la règle 40 (cmd_set_option)
+
+
+état 140
+
+   43 cmd_set_info: '(' "set-info" KEYWORD info_argument ')' .
+
+    $défaut  réduction par utilisation de la règle 43 (cmd_set_info)
+
+
+état 141
+
+   75 attribute_value: '(' ')' .
+
+    $défaut  réduction par utilisation de la règle 75 (attribute_value)
+
+
+état 142
+
+   77 attribute_value_list: attribute_value .
+
+    $défaut  réduction par utilisation de la règle 77 (attribute_value_list)
+
+
+état 143
+
+   76 attribute_value: '(' attribute_value_list . ')'
+   78 attribute_value_list: attribute_value_list . attribute_value
+
+    RATCONSTANT  décalage et aller à l'état 98
+    NUMERAL      décalage et aller à l'état 99
+    STRING       décalage et aller à l'état 100
+    SYMBOL       décalage et aller à l'état 101
+    "let"        décalage et aller à l'état 104
+    '('          décalage et aller à l'état 105
+    ')'          décalage et aller à l'état 174
+
+    info_argument    aller à l'état 106
+    attribute_value  aller à l'état 175
+
+
+état 144
+
+   49 cmd_get_value: '(' "get-value" '(' verbatim_term_list ')' . ')'
+
+    ')'  décalage et aller à l'état 176
+
+
+état 145
+
+  102 verbatim_term_list: verbatim_term_list verbatim_term .
+
+    $défaut  réduction par utilisation de la règle 102 (verbatim_term_list)
+
+
+état 146
+
+   51 cmd_internal_parse_terms: '(' ".internal-parse-terms" '(' term_list ')' . ')'
+
+    ')'  décalage et aller à l'état 177
+
+
+état 147
+
+   84 term_list: term_list a_term .
+
+    $défaut  réduction par utilisation de la règle 84 (term_list)
+
+
+état 148
+
+   92 logic_name: SYMBOL '[' NUMERAL ']' .
+
+    $défaut  réduction par utilisation de la règle 92 (logic_name)
+
+
+état 149
+
+   25 cmd_define_sort: '(' "define-sort" SYMBOL '(' ')' a_sort . ')'
+
+    ')'  décalage et aller à l'état 178
+
+
+état 150
+
+   26 cmd_define_sort: '(' "define-sort" SYMBOL '(' sort_param_list ')' . a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 179
+
+
+état 151
+
+   99 sort_param_list: sort_param_list a_sort_param .
+
+    $défaut  réduction par utilisation de la règle 99 (sort_param_list)
+
+
+état 152
+
+   97 a_sort: '(' SYMBOL . sort_list ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    sort_list  aller à l'état 180
+    a_sort     aller à l'état 122
+
+
+état 153
+
+   96 a_sort: '(' "_" . SYMBOL int_list ')'
+
+    SYMBOL  décalage et aller à l'état 181
+
+
+état 154
+
+   27 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' ')' a_sort . ')'
+
+    ')'  décalage et aller à l'état 182
+
+
+état 155
+
+   28 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' sort_list ')' . a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 183
+
+
+état 156
+
+   94 sort_list: sort_list a_sort .
+
+    $défaut  réduction par utilisation de la règle 94 (sort_list)
+
+
+état 157
+
+   85 quant_var_list: '(' SYMBOL . a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 184
+
+
+état 158
+
+   29 cmd_define_fun: '(' "define-fun" SYMBOL '(' ')' a_sort . a_term ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 185
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 159
+
+   86 quant_var_list: quant_var_list '(' . SYMBOL a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 186
+
+
+état 160
+
+   30 cmd_define_fun: '(' "define-fun" SYMBOL '(' quant_var_list ')' . a_sort a_term ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 187
+
+
+état 161
+
+   62 term_symbol: '(' "as" term_unqualified_symbol a_sort . ')'
+
+    ')'  décalage et aller à l'état 188
+
+
+état 162
+
+   69 term_num_constant: '(' "_" BVCONSTANT NUMERAL . ')'
+
+    ')'  décalage et aller à l'état 189
+
+
+état 163
+
+   79 num_list: NUMERAL .
+
+    $défaut  réduction par utilisation de la règle 79 (num_list)
+
+
+état 164
+
+   64 term_unqualified_symbol: '(' "_" SYMBOL num_list . ')'
+   80 num_list: num_list . NUMERAL
+
+    NUMERAL  décalage et aller à l'état 190
+    ')'      décalage et aller à l'état 191
+
+
+état 165
+
+   72 term_attribute: KEYWORD . attribute_value
+
+    RATCONSTANT  décalage et aller à l'état 98
+    NUMERAL      décalage et aller à l'état 99
+    STRING       décalage et aller à l'état 100
+    SYMBOL       décalage et aller à l'état 101
+    "let"        décalage et aller à l'état 104
+    '('          décalage et aller à l'état 105
+
+    info_argument    aller à l'état 106
+    attribute_value  aller à l'état 192
+
+
+état 166
+
+   54 annotated_term: '(' "!" a_term term_attribute_list . ')'
+   71 term_attribute_list: term_attribute_list . term_attribute
+
+    KEYWORD  décalage et aller à l'état 165
+    ')'      décalage et aller à l'état 193
+
+    term_attribute  aller à l'état 194
+
+
+état 167
+
+   70 term_attribute_list: term_attribute .
+
+    $défaut  réduction par utilisation de la règle 70 (term_attribute_list)
+
+
+état 168
+
+   56 plain_term: '(' "forall" '(' quant_var_list . ')' a_term ')'
+   86 quant_var_list: quant_var_list . '(' SYMBOL a_sort ')'
+
+    '('  décalage et aller à l'état 159
+    ')'  décalage et aller à l'état 195
+
+
+état 169
+
+   57 plain_term: '(' "exists" '(' quant_var_list . ')' a_term ')'
+   86 quant_var_list: quant_var_list . '(' SYMBOL a_sort ')'
+
+    '('  décalage et aller à l'état 159
+    ')'  décalage et aller à l'état 196
+
+
+état 170
+
+   60 plain_term: '(' term_symbol term_list ')' .
+
+    $défaut  réduction par utilisation de la règle 60 (plain_term)
+
+
+état 171
+
+   90 let_binding: '(' . SYMBOL a_term ')'
+
+    SYMBOL  décalage et aller à l'état 197
+
+
+état 172
+
+   55 plain_term: '(' begin_let_scope '(' let_bindings . ')' a_term ')'
+
+    ')'  décalage et aller à l'état 198
+
+
+état 173
+
+   88 let_bindings: let_binding .
+   89             | let_binding . let_bindings
+
+    '('  décalage et aller à l'état 171
+
+    $défaut  réduction par utilisation de la règle 88 (let_bindings)
+
+    let_bindings  aller à l'état 199
+    let_binding   aller à l'état 173
+
+
+état 174
+
+   76 attribute_value: '(' attribute_value_list ')' .
+
+    $défaut  réduction par utilisation de la règle 76 (attribute_value)
+
+
+état 175
+
+   78 attribute_value_list: attribute_value_list attribute_value .
+
+    $défaut  réduction par utilisation de la règle 78 (attribute_value_list)
+
+
+état 176
+
+   49 cmd_get_value: '(' "get-value" '(' verbatim_term_list ')' ')' .
+
+    $défaut  réduction par utilisation de la règle 49 (cmd_get_value)
+
+
+état 177
+
+   51 cmd_internal_parse_terms: '(' ".internal-parse-terms" '(' term_list ')' ')' .
+
+    $défaut  réduction par utilisation de la règle 51 (cmd_internal_parse_terms)
+
+
+état 178
+
+   25 cmd_define_sort: '(' "define-sort" SYMBOL '(' ')' a_sort ')' .
+
+    $défaut  réduction par utilisation de la règle 25 (cmd_define_sort)
+
+
+état 179
+
+   26 cmd_define_sort: '(' "define-sort" SYMBOL '(' sort_param_list ')' a_sort . ')'
+
+    ')'  décalage et aller à l'état 200
+
+
+état 180
+
+   94 sort_list: sort_list . a_sort
+   97 a_sort: '(' SYMBOL sort_list . ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+    ')'     décalage et aller à l'état 201
+
+    a_sort  aller à l'état 156
+
+
+état 181
+
+   96 a_sort: '(' "_" SYMBOL . int_list ')'
+
+    NUMERAL  décalage et aller à l'état 202
+
+    int_list  aller à l'état 203
+
+
+état 182
+
+   27 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' ')' a_sort ')' .
+
+    $défaut  réduction par utilisation de la règle 27 (cmd_declare_fun)
+
+
+état 183
+
+   28 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' sort_list ')' a_sort . ')'
+
+    ')'  décalage et aller à l'état 204
+
+
+état 184
+
+   85 quant_var_list: '(' SYMBOL a_sort . ')'
+
+    ')'  décalage et aller à l'état 205
+
+
+état 185
+
+   29 cmd_define_fun: '(' "define-fun" SYMBOL '(' ')' a_sort a_term . ')'
+
+    ')'  décalage et aller à l'état 206
+
+
+état 186
+
+   86 quant_var_list: quant_var_list '(' SYMBOL . a_sort ')'
+
+    SYMBOL  décalage et aller à l'état 118
+    '('     décalage et aller à l'état 119
+
+    a_sort  aller à l'état 207
+
+
+état 187
+
+   30 cmd_define_fun: '(' "define-fun" SYMBOL '(' quant_var_list ')' a_sort . a_term ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 208
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 188
+
+   62 term_symbol: '(' "as" term_unqualified_symbol a_sort ')' .
+
+    $défaut  réduction par utilisation de la règle 62 (term_symbol)
+
+
+état 189
+
+   69 term_num_constant: '(' "_" BVCONSTANT NUMERAL ')' .
+
+    $défaut  réduction par utilisation de la règle 69 (term_num_constant)
+
+
+état 190
+
+   80 num_list: num_list NUMERAL .
+
+    $défaut  réduction par utilisation de la règle 80 (num_list)
+
+
+état 191
+
+   64 term_unqualified_symbol: '(' "_" SYMBOL num_list ')' .
+
+    $défaut  réduction par utilisation de la règle 64 (term_unqualified_symbol)
+
+
+état 192
+
+   72 term_attribute: KEYWORD attribute_value .
+
+    $défaut  réduction par utilisation de la règle 72 (term_attribute)
+
+
+état 193
+
+   54 annotated_term: '(' "!" a_term term_attribute_list ')' .
+
+    $défaut  réduction par utilisation de la règle 54 (annotated_term)
+
+
+état 194
+
+   71 term_attribute_list: term_attribute_list term_attribute .
+
+    $défaut  réduction par utilisation de la règle 71 (term_attribute_list)
+
+
+état 195
+
+   56 plain_term: '(' "forall" '(' quant_var_list ')' . a_term ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 209
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 196
+
+   57 plain_term: '(' "exists" '(' quant_var_list ')' . a_term ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 210
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 197
+
+   90 let_binding: '(' SYMBOL . a_term ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 211
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 198
+
+   55 plain_term: '(' begin_let_scope '(' let_bindings ')' . a_term ')'
+
+    BINCONSTANT  décalage et aller à l'état 52
+    HEXCONSTANT  décalage et aller à l'état 53
+    RATCONSTANT  décalage et aller à l'état 54
+    NUMERAL      décalage et aller à l'état 55
+    SYMBOL       décalage et aller à l'état 56
+    '('          décalage et aller à l'état 57
+
+    a_term                   aller à l'état 212
+    annotated_term           aller à l'état 59
+    plain_term               aller à l'état 60
+    term_symbol              aller à l'état 61
+    term_unqualified_symbol  aller à l'état 62
+    term_num_constant        aller à l'état 63
+
+
+état 199
+
+   89 let_bindings: let_binding let_bindings .
+
+    $défaut  réduction par utilisation de la règle 89 (let_bindings)
+
+
+état 200
+
+   26 cmd_define_sort: '(' "define-sort" SYMBOL '(' sort_param_list ')' a_sort ')' .
+
+    $défaut  réduction par utilisation de la règle 26 (cmd_define_sort)
+
+
+état 201
+
+   97 a_sort: '(' SYMBOL sort_list ')' .
+
+    $défaut  réduction par utilisation de la règle 97 (a_sort)
+
+
+état 202
+
+   81 int_list: NUMERAL .
+
+    $défaut  réduction par utilisation de la règle 81 (int_list)
+
+
+état 203
+
+   82 int_list: int_list . NUMERAL
+   96 a_sort: '(' "_" SYMBOL int_list . ')'
+
+    NUMERAL  décalage et aller à l'état 213
+    ')'      décalage et aller à l'état 214
+
+
+état 204
+
+   28 cmd_declare_fun: '(' "declare-fun" SYMBOL '(' sort_list ')' a_sort ')' .
+
+    $défaut  réduction par utilisation de la règle 28 (cmd_declare_fun)
+
+
+état 205
+
+   85 quant_var_list: '(' SYMBOL a_sort ')' .
+
+    $défaut  réduction par utilisation de la règle 85 (quant_var_list)
+
+
+état 206
+
+   29 cmd_define_fun: '(' "define-fun" SYMBOL '(' ')' a_sort a_term ')' .
+
+    $défaut  réduction par utilisation de la règle 29 (cmd_define_fun)
+
+
+état 207
+
+   86 quant_var_list: quant_var_list '(' SYMBOL a_sort . ')'
+
+    ')'  décalage et aller à l'état 215
+
+
+état 208
+
+   30 cmd_define_fun: '(' "define-fun" SYMBOL '(' quant_var_list ')' a_sort a_term . ')'
+
+    ')'  décalage et aller à l'état 216
+
+
+état 209
+
+   56 plain_term: '(' "forall" '(' quant_var_list ')' a_term . ')'
+
+    ')'  décalage et aller à l'état 217
+
+
+état 210
+
+   57 plain_term: '(' "exists" '(' quant_var_list ')' a_term . ')'
+
+    ')'  décalage et aller à l'état 218
+
+
+état 211
+
+   90 let_binding: '(' SYMBOL a_term . ')'
+
+    ')'  décalage et aller à l'état 219
+
+
+état 212
+
+   55 plain_term: '(' begin_let_scope '(' let_bindings ')' a_term . ')'
+
+    ')'  décalage et aller à l'état 220
+
+
+état 213
+
+   82 int_list: int_list NUMERAL .
+
+    $défaut  réduction par utilisation de la règle 82 (int_list)
+
+
+état 214
+
+   96 a_sort: '(' "_" SYMBOL int_list ')' .
+
+    $défaut  réduction par utilisation de la règle 96 (a_sort)
+
+
+état 215
+
+   86 quant_var_list: quant_var_list '(' SYMBOL a_sort ')' .
+
+    $défaut  réduction par utilisation de la règle 86 (quant_var_list)
+
+
+état 216
+
+   30 cmd_define_fun: '(' "define-fun" SYMBOL '(' quant_var_list ')' a_sort a_term ')' .
+
+    $défaut  réduction par utilisation de la règle 30 (cmd_define_fun)
+
+
+état 217
+
+   56 plain_term: '(' "forall" '(' quant_var_list ')' a_term ')' .
+
+    $défaut  réduction par utilisation de la règle 56 (plain_term)
+
+
+état 218
+
+   57 plain_term: '(' "exists" '(' quant_var_list ')' a_term ')' .
+
+    $défaut  réduction par utilisation de la règle 57 (plain_term)
+
+
+état 219
+
+   90 let_binding: '(' SYMBOL a_term ')' .
+
+    $défaut  réduction par utilisation de la règle 90 (let_binding)
+
+
+état 220
+
+   55 plain_term: '(' begin_let_scope '(' let_bindings ')' a_term ')' .
+
+    $défaut  réduction par utilisation de la règle 55 (plain_term)

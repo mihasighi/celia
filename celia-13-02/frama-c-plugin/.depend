@@ -1,0 +1,37 @@
+./Celia.cmi:
+./celia_options.cmi:
+./common.cmi:
+./interp_eqn.cmi:
+./celia_check.cmo: common.cmi celia_options.cmi
+./celia_check.cmx: common.cmx celia_options.cmx
+./celia_config.cmo:
+./celia_config.cmx:
+./celia_options.cmo: ./celia_options.cmi
+./celia_options.cmx: ./celia_options.cmi
+./cil2apron.cmo: common.cmi celia_options.cmi
+./cil2apron.cmx: common.cmx celia_options.cmx
+./cil2shad.cmo: common.cmi cil2apron.cmo celia_options.cmi
+./cil2shad.cmx: common.cmx cil2apron.cmx celia_options.cmx
+./common.cmo: integer.cmo celia_options.cmi ./common.cmi
+./common.cmx: integer.cmx celia_options.cmx ./common.cmi
+./integer.cmo:
+./integer.cmx:
+./interp_eqn.cmo: common.cmi cil2shad.cmo cil2apron.cmo celia_options.cmi \
+    ./interp_eqn.cmi
+./interp_eqn.cmx: common.cmx cil2shad.cmx cil2apron.cmx celia_options.cmx \
+    ./interp_eqn.cmi
+./norm.cmo: integer.cmo common.cmi celia_options.cmi
+./norm.cmx: integer.cmx common.cmx celia_options.cmx
+./register.cmo: spl_rewrite.cmo rewrite.cmo retype.cmo norm.cmo \
+    interp_eqn.cmi common.cmi celia_options.cmi celia_check.cmo
+./register.cmx: spl_rewrite.cmx rewrite.cmx retype.cmx norm.cmx \
+    interp_eqn.cmx common.cmx celia_options.cmx celia_check.cmx
+./register_gui.cmo:
+./register_gui.cmx:
+./retype.cmo: common.cmi celia_options.cmi
+./retype.cmx: common.cmx celia_options.cmx
+./rewrite.cmo: common.cmi celia_options.cmi
+./rewrite.cmx: common.cmx celia_options.cmx
+./spl_rewrite.cmo: common.cmi
+./spl_rewrite.cmx: common.cmx
+./Celia.cmi:

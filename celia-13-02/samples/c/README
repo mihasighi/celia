@@ -1,0 +1,42 @@
+
+HOW TO PRODUCE EXAMPLES
+=======================
+
+A. The directory including the intlist library and other C examples.
+
+All examples compile for
+
+        CPP=$CPP" -I $FRAMAC/libc"
+
+
+
+B. Before lauching CELIA, please ensure that you have set:
+
+B.1. the CINV and LD_LIBRARY_PATH environment variable as 
+     shown in the file $CINV/install.sh
+
+B.2. the parameters of the analysis are set in .prop files. Examples
+     of .prop files are given in this directory for each data word domain
+     (lsum, mset, ucons) and for functions analyzed in these files (files
+     *-funs.prop).
+
+B.3. the C files use the intlist.h file.
+
+B.4. examples of calling the analysis are given in *.makefile files.
+
+C. Call CELIA by executing
+
+	make -f <ex>.makefile  <dwdomain>
+
+   e.g.,
+	make -f intlist-fold-reverse.makefile ucons
+
+D. The results are provided in the directory
+
+	<ex-dwdomain>
+
+   which is the renaming of the `pan' directory produced
+   during the analysis.
+
+
+

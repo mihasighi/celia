@@ -1,0 +1,135 @@
+(set-logic SL3)
+(declare-sort Ptr 0)
+(declare-sort Node 0)
+(declare-fun nilNode () Node)
+(declare-fun len (Node) Int)
+(declare-fun data (Node Int) Int)
+(declare-fun sum (Node) Int)
+(declare-fun mset (Node) Int)
+(declare-fun sep (Bool Bool) Bool)
+(declare-fun ls (Node Node) Bool)
+(declare-fun label (Ptr Node) Bool)
+(declare-fun Gall (Int Node) Bool)
+(declare-fun Gle2 (Int Int Node) Bool)
+(declare-fun Gsucc2 (Int Int Node) Bool)
+(declare-fun Gfst (Int Node) Bool)
+(declare-fun Glst (Int Node) Bool)
+(declare-fun Geq2 (Int Node Int Node) Bool)
+(declare-fun Gsl2 (Int Node Int Node Int) Bool)
+(declare-fun Gsr2 (Int Node Int Node Int) Bool)
+(declare-fun x0 () Ptr)
+(declare-fun x1 () Ptr)
+(declare-fun x2 () Ptr)
+(declare-fun x3 () Ptr)
+(declare-fun x4 () Ptr)
+(assert 
+	(exists ( (?n1 Node)  (?n2 Node) )
+	(and 
+		;; graph labeling
+		(label x0 nilNode)
+		(label x1 ?n1)
+		(label x2 ?n1)
+		(label x3 ?n2)
+		(label x4 ?n2)
+
+		;; graph edges
+		(ls ?n1 nilNode)
+		(ls ?n2 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n2)  0 )  (+  (len ?n1)  0 ) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+
+	) ;; end and
+
+	) ;; end exists
+) ;; end assert
+(assert 
+(not 
+(or 
+	(exists ( (?n1 Node)  (?n2 Node) )
+	(and 
+		;; graph labeling
+		(label x0 nilNode)
+		(label x1 ?n1)
+		(label x2 ?n1)
+		(label x3 ?n2)
+		(label x4 ?n2)
+
+		;; graph edges
+		(ls ?n1 nilNode)
+		(ls ?n2 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n2)  0 )  (+  (len ?n1)  0 ) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+
+	) ;; end and
+
+	) ;; end exists
+	(exists ( (?n1 Node)  (?n2 Node)  (?n3 Node)  (?n4 Node) )
+	(and 
+		;; graph labeling
+		(label x0 nilNode)
+		(label x1 ?n1)
+		(label x2 ?n2)
+		(label x3 ?n3)
+		(label x4 ?n4)
+
+		;; graph edges
+		(ls ?n1 ?n2)
+		(ls ?n2 nilNode)
+		(ls ?n3 ?n4)
+		(ls ?n4 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n3)  0 )  (+  (len ?n1)  0 ) ) )
+		(= 0 (- (+  (len ?n4)  0 )  (+  (len ?n2)  0 ) ) )
+		(<= 0 (- (+  (len ?n2)  0 )  (+ 1 0 ) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+		(forall ((?y1 Int) (?y2 Int))
+		(=> (Geq2 ?y1 n1 ?y2 n3)
+		(and 
+		(= 0 (- (+  (len ?n3)  0 )  (+  (len ?n1)  0 ) ) )
+		(= 0 (- (+  (len ?n4)  0 )  (+  (len ?n2)  0 ) ) )
+		(= 0 (- (+  ?y2  0 )  (+  ?y1  0 ) ) )
+		(= 0 (- (+   (data ?n3 ?y2)   0 )  (+   (data ?n1 ?y1)  2) ) )
+		(<= 0 (- (+  (len ?n2)  0 )  (+ 1 0 ) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+  ?y1 1) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 2 0 ) ) )
+		)
+		) )
+
+	) ;; end and
+
+	) ;; end exists
+	(exists ( (?n1 Node)  (?n2 Node) )
+	(and 
+		;; graph labeling
+		(label x0 nilNode)
+		(label x1 ?n1)
+		(label x2 nilNode)
+		(label x3 ?n2)
+		(label x4 nilNode)
+
+		;; graph edges
+		(ls ?n1 nilNode)
+		(ls ?n2 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n2)  0 )  (+  (len ?n1)  0 ) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+		(forall ((?y1 Int) (?y2 Int))
+		(=> (Geq2 ?y1 n1 ?y2 n2)
+		(and 
+		(= 0 (- (+  (len ?n2)  0 )  (+  (len ?n1)  0 ) ) )
+		(= 0 (- (+  ?y2  0 )  (+  ?y1  0 ) ) )
+		(= 0 (- (+   (data ?n2 ?y2)   0 )  (+   (data ?n1 ?y1)  2) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+  ?y1 1) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 2 0 ) ) )
+		)
+		) )
+
+	) ;; end and
+
+	) ;; end exists
+) ;; end or
+) ;; end not
+) ;; end assert
+(check-sat)

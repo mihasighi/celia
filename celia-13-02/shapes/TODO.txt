@@ -1,0 +1,53 @@
+
+Coding of universal formulas:
+
+1) done by calling domain_meet_lincons with a lcons having
+   lcons->scalar == OFFSET_UCONS
+
+2) This is the only case in which this function is called.
+   The semantics is:
+
+        a meet universal formula created using the constraint
+
+   But in general, a does not contains a formula for the node
+   and for the pattern. So a simple assignement (and strengthening?)
+   shall be enough.
+
+3) lcons has the form:
+     n1 + n2 + ... + nk + code = OFFSET_UCONS
+   where
+	ni 	are the nodes to be constrainted by the formula,
+        code	is the code used to represent the formula
+
+
+4) The list of lcons and their codes are:
+
+	n + 1 = 0	means	forall y. 1<= y < len(n) ==> d(y)=y
+
+
+
+Data structures needed by the shad library:
+
+- C/ML interface for building (tree/linear) expressions over pointers/arrays
+	- ah_pexpr
+	- ah_pcons
+
+- C/ML interface for specifying types of nodes, used in the environment
+	- types indexed with info: nb of ptr fields and their type, nb of data fields
+
+- C/ML interface for environment/dimensions/etc
+	- makes difference between types of nodes and data, etc.
+	- support different fields ptr and data
+
+- C/ML interface for heap graphs
+	- hg_manager.c|h used in the _shape_internal_t
+	- hg_abstract0.c|h  with functions
+
+- C/ML interface for data words domains
+	- dw_manager.cLh used instead of ap_manager in _shape_internal_t
+	- dw_abstract0.c|h with functions needed for data words
+
+- C/ML interface for heap
+	- ah_manager
+	- ah_abstract0|1 etc.
+

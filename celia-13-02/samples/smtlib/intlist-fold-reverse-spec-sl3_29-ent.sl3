@@ -1,0 +1,102 @@
+(set-logic SL3)
+(declare-sort Ptr 0)
+(declare-sort Node 0)
+(declare-fun nilNode () Node)
+(declare-fun len (Node) Int)
+(declare-fun data (Node Int) Int)
+(declare-fun sum (Node) Int)
+(declare-fun mset (Node) Int)
+(declare-fun sep (Bool Bool) Bool)
+(declare-fun ls (Node Node) Bool)
+(declare-fun label (Ptr Node) Bool)
+(declare-fun Gall (Int Node) Bool)
+(declare-fun Gle2 (Int Int Node) Bool)
+(declare-fun Gsucc2 (Int Int Node) Bool)
+(declare-fun Gfst (Int Node) Bool)
+(declare-fun Glst (Int Node) Bool)
+(declare-fun Geq2 (Int Node Int Node) Bool)
+(declare-fun Gsl2 (Int Node Int Node Int) Bool)
+(declare-fun Gsr2 (Int Node Int Node Int) Bool)
+(declare-fun x0 () Ptr)
+(declare-fun x1 () Ptr)
+(declare-fun x2 () Ptr)
+(declare-fun x3 () Ptr)
+(assert 
+(or 
+	(exists ( (?n1 Node) )
+	(and 
+		;; graph labeling
+		(label x0 ?n1)
+		(label x1 nilNode)
+		(label x2 ?n1)
+		(label x3 nilNode)
+
+		;; graph edges
+		(ls ?n1 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+
+	) ;; end and
+
+	) ;; end exists
+	(exists ( (?n1 Node)  (?n2 Node) )
+	(and 
+		;; graph labeling
+		(label x0 ?n1)
+		(label x1 nilNode)
+		(label x2 ?n2)
+		(label x3 nilNode)
+
+		;; graph edges
+		(ls ?n1 ?n2)
+		(ls ?n2 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n2)  0 )  (+ 1 0 ) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+
+	) ;; end and
+
+	) ;; end exists
+) ;; end or
+) ;; end assert
+(assert 
+(not 
+(or 
+	(exists ( (?n1 Node)  (?n2 Node) )
+	(and 
+		;; graph labeling
+		(label x0 ?n1)
+		(label x1 nilNode)
+		(label x2 ?n2)
+		(label x3 nilNode)
+
+		;; graph edges
+		(ls ?n1 ?n2)
+		(ls ?n2 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n2)  0 )  (+ 1 0 ) ) )
+		(<= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+
+	) ;; end and
+
+	) ;; end exists
+	(exists ( (?n1 Node) )
+	(and 
+		;; graph labeling
+		(label x0 ?n1)
+		(label x1 nilNode)
+		(label x2 ?n1)
+		(label x3 nilNode)
+
+		;; graph edges
+		(ls ?n1 nilNode)
+	;; ucons constraints
+		(= 0 (- (+  (len ?n1)  0 )  (+ 1 0 ) ) )
+
+	) ;; end and
+
+	) ;; end exists
+) ;; end or
+) ;; end not
+) ;; end assert
+(check-sat)

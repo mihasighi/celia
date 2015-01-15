@@ -1,0 +1,67 @@
+************************************************
+Notes about the integration of CINV with Frama-C
+************************************************
+
+Name convention 
+===============
+- plug-in name: Celia
+- engine analysis name: cinv
+- c fragment: clim
+
+
+Steps for the plug-in
+=====================
+
+0. Parse file with Cil
+
+1. Apply rewrite and normalize from Jessie
+    - after these steps,
+	o the CFG of the program is built
+	o each function have an unique return statement
+	(last of the list of statements)
+	with one value (tmp variables are added to expand ()?: constructs)
+	o each statement has an unique sid
+	o there exists breaks, continue, goto
+	o location for each statements points with both fields to the 
+	line at the begining of the statement
+
+   So, a unique identifier for a statement is obtained from
+	- sid of the statement
+	- Lexing.position (to be able to introduce a node for functions calls)
+ 
+1. Signal unmanaged code and specs
+   { Module available only here because in our Clim, we have a 
+     restricted C syntax }
+    - type definition which are not intlist
+    - variables which are not of type int, float or intlist
+    - statements:
+        o pointer arithmetics
+	o access to structures only by pointers
+	o non-linear expressions
+    - specifications:
+	o only predicates reach, disjoint, =null
+	o terms sum, mset
+
+2. Slice unmanaged code & specs [TODO]
+    - collect managed info and apply slicing plug-in of Frama-C
+        o first to each function
+	o then to the main program
+    - can we slice specifications?
+
+3. Translate to Clim AST [TODO]
+    - propose an AST for Clim
+    - compute correspondances between Clim AST and Cil AST
+
+3'. Translate Cil to Fixpoint equations [DONE]
+    - forward graph: intra and inter ICFG
+    - backward graph: intra CFG
+
+    - using APRON interface [DONE]
+    - using SHAD interface [TODO]
+
+    - consider analysis starting from a function [DONE]
+     (take as input the function pre-condition 
+      or post-condition [DONE] ...)
+
+4. Do the presentation of results with the code. [TODO]
+

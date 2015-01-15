@@ -1,0 +1,7 @@
+
+BUGS 
+====
+
+BUG
+- the exceptions raised by shapes library are not visible in mode without DEBUG
+

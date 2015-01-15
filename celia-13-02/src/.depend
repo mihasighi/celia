@@ -1,0 +1,68 @@
+boolexpr.cmo: boolexpr.cmi
+boolexpr.cmx: boolexpr.cmi
+cinv.cmo: /home/sighirea/Tools/cinv1/shapes/shape.cmi cinv_options.cmi \
+    cinv.cmi
+cinv.cmx: /home/sighirea/Tools/cinv1/shapes/shape.cmx cinv_options.cmx \
+    cinv.cmi
+cinv_environment.cmo: loc.cmi cinv_environment.cmi
+cinv_environment.cmx: loc.cmx cinv_environment.cmi
+cinv_equation.cmo: pp.cmo boolexpr.cmi cinv_equation.cmi
+cinv_equation.cmx: pp.cmx boolexpr.cmx cinv_equation.cmi
+cinv_frontend.cmo: /home/sighirea/Tools/cinv1/shapes/shape.cmi \
+    cinv_solving.cmi cinv_options.cmi cinv_equation.cmi cinv_frontend.cmi
+cinv_frontend.cmx: /home/sighirea/Tools/cinv1/shapes/shape.cmx \
+    cinv_solving.cmx cinv_options.cmx cinv_equation.cmx cinv_frontend.cmi
+cinv_options.cmo: cinv_options.cmi
+cinv_options.cmx: cinv_options.cmi
+cinv_solving.cmo: cinv_options.cmi cinv_equation.cmi boolexpr.cmi \
+    cinv_solving.cmi
+cinv_solving.cmx: cinv_options.cmx cinv_equation.cmx boolexpr.cmx \
+    cinv_solving.cmi
+cinv_version.cmo:
+cinv_version.cmx:
+clim_constructors.cmo: loc.cmi clim_env.cmi clim_ast.cmi \
+    clim_constructors.cmi
+clim_constructors.cmx: loc.cmx clim_env.cmi clim_ast.cmi \
+    clim_constructors.cmi
+clim_envset.cmo: clim_stdlib.cmo clim_env.cmi clim_envset.cmi
+clim_envset.cmx: clim_stdlib.cmx clim_env.cmi clim_envset.cmi
+clim_options.cmo: clim_options.cmi
+clim_options.cmx: clim_options.cmi
+clim_output_misc.cmo: pp.cmo clim_pervasives.cmi clim_env.cmi clim_ast.cmi
+clim_output_misc.cmx: pp.cmx clim_pervasives.cmx clim_env.cmi clim_ast.cmi
+clim_pervasives.cmo: pp.cmo clim_stdlib.cmo clim_env.cmi clim_ast.cmi \
+    clim_pervasives.cmi
+clim_pervasives.cmx: pp.cmx clim_stdlib.cmx clim_env.cmi clim_ast.cmi \
+    clim_pervasives.cmi
+clim_poutput.cmo: pp.cmo option_misc.cmo clim_output_misc.cmo clim_env.cmi \
+    clim_ast.cmi
+clim_poutput.cmx: pp.cmx option_misc.cmx clim_output_misc.cmx clim_env.cmi \
+    clim_ast.cmi
+clim_stdlib.cmo:
+clim_stdlib.cmx:
+loc.cmo: loc.cmi
+loc.cmx: loc.cmi
+option_misc.cmo:
+option_misc.cmx:
+output.cmo: pp.cmo option_misc.cmo loc.cmi output.cmi
+output.cmx: pp.cmx option_misc.cmx loc.cmx output.cmi
+pp.cmo:
+pp.cmx:
+shad.cmo: shad.cmi
+shad.cmx: shad.cmi
+boolexpr.cmi:
+cinv.cmi: cinv_options.cmi
+cinv_environment.cmi: loc.cmi
+cinv_equation.cmi: boolexpr.cmi
+cinv_frontend.cmi: cinv_solving.cmi cinv_options.cmi cinv_equation.cmi
+cinv_options.cmi:
+cinv_solving.cmi: cinv_equation.cmi
+clim_ast.cmi: loc.cmi clim_stdlib.cmo clim_env.cmi
+clim_constructors.cmi: loc.cmi clim_env.cmi clim_ast.cmi
+clim_env.cmi:
+clim_envset.cmi: clim_stdlib.cmo clim_env.cmi
+clim_options.cmi:
+clim_pervasives.cmi: clim_stdlib.cmo clim_env.cmi clim_ast.cmi
+loc.cmi:
+output.cmi: loc.cmi
+shad.cmi:
