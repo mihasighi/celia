@@ -1,0 +1,312 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 7 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (0,12)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 7, ptrdim 12, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x0 x5 x7 x11 ]" ] ;
+	h_0_n1 [label=" n1 |  x1^(0) | [ x1 x8 ]" ] ;
+	h_0_n2 [label=" n2 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_0_n3 [label=" n3 |  x3^(0) | [ x3 ]" ] ;
+	h_0_n4 [label=" n4 |  x4^(0) | [ x4 ]" ] ;
+	h_0_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_0_n6 [label=" n6 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+	h_0_n3 -> h_0_n0;
+	h_0_n4 -> h_0_n0;
+	h_0_n5 -> h_0_n6;
+	h_0_n6 -> h_0_n0;
+
+	}
+
+	subgraph cluster_lsum_0 {
+	node [shape=Mrecord] ;
+	label = "lsum 0 of (datadim=0, segmdim=7)" ;
+	lsum_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (21,0)
+array of constraints of size 13
+ 0: -data(n1) + data(n5) = 0
+ 1: -data(n1) + data(n3) = 0
+ 2: -data(n2) + data(n4) = 0
+ 3: -sum(n1) + sum(n3) = 0
+ 4: -sum(n2) + sum(n4) = 0
+ 5: -len(n1) + len(n5) + 1 = 0
+ 6: -len(n1) + len(n3) = 0
+ 7: -len(n2) + len(n4) = 0
+ 8: len(n6) - 1 = 0
+ 9: sum(n6) = 0
+10: data(n6) - sum(n1) + sum(n5) = 0
+11: len(n2) - 1 >= 0
+12: len(n1) - 2 >= 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_1 {
+	color = black ;
+	label = "ushape of dim (0,12)" ;
+	subgraph cluster_hgraph_1 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 1 of size 8, ptrdim 12, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_1_n0 [label=" n0(#) |  NULL | [ x0 x7 x11 ]" ] ;
+	h_1_n1 [label=" n1 |  x1^(0) | [ x1 x8 ]" ] ;
+	h_1_n2 [label=" n2 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_1_n3 [label=" n3 |  x3^(0) | [ x3 ]" ] ;
+	h_1_n4 [label=" n4 |  x4^(0) | [ x4 ]" ] ;
+	h_1_n5 [label=" n5 |  x5^(0) | [ x5 ]" ] ;
+	h_1_n6 [label=" n6 |  x6^(0) | [ x6 ]" ] ;
+	h_1_n7 [label=" n7 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_1_n0 -> h_1_n0;
+	h_1_n1 -> h_1_n5;
+	h_1_n2 -> h_1_n0;
+	h_1_n3 -> h_1_n0;
+	h_1_n4 -> h_1_n0;
+	h_1_n5 -> h_1_n0;
+	h_1_n6 -> h_1_n7;
+	h_1_n7 -> h_1_n0;
+
+	}
+
+	subgraph cluster_lsum_1 {
+	node [shape=Mrecord] ;
+	label = "lsum 1 of (datadim=0, segmdim=8)" ;
+	lsum_dcons_1 [label=<<table><tr><td>dcons: polyhedron of dim (24,0)
+array of constraints of size 14
+ 0: -data(n1) + data(n6) = 0
+ 1: -data(n1) + data(n3) = 0
+ 2: -data(n2) + data(n4) = 0
+ 3: -sum(n2) + sum(n4) = 0
+ 4: -len(n1) + len(n6) + 1 = 0
+ 5: -len(n2) + len(n4) = 0
+ 6: len(n7) - 1 = 0
+ 7: len(n1) - len(n3) + len(n5) = 0
+ 8: sum(n7) = 0
+ 9: data(n7) - sum(n1) + sum(n6) = 0
+10: data(n5) + sum(n1) - sum(n3) + sum(n5) = 0
+11: -len(n1) + len(n3) - 1 >= 0
+12: len(n2) - 1 >= 0
+13: len(n1) - 2 >= 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_2 {
+	color = black ;
+	label = "ushape of dim (0,12)" ;
+	subgraph cluster_hgraph_2 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 2 of size 5, ptrdim 12, datadim 0,  closed" ;
+	/* nodes and their labels */
+	h_2_n0 [label=" n0(#) |  NULL | [ x0 x2 x4 x5 x7 x9 x11 ]" ] ;
+	h_2_n1 [label=" n1 |  x1^(0) | [ x1 x8 ]" ] ;
+	h_2_n2 [label=" n2 |  x3^(0) | [ x3 ]" ] ;
+	h_2_n3 [label=" n3 |  x6^(0) | [ x6 ]" ] ;
+	h_2_n4 [label=" n4 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_2_n0 -> h_2_n0;
+	h_2_n1 -> h_2_n0;
+	h_2_n2 -> h_2_n0;
+	h_2_n3 -> h_2_n4;
+	h_2_n4 -> h_2_n0;
+
+	}
+
+	subgraph cluster_lsum_2 {
+	node [shape=Mrecord] ;
+	label = "lsum 2 of (datadim=0, segmdim=5)" ;
+	lsum_dcons_2 [label=<<table><tr><td>dcons: polyhedron of dim (15,0)
+array of constraints of size 9
+ 0: -data(n1) + data(n3) = 0
+ 1: -data(n1) + data(n2) = 0
+ 2: -sum(n1) + sum(n2) = 0
+ 3: -len(n1) + len(n3) + 1 = 0
+ 4: -len(n1) + len(n2) = 0
+ 5: len(n4) - 1 = 0
+ 6: sum(n4) = 0
+ 7: data(n4) - sum(n1) + sum(n3) = 0
+ 8: len(n1) - 2 >= 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_3 {
+	color = black ;
+	label = "ushape of dim (0,12)" ;
+	subgraph cluster_hgraph_3 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 3 of size 6, ptrdim 12, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_3_n0 [label=" n0(#) |  NULL | [ x0 x2 x4 x7 x9 x11 ]" ] ;
+	h_3_n1 [label=" n1 |  x1^(0) | [ x1 x8 ]" ] ;
+	h_3_n2 [label=" n2 |  x3^(0) | [ x3 ]" ] ;
+	h_3_n3 [label=" n3 |  x5^(0) | [ x5 ]" ] ;
+	h_3_n4 [label=" n4 |  x6^(0) | [ x6 ]" ] ;
+	h_3_n5 [label=" n5 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_3_n0 -> h_3_n0;
+	h_3_n1 -> h_3_n3;
+	h_3_n2 -> h_3_n0;
+	h_3_n3 -> h_3_n0;
+	h_3_n4 -> h_3_n5;
+	h_3_n5 -> h_3_n0;
+
+	}
+
+	subgraph cluster_lsum_3 {
+	node [shape=Mrecord] ;
+	label = "lsum 3 of (datadim=0, segmdim=6)" ;
+	lsum_dcons_3 [label=<<table><tr><td>dcons: polyhedron of dim (18,0)
+array of constraints of size 10
+ 0: -data(n1) + data(n4) = 0
+ 1: -data(n1) + data(n2) = 0
+ 2: -len(n1) + len(n4) + 1 = 0
+ 3: len(n5) - 1 = 0
+ 4: len(n1) - len(n2) + len(n3) = 0
+ 5: sum(n5) = 0
+ 6: data(n5) - sum(n1) + sum(n4) = 0
+ 7: data(n3) + sum(n1) - sum(n2) + sum(n3) = 0
+ 8: -len(n1) + len(n2) - 1 >= 0
+ 9: len(n1) - 2 >= 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_4 {
+	color = black ;
+	label = "ushape of dim (0,12)" ;
+	subgraph cluster_hgraph_4 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 4 of size 6, ptrdim 12, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_4_n0 [label=" n0(#) |  NULL | [ x0 x5 x7 x11 ]" ] ;
+	h_4_n1 [label=" n1 |  x1^(0) | [ x1 x8 ]" ] ;
+	h_4_n2 [label=" n2 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_4_n3 [label=" n3 |  x3^(0) | [ x3 ]" ] ;
+	h_4_n4 [label=" n4 |  x4^(0) | [ x4 ]" ] ;
+	h_4_n5 [label=" n5 |  x6^(0) | [ x6 x10 ]" ] ;
+	/* succ matrix */
+	h_4_n0 -> h_4_n0;
+	h_4_n1 -> h_4_n0;
+	h_4_n2 -> h_4_n0;
+	h_4_n3 -> h_4_n0;
+	h_4_n4 -> h_4_n0;
+	h_4_n5 -> h_4_n0;
+
+	}
+
+	subgraph cluster_lsum_4 {
+	node [shape=Mrecord] ;
+	label = "lsum 4 of (datadim=0, segmdim=6)" ;
+	lsum_dcons_4 [label=<<table><tr><td>dcons: polyhedron of dim (18,0)
+array of constraints of size 12
+ 0: -data(n1) + data(n5) = 0
+ 1: -data(n1) + data(n3) = 0
+ 2: -data(n2) + data(n4) = 0
+ 3: -sum(n2) + sum(n4) = 0
+ 4: -len(n2) + len(n4) = 0
+ 5: len(n5) - 1 = 0
+ 6: len(n3) - 1 = 0
+ 7: len(n1) - 1 = 0
+ 8: sum(n5) = 0
+ 9: sum(n3) = 0
+10: sum(n1) = 0
+11: len(n2) - 1 >= 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_5 {
+	color = black ;
+	label = "ushape of dim (0,12)" ;
+	subgraph cluster_hgraph_5 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 5 of size 7, ptrdim 12, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_5_n0 [label=" n0(#) |  NULL | [ x0 x7 x11 ]" ] ;
+	h_5_n1 [label=" n1 |  x1^(0) | [ x1 x8 ]" ] ;
+	h_5_n2 [label=" n2 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_5_n3 [label=" n3 |  x3^(0) | [ x3 ]" ] ;
+	h_5_n4 [label=" n4 |  x4^(0) | [ x4 ]" ] ;
+	h_5_n5 [label=" n5 |  x5^(0) | [ x5 ]" ] ;
+	h_5_n6 [label=" n6 |  x6^(0) | [ x6 x10 ]" ] ;
+	/* succ matrix */
+	h_5_n0 -> h_5_n0;
+	h_5_n1 -> h_5_n5;
+	h_5_n2 -> h_5_n0;
+	h_5_n3 -> h_5_n0;
+	h_5_n4 -> h_5_n0;
+	h_5_n5 -> h_5_n0;
+	h_5_n6 -> h_5_n0;
+
+	}
+
+	subgraph cluster_lsum_5 {
+	node [shape=Mrecord] ;
+	label = "lsum 5 of (datadim=0, segmdim=7)" ;
+	lsum_dcons_5 [label=<<table><tr><td>dcons: polyhedron of dim (21,0)
+array of constraints of size 13
+ 0: -data(n1) + data(n6) = 0
+ 1: -data(n1) + data(n3) = 0
+ 2: -data(n2) + data(n4) = 0
+ 3: -sum(n2) + sum(n4) = 0
+ 4: -len(n2) + len(n4) = 0
+ 5: -len(n3) + len(n5) + 1 = 0
+ 6: len(n6) - 1 = 0
+ 7: len(n1) - 1 = 0
+ 8: sum(n6) = 0
+ 9: sum(n1) = 0
+10: data(n5) - sum(n3) + sum(n5) = 0
+11: len(n3) - 2 >= 0
+12: len(n2) - 1 >= 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_6 {
+	color = black ;
+	label = "ushape of dim (0,12)" ;
+	subgraph cluster_hgraph_6 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 6 of size 5, ptrdim 12, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_6_n0 [label=" n0(#) |  NULL | [ x0 x2 x4 x7 x9 x11 ]" ] ;
+	h_6_n1 [label=" n1 |  x1^(0) | [ x1 x8 ]" ] ;
+	h_6_n2 [label=" n2 |  x3^(0) | [ x3 ]" ] ;
+	h_6_n3 [label=" n3 |  x5^(0) | [ x5 ]" ] ;
+	h_6_n4 [label=" n4 |  x6^(0) | [ x6 x10 ]" ] ;
+	/* succ matrix */
+	h_6_n0 -> h_6_n0;
+	h_6_n1 -> h_6_n3;
+	h_6_n2 -> h_6_n0;
+	h_6_n3 -> h_6_n0;
+	h_6_n4 -> h_6_n0;
+
+	}
+
+	subgraph cluster_lsum_6 {
+	node [shape=Mrecord] ;
+	label = "lsum 6 of (datadim=0, segmdim=5)" ;
+	lsum_dcons_6 [label=<<table><tr><td>dcons: polyhedron of dim (15,0)
+array of constraints of size 9
+ 0: -data(n1) + data(n4) = 0
+ 1: -data(n1) + data(n2) = 0
+ 2: -len(n2) + len(n3) + 1 = 0
+ 3: len(n4) - 1 = 0
+ 4: len(n1) - 1 = 0
+ 5: sum(n4) = 0
+ 6: sum(n1) = 0
+ 7: data(n3) - sum(n2) + sum(n3) = 0
+ 8: len(n2) - 2 >= 0
+</td></tr></table>> ] ;
+	}
+}
+}

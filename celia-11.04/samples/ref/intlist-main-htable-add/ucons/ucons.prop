@@ -1,0 +1,5 @@
+debug=0
+domain=shape
+dwdomain=mset
+maxanon=0
+maxasegm=1

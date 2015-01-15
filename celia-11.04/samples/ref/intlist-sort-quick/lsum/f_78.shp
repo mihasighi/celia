@@ -1,0 +1,29 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 1 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (3,3)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 1, ptrdim 3, datadim 3, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x3 x4 x5 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+
+	}
+
+	subgraph cluster_lsum_0 {
+	node [shape=Mrecord] ;
+	label = "lsum 0 of (datadim=3, segmdim=1)" ;
+	lsum_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (6,0)
+array of constraints of size 3
+ 0: x2 - 1 = 0
+ 1: x1 - 1 = 0
+ 2: x0 - 1 = 0
+</td></tr></table>> ] ;
+	}
+}
+}

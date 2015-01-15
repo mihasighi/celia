@@ -1,0 +1,6 @@
+debug=0
+domain=shape
+dwdomain=lsum
+maxanon=0
+maxasegm=1
+main=add_tail

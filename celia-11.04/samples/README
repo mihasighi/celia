@@ -1,0 +1,29 @@
+
+HOW TO PRODUCE EXAMPLES
+=======================
+
+A. The directory including the intlist library et other C examples is c.
+
+All examples compile for
+
+        CPP=$CPP" -I $FRAMAC/libc"
+
+
+
+B. Before lauching CELIA, please ensure that you have set:
+
+B.1. the CINV and LD_LIBRARY_PATH environment variable as 
+     shown in $CINV/install.sh
+
+B.2. the parameters of the analysis in a .prop file. Examples
+     of .prop files are given in this directory and in the directories
+     ref/intlist*/*/
+
+B.3. the C files use the intlist.h library.
+
+
+C. Call CELIA by executing
+
+	frama-c-Celia.byte -celia -celia-cinv-opt opt.prop <input c files>
+
+

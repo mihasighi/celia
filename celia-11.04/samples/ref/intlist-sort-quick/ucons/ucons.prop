@@ -1,0 +1,8 @@
+debug=0
+domain=shape
+dwdomain=mset
+dwdomain=ucons
+maxanon=0
+maxasegm=1
+main=quicksort
+funspec=funs.prop

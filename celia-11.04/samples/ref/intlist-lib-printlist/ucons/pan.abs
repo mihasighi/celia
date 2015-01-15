@@ -1,0 +1,13 @@
+../../../c/intlist-lib-printlist.c:(19,14): [|0>=0|]
+../../../c/intlist-lib-printlist.c:(14,9): [|1>=0|]
+../../../c/intlist-lib-printlist.c:(12,7): [|2>=0|]
+../../../c/intlist-lib-printlist.c:(16,11): [|3>=0|]
+../../../c/intlist-lib-printlist.c:(15,10): [|4>=0|]
+../../../c/intlist-lib-printlist.c:(13,8): [|5>=0|]
+../../../c/intlist-lib-printlist.c:(11,3): [|6>=0|]
+../../../c/intlist-lib-printlist.c:(7,0): [|7>=0|]
+../../../c/intlist-lib-printlist.c:(9,2): [|8>=0|]
+../../../c/intlist-lib-printlist.c:(18,12): [|9>=0|]
+../../../c/intlist-lib-printlist.c:(11,5): [|10>=0|]
+../../../c/intlist-lib-printlist.c:(11,-2): [|11>=0|]
+../../../c/intlist-lib-printlist.c:(11,6): bottom

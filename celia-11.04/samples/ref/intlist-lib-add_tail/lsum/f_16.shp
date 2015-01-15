@@ -1,0 +1,81 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 2 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (2,6)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 5, ptrdim 6, datadim 2, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x2 ]" ] ;
+	h_0_n1 [label=" n1 |  x3^(0) | [ x3 x7 ]" ] ;
+	h_0_n2 [label=" n2 |  x4^(0) | [ x4 ]" ] ;
+	h_0_n3 [label=" n3 |  x5^(0) | [ x5 ]" ] ;
+	h_0_n4 [label=" n4 |  x6^(0) | [ x6 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n4;
+	h_0_n2 -> h_0_n0;
+	h_0_n3 -> h_0_n0;
+	h_0_n4 -> h_0_n3;
+
+	}
+
+	subgraph cluster_lsum_0 {
+	node [shape=Mrecord] ;
+	label = "lsum 0 of (datadim=2, segmdim=5)" ;
+	lsum_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (17,0)
+array of constraints of size 10
+ 0: -x0 + data(n3) = 0
+ 1: -x0 + x1 = 0
+ 2: -data(n1) + data(n2) = 0
+ 3: -data(n4) - sum(n1) + sum(n2) = 0
+ 4: -len(n1) + len(n2) - 1 = 0
+ 5: len(n4) - 1 = 0
+ 6: len(n3) - 1 = 0
+ 7: sum(n4) = 0
+ 8: sum(n3) = 0
+ 9: len(n1) - 1 >= 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_1 {
+	color = black ;
+	label = "ushape of dim (2,6)" ;
+	subgraph cluster_hgraph_1 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 1 of size 4, ptrdim 6, datadim 2, not closed" ;
+	/* nodes and their labels */
+	h_1_n0 [label=" n0(#) |  NULL | [ x2 ]" ] ;
+	h_1_n1 [label=" n1 |  x3^(0) | [ x3 x6 x7 ]" ] ;
+	h_1_n2 [label=" n2 |  x4^(0) | [ x4 ]" ] ;
+	h_1_n3 [label=" n3 |  x5^(0) | [ x5 ]" ] ;
+	/* succ matrix */
+	h_1_n0 -> h_1_n0;
+	h_1_n1 -> h_1_n3;
+	h_1_n2 -> h_1_n0;
+	h_1_n3 -> h_1_n0;
+
+	}
+
+	subgraph cluster_lsum_1 {
+	node [shape=Mrecord] ;
+	label = "lsum 1 of (datadim=2, segmdim=4)" ;
+	lsum_dcons_1 [label=<<table><tr><td>dcons: polyhedron of dim (14,0)
+array of constraints of size 9
+ 0: -x0 + data(n3) = 0
+ 1: -x0 + x1 = 0
+ 2: -data(n1) + data(n2) = 0
+ 3: len(n3) - 1 = 0
+ 4: len(n2) - 1 = 0
+ 5: len(n1) - 1 = 0
+ 6: sum(n3) = 0
+ 7: sum(n2) = 0
+ 8: sum(n1) = 0
+</td></tr></table>> ] ;
+	}
+}
+}

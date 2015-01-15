@@ -1,0 +1,80 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 2 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (0,7)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 4, ptrdim 7, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x0 x3 ]" ] ;
+	h_0_n1 [label=" n1 |  x1^(0) | [ x1 x5 ]" ] ;
+	h_0_n2 [label=" n2 |  x2^(0) | [ x2 ]" ] ;
+	h_0_n3 [label=" n3 |  x4^(0) | [ x4 x6 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n3;
+	h_0_n2 -> h_0_n0;
+	h_0_n3 -> h_0_n0;
+
+	}
+
+	subgraph cluster_mset_0 {
+	node [shape=record] ;
+	label="mset 0 of (datadim=0, segmdim=4)" ;
+	mset_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (8,0)
+array of constraints of size 4
+ 0: -data(n1) + data(n2) = 0
+ 1: -len(n2) + len(n3) + 2 = 0
+ 2: len(n1) - 1 = 0
+ 3: len(n2) - 3 >= 0
+</td></tr></table>> ] ;
+	mset_mscons_0 [label=<<table><tr><td>mscons: polyhedron of dim (8,0)
+array of constraints of size 2
+ 0: -mshd(n1) + mshd(n2) = 0
+ 1: mstl(n1) = 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_1 {
+	color = black ;
+	label = "ushape of dim (0,7)" ;
+	subgraph cluster_hgraph_1 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 1 of size 4, ptrdim 7, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_1_n0 [label=" n0(#) |  NULL | [ x0 x3 x6 ]" ] ;
+	h_1_n1 [label=" n1 |  x1^(0) | [ x1 x5 ]" ] ;
+	h_1_n2 [label=" n2 |  x2^(0) | [ x2 ]" ] ;
+	h_1_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	/* succ matrix */
+	h_1_n0 -> h_1_n0;
+	h_1_n1 -> h_1_n0;
+	h_1_n2 -> h_1_n0;
+	h_1_n3 -> h_1_n0;
+
+	}
+
+	subgraph cluster_mset_1 {
+	node [shape=record] ;
+	label="mset 1 of (datadim=0, segmdim=4)" ;
+	mset_dcons_1 [label=<<table><tr><td>dcons: polyhedron of dim (8,0)
+array of constraints of size 4
+ 0: -data(n1) + data(n2) = 0
+ 1: len(n3) - 1 = 0
+ 2: len(n2) - 2 = 0
+ 3: len(n1) - 1 = 0
+</td></tr></table>> ] ;
+	mset_mscons_1 [label=<<table><tr><td>mscons: polyhedron of dim (8,0)
+array of constraints of size 4
+ 0: -mshd(n1) + mshd(n2) = 0
+ 1: -mshd(n3) + mstl(n2) = 0
+ 2: mstl(n3) = 0
+ 3: mstl(n1) = 0
+</td></tr></table>> ] ;
+	}
+}
+}

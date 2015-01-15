@@ -1,0 +1,41 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 1 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (0,7)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 3, ptrdim 7, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x0 x3 x4 x6 ]" ] ;
+	h_0_n1 [label=" n1 |  x1^(0) | [ x1 x5 ]" ] ;
+	h_0_n2 [label=" n2 |  x2^(0) | [ x2 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+
+	}
+
+	subgraph cluster_ucons_0 {
+	node [shape=Mrecord] ;
+	label = "ucons 0 of (datadim=0, segmdim=3)" ;
+
+	subgraph cluster_econs_0 {
+	node [shape=Mrecord] ;
+	 ucons_econs_0 [label=<<table><tr><td>econs: polyhedron of dim (6,0)
+array of constraints of size 3
+ 0: l[n1] - l[n2] = 0
+ 1: d(n1) - d(n2) = 0
+ 2: l[n2] - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_0{
+	node [shape=Mrecord] ;
+	}
+	}
+}
+}

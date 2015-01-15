@@ -1,0 +1,4 @@
+mergesort: 0 1 0x01
+split: 0 1 0x01
+fold2_merge: 0 1 0x02
+fold_clone: 0 1 0x02

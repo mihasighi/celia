@@ -1,0 +1,6 @@
+debug=0
+domain=shape
+dwdomain=ucons
+maxanon=0
+maxasegm=1
+main=del_tail_rec

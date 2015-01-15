@@ -1,0 +1,63 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 1 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (3,3)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 2, ptrdim 3, datadim 3, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x3 x4 ]" ] ;
+	h_0_n1 [label=" n1 |  x5^(0) | [ x5 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+
+	}
+
+	subgraph cluster_ucons_0 {
+	node [shape=Mrecord] ;
+	label = "ucons 0 of (datadim=3, segmdim=2)" ;
+
+	subgraph cluster_econs_0 {
+	node [shape=Mrecord] ;
+	 ucons_econs_0 [label=<<table><tr><td>econs: polyhedron of dim (7,0)
+array of constraints of size 5
+ 0: -x0 + x2 = 0
+ 1: -x1 + l[n1] = 0
+ 2: d(n1) = 0
+ 3: x1 - 1 >= 0
+ 4: x0 - x1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_0{
+	node [shape=Mrecord] ;
+	pattern_10 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_10 [label=<<table><tr><td>ucons10: polyhedron of dim (9,0)
+array of constraints of size 7
+ 0: -x0 + x2 = 0
+ 1: -x1 + l[n1] = 0
+ 2: d(y1) = 0
+ 3: d(n1) = 0
+ 4: y1 - 1 >= 0
+ 5: x1 - y1 - 1 >= 0
+ 6: x0 - x1 >= 0
+</td></tr></table>> ] ;
+	pattern_10 -> ucons_10 [label = implies ];
+	}
+
+	subgraph cluster_nodes_0 {
+	node [shape=Mrecord] ;
+	ucons_nodes_0 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+}

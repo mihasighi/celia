@@ -1,0 +1,5 @@
+quicksort: 0 1 5
+init: 0 1 5
+fold_split: 0 1 5
+fold2_concat: 0 1 5
+fold_clone: 0 2 5

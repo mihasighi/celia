@@ -1,0 +1,7 @@
+../../../c/intlist-lib-empty.c:(9,3): bottom
+../../../c/intlist-lib-empty.c:(7,0): [|0>=0|]
+../../../c/intlist-lib-empty.c:(8,2): [|1>=0|]
+../../../c/intlist-lib-empty.c:(10,5): [|2>=0|]
+../../../c/intlist-lib-empty.c:(9,6): bottom
+../../../c/intlist-lib-empty.c:(10,7): [|3>=0|]
+../../../c/intlist-lib-empty.c:(8,-1): bottom

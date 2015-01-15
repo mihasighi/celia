@@ -1,0 +1,4 @@
+mergesort: 0 1 5
+split: 0 1 5
+fold2_merge: 0 1 5
+fold_clone: 0 1 5

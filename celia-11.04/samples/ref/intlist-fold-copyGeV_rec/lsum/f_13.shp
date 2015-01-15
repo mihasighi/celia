@@ -1,0 +1,71 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 2 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (2,7)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 3, ptrdim 7, datadim 2, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x2 x5 x7 x8 ]" ] ;
+	h_0_n1 [label=" n1 |  x3^(0) | [ x3 x6 ]" ] ;
+	h_0_n2 [label=" n2 |  x4^(0) | [ x4 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+
+	}
+
+	subgraph cluster_lsum_0 {
+	node [shape=Mrecord] ;
+	label = "lsum 0 of (datadim=2, segmdim=3)" ;
+	lsum_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (11,0)
+array of constraints of size 6
+ 0: -x0 + x1 = 0
+ 1: -data(n1) + data(n2) = 0
+ 2: len(n2) - 1 = 0
+ 3: len(n1) - 1 = 0
+ 4: sum(n2) = 0
+ 5: sum(n1) = 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_1 {
+	color = black ;
+	label = "ushape of dim (2,7)" ;
+	subgraph cluster_hgraph_1 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 1 of size 4, ptrdim 7, datadim 2, not closed" ;
+	/* nodes and their labels */
+	h_1_n0 [label=" n0(#) |  NULL | [ x2 x5 x7 ]" ] ;
+	h_1_n1 [label=" n1 |  x3^(0) | [ x3 x6 ]" ] ;
+	h_1_n2 [label=" n2 |  x4^(0) | [ x4 ]" ] ;
+	h_1_n3 [label=" n3 |  x8^(0) | [ x8 ]" ] ;
+	/* succ matrix */
+	h_1_n0 -> h_1_n0;
+	h_1_n1 -> h_1_n3;
+	h_1_n2 -> h_1_n0;
+	h_1_n3 -> h_1_n0;
+
+	}
+
+	subgraph cluster_lsum_1 {
+	node [shape=Mrecord] ;
+	label = "lsum 1 of (datadim=2, segmdim=4)" ;
+	lsum_dcons_1 [label=<<table><tr><td>dcons: polyhedron of dim (14,0)
+array of constraints of size 7
+ 0: -x0 + x1 = 0
+ 1: -data(n1) + data(n2) = 0
+ 2: -len(n2) + len(n3) + 1 = 0
+ 3: len(n1) - 1 = 0
+ 4: sum(n1) = 0
+ 5: data(n3) - sum(n2) + sum(n3) = 0
+ 6: len(n2) - 2 >= 0
+</td></tr></table>> ] ;
+	}
+}
+}

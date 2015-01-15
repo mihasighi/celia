@@ -1,0 +1,8 @@
+debug=1
+domain=shape
+dwdomain=lsum
+maxanon=0
+maxasegm=1
+main=add
+funspec=funs.prop
+

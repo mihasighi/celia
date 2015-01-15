@@ -1,0 +1,67 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 2 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (2,12)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 4, ptrdim 12, datadim 2, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x6 x7 x9 x10 x11 x12 x13 ]" ] ;
+	h_0_n1 [label=" n1 |  x2^(0) | [ x2 x8 ]" ] ;
+	h_0_n2 [label=" n2 |  x3^(0) | [ x3 x5 ]" ] ;
+	h_0_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+	h_0_n3 -> h_0_n0;
+
+	}
+
+	subgraph cluster_mset_0 {
+	node [shape=record] ;
+	label="mset 0 of (datadim=2, segmdim=4)" ;
+	mset_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (10,0)
+array of constraints of size 5
+ 0: -data(n2) + data(n3) = 0
+ 1: -len(n1) + len(n3) = 0
+ 2: -len(n1) + len(n2) = 0
+ 3: -data(n1) + data(n2) >= 0
+ 4: len(n1) - 1 >= 0
+</td></tr></table>> ] ;
+	mset_mscons_0 [label=<<table><tr><td>mscons: polyhedron of dim (10,0)
+array of constraints of size 2
+ 0: -mshd(n1) + mshd(n3) - mstl(n1) + mstl(n3) = 0
+ 1: -mshd(n1) + mshd(n2) - mstl(n1) + mstl(n2) = 0
+</td></tr></table>> ] ;
+	}
+}
+
+subgraph cluster_1 {
+	color = black ;
+	label = "ushape of dim (2,12)" ;
+	subgraph cluster_hgraph_1 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 1 of size 1, ptrdim 12, datadim 2, not closed" ;
+	/* nodes and their labels */
+	h_1_n0 [label=" n0(#) |  NULL | [ x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 ]" ] ;
+	/* succ matrix */
+	h_1_n0 -> h_1_n0;
+
+	}
+
+	subgraph cluster_mset_1 {
+	node [shape=record] ;
+	label="mset 1 of (datadim=2, segmdim=1)" ;
+	mset_dcons_1 [label=<<table><tr><td>dcons: polyhedron of dim (4,0)
+empty array of constraints
+</td></tr></table>> ] ;
+	mset_mscons_1 [label=<<table><tr><td>mscons: polyhedron of dim (4,0)
+empty array of constraints
+</td></tr></table>> ] ;
+	}
+}
+}

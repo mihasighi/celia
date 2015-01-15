@@ -1,0 +1,17 @@
+
+BUGS 
+====
+
+BUG
+- the exceptions raised by shapes library are not visible in mode without DEBUG
+
+BUG
+- example intlist-fold-copyGeV_rec with ucons and pattern P1 does not
+  obtain a precise result
+
+BUG
+- the pattern P_= (2) raises a core dump for intlist-sort-quick2
+
+BUG
+- the mset on intlist-sort-quick0 raises exception on funtion init
+

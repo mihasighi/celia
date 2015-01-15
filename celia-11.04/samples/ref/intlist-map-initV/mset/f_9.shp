@@ -1,0 +1,38 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 1 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (2,5)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 3, ptrdim 5, datadim 2, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x4 x6 ]" ] ;
+	h_0_n1 [label=" n1 |  x2^(0) | [ x2 x5 ]" ] ;
+	h_0_n2 [label=" n2 |  x3^(0) | [ x3 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+
+	}
+
+	subgraph cluster_mset_0 {
+	node [shape=record] ;
+	label="mset 0 of (datadim=2, segmdim=3)" ;
+	mset_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (8,0)
+array of constraints of size 4
+ 0: -x0 + x1 = 0
+ 1: len(n1) - len(n2) = 0
+ 2: data(n1) - data(n2) = 0
+ 3: len(n2) - 1 >= 0
+</td></tr></table>> ] ;
+	mset_mscons_0 [label=<<table><tr><td>mscons: polyhedron of dim (8,0)
+array of constraints of size 1
+ 0: mshd(n1) - mshd(n2) + mstl(n1) - mstl(n2) = 0
+</td></tr></table>> ] ;
+	}
+}
+}

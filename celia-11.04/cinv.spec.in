@@ -1,0 +1,38 @@
+%define name cinv
+%define version @VERSION@
+%define release @RELEASE@
+
+Summary: Cinv
+Name: %{name}
+Version: %{version}
+Release: %{release}
+Copyright: GPL
+Group: Development/Tools
+URL: http://www.liafa.jussieu.fr/cinv
+Vendor: LIAFA
+Source: http://www.liafa.jussieu.fr/cinv/download
+BuildRoot: /tmp/%{name}-%{version}
+Packager: 
+
+%description 
+TODO
+
+%prep
+%setup -q
+
+%build
+%configure @CFG@
+make
+strip trex2c
+
+%install
+%makeinstall
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%doc README COPYING INSTALL
+%{_bindir}/cinv
+%{_mandir}/man1/*

@@ -1,0 +1,46 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 1 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (0,9)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 5, ptrdim 9, datadim 0,  closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x5 x6 x7 ]" ] ;
+	h_0_n1 [label=" n1 |  x0^(0) | [ x0 x8 ]" ] ;
+	h_0_n2 [label=" n2 |  x1^(0) | [ x1 ]" ] ;
+	h_0_n3 [label=" n3 |  x2^(0) | [ x2 x4 ]" ] ;
+	h_0_n4 [label=" n4 |  x3^(0) | [ x3 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+	h_0_n3 -> h_0_n0;
+	h_0_n4 -> h_0_n0;
+
+	}
+
+	subgraph cluster_mset_0 {
+	node [shape=record] ;
+	label="mset 0 of (datadim=0, segmdim=5)" ;
+	mset_dcons_0 [label=<<table><tr><td>dcons: polyhedron of dim (10,0)
+array of constraints of size 6
+ 0: -data(n1) + data(n2) = 0
+ 1: -len(n1) + len(n3) + len(n4) = 0
+ 2: -len(n1) + len(n2) = 0
+ 3: -len(n1) + 2len(n3) >= 0
+ 4: len(n1) - 2len(n3) + 1 >= 0
+ 5: len(n1) - len(n3) - 1 >= 0
+</td></tr></table>> ] ;
+	mset_mscons_0 [label=<<table><tr><td>mscons: polyhedron of dim (10,0)
+array of constraints of size 3
+ 0: -mshd(n1) + mshd(n3) + mshd(n4) - mstl(n1) + mstl(n3) + mstl(n4) = 0
+ 1: -mshd(n1) + mshd(n2) = 0
+ 2: -mstl(n1) + mstl(n2) = 0
+</td></tr></table>> ] ;
+	}
+}
+}

@@ -1,0 +1,1624 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 18 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 7, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x1 x12 ]" ] ;
+	h_0_n1 [label=" n1 |  x2^(0) | [ x2 x9 x10 ]" ] ;
+	h_0_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_0_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_0_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_0_n5 [label=" n5 |  x6^(0) | [ x6 x7 ]" ] ;
+	h_0_n6 [label=" n6 |  x8^(0) | [ x8 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+	h_0_n3 -> h_0_n0;
+	h_0_n4 -> h_0_n0;
+	h_0_n5 -> h_0_n0;
+	h_0_n6 -> h_0_n0;
+
+	}
+
+	subgraph cluster_ucons_0 {
+	node [shape=Mrecord] ;
+	label = "ucons 0 of (datadim=1, segmdim=7)" ;
+
+	subgraph cluster_econs_0 {
+	node [shape=Mrecord] ;
+	 ucons_econs_0 [label=<<table><tr><td>econs: polyhedron of dim (15,0)
+array of constraints of size 11
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: l[n6] - 1 = 0
+ 5: l[n5] - 1 = 0
+ 6: l[n4] - 2 = 0
+ 7: l[n2] - 2 = 0
+ 8: -x0 + d(n1) >= 0
+ 9: l[n1] - 1 >= 0
+10: d(n1) - d(n2) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_0{
+	node [shape=Mrecord] ;
+	pattern_10 [label=<<table><tr><td> y1 in [n2], l[n2] >= 2 
+ </td></tr></table>> ] ;
+	ucons_10 [label=<<table><tr><td>ucons10: polyhedron of dim (17,0)
+array of constraints of size 13
+ 0: -x0 + d(y1) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n5) = 0
+ 3: -d(n2) + d(n4) = 0
+ 4: -l[n1] + l[n3] = 0
+ 5: y1 - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n5] - 1 = 0
+ 8: l[n4] - 2 = 0
+ 9: l[n2] - 2 = 0
+10: -x0 + d(n1) >= 0
+11: l[n1] - 1 >= 0
+12: d(n1) - d(n2) >= 0
+</td></tr></table>> ] ;
+	pattern_10 -> ucons_10 [label = implies ];
+	}
+
+	subgraph cluster_nodes_0 {
+	node [shape=Mrecord] ;
+	ucons_nodes_0 [label=<<table><tr><td>node to patterns: 
+ 	 n2:
+y1 in [n2], l[n2] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_1 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_1 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 1 of size 8, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_1_n0 [label=" n0(#) |  NULL | [ x1 ]" ] ;
+	h_1_n1 [label=" n1 |  x2^(0) | [ x2 x9 x10 ]" ] ;
+	h_1_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_1_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_1_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_1_n5 [label=" n5 |  x6^(0) | [ x6 x7 ]" ] ;
+	h_1_n6 [label=" n6 |  x8^(0) | [ x8 ]" ] ;
+	h_1_n7 [label=" n7 |  x12^(0) | [ x12 ]" ] ;
+	/* succ matrix */
+	h_1_n0 -> h_1_n0;
+	h_1_n1 -> h_1_n0;
+	h_1_n2 -> h_1_n7;
+	h_1_n3 -> h_1_n0;
+	h_1_n4 -> h_1_n0;
+	h_1_n5 -> h_1_n0;
+	h_1_n6 -> h_1_n0;
+	h_1_n7 -> h_1_n0;
+
+	}
+
+	subgraph cluster_ucons_1 {
+	node [shape=Mrecord] ;
+	label = "ucons 1 of (datadim=1, segmdim=8)" ;
+
+	subgraph cluster_econs_1 {
+	node [shape=Mrecord] ;
+	 ucons_econs_1 [label=<<table><tr><td>econs: polyhedron of dim (17,0)
+array of constraints of size 12
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n4] + l[n7] + 2 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n5] - 1 = 0
+ 7: l[n2] - 2 = 0
+ 8: -x0 + d(n1) >= 0
+ 9: l[n4] - 3 >= 0
+10: l[n1] - 1 >= 0
+11: d(n1) - d(n2) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_1{
+	node [shape=Mrecord] ;
+	pattern_11 [label=<<table><tr><td> y1 in [n2], l[n2] >= 2 
+ </td></tr></table>> ] ;
+	ucons_11 [label=<<table><tr><td>ucons11: polyhedron of dim (19,0)
+array of constraints of size 14
+ 0: -x0 + d(y1) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n5) = 0
+ 3: -d(n2) + d(n4) = 0
+ 4: -l[n1] + l[n3] = 0
+ 5: -l[n4] + l[n7] + 2 = 0
+ 6: y1 - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: l[n5] - 1 = 0
+ 9: l[n2] - 2 = 0
+10: -x0 + d(n1) >= 0
+11: l[n4] - 3 >= 0
+12: l[n1] - 1 >= 0
+13: d(n1) - d(n2) >= 0
+</td></tr></table>> ] ;
+	pattern_11 -> ucons_11 [label = implies ];
+	}
+
+	subgraph cluster_nodes_1 {
+	node [shape=Mrecord] ;
+	ucons_nodes_1 [label=<<table><tr><td>node to patterns: 
+ 	 n2:
+y1 in [n2], l[n2] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_2 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_2 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 2 of size 8, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_2_n0 [label=" n0(#) |  NULL | [ x1 x12 ]" ] ;
+	h_2_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_2_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_2_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_2_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_2_n5 [label=" n5 |  x6^(0) | [ x6 x7 ]" ] ;
+	h_2_n6 [label=" n6 |  x8^(0) | [ x8 ]" ] ;
+	h_2_n7 [label=" n7 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_2_n0 -> h_2_n0;
+	h_2_n1 -> h_2_n7;
+	h_2_n2 -> h_2_n0;
+	h_2_n3 -> h_2_n0;
+	h_2_n4 -> h_2_n0;
+	h_2_n5 -> h_2_n0;
+	h_2_n6 -> h_2_n0;
+	h_2_n7 -> h_2_n0;
+
+	}
+
+	subgraph cluster_ucons_2 {
+	node [shape=Mrecord] ;
+	label = "ucons 2 of (datadim=1, segmdim=8)" ;
+
+	subgraph cluster_econs_2 {
+	node [shape=Mrecord] ;
+	 ucons_econs_2 [label=<<table><tr><td>econs: polyhedron of dim (17,0)
+array of constraints of size 13
+ 0: -x0 + d(n4) = 0
+ 1: -x0 + d(n2) = 0
+ 2: -d(n1) + d(n5) = 0
+ 3: -d(n1) + d(n3) = 0
+ 4: -l[n3] + l[n7] + 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n5] - 1 = 0
+ 7: l[n4] - 1 = 0
+ 8: l[n2] - 1 = 0
+ 9: l[n1] - 1 = 0
+10: -x0 + d(n7) >= 0
+11: l[n3] - 2 >= 0
+12: x0 - d(n1) - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_2{
+	node [shape=Mrecord] ;
+	}
+
+	subgraph cluster_nodes_2 {
+	node [shape=Mrecord] ;
+	ucons_nodes_2 [label=<<table><tr><td>node to patterns: 
+ </td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_3 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_3 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 3 of size 9, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_3_n0 [label=" n0(#) |  NULL | [ x1 ]" ] ;
+	h_3_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_3_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_3_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_3_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_3_n5 [label=" n5 |  x6^(0) | [ x6 x7 ]" ] ;
+	h_3_n6 [label=" n6 |  x8^(0) | [ x8 ]" ] ;
+	h_3_n7 [label=" n7 |  x10^(0) | [ x10 ]" ] ;
+	h_3_n8 [label=" n8 |  x12^(0) | [ x12 ]" ] ;
+	/* succ matrix */
+	h_3_n0 -> h_3_n0;
+	h_3_n1 -> h_3_n7;
+	h_3_n2 -> h_3_n8;
+	h_3_n3 -> h_3_n0;
+	h_3_n4 -> h_3_n0;
+	h_3_n5 -> h_3_n0;
+	h_3_n6 -> h_3_n0;
+	h_3_n7 -> h_3_n0;
+	h_3_n8 -> h_3_n0;
+
+	}
+
+	subgraph cluster_ucons_3 {
+	node [shape=Mrecord] ;
+	label = "ucons 3 of (datadim=1, segmdim=9)" ;
+
+	subgraph cluster_econs_3 {
+	node [shape=Mrecord] ;
+	 ucons_econs_3 [label=<<table><tr><td>econs: polyhedron of dim (19,0)
+array of constraints of size 13
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n3] + l[n7] + 1 = 0
+ 3: -l[n4] + l[n8] + 1 = 0
+ 4: l[n6] - 1 = 0
+ 5: l[n5] - 1 = 0
+ 6: l[n2] - 1 = 0
+ 7: l[n1] - 1 = 0
+ 8: x0 - d(n1) - d(n2) + d(n5) = 0
+ 9: l[n4] - 2 >= 0
+10: l[n3] - 2 >= 0
+11: x0 - d(n1) >= 0
+12: x0 - d(n2) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_3{
+	node [shape=Mrecord] ;
+	}
+
+	subgraph cluster_nodes_3 {
+	node [shape=Mrecord] ;
+	ucons_nodes_3 [label=<<table><tr><td>node to patterns: 
+ </td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_4 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_4 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 4 of size 8, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_4_n0 [label=" n0(#) |  NULL | [ x1 x12 ]" ] ;
+	h_4_n1 [label=" n1 |  x2^(0) | [ x2 x9 x10 ]" ] ;
+	h_4_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_4_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_4_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_4_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_4_n6 [label=" n6 |  x7^(0) | [ x7 ]" ] ;
+	h_4_n7 [label=" n7 |  x8^(0) | [ x8 ]" ] ;
+	/* succ matrix */
+	h_4_n0 -> h_4_n0;
+	h_4_n1 -> h_4_n0;
+	h_4_n2 -> h_4_n0;
+	h_4_n3 -> h_4_n0;
+	h_4_n4 -> h_4_n0;
+	h_4_n5 -> h_4_n6;
+	h_4_n6 -> h_4_n0;
+	h_4_n7 -> h_4_n0;
+
+	}
+
+	subgraph cluster_ucons_4 {
+	node [shape=Mrecord] ;
+	label = "ucons 4 of (datadim=1, segmdim=8)" ;
+
+	subgraph cluster_econs_4 {
+	node [shape=Mrecord] ;
+	 ucons_econs_4 [label=<<table><tr><td>econs: polyhedron of dim (17,0)
+array of constraints of size 13
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n2] + l[n5] + 2 = 0
+ 5: -l[n2] + l[n4] = 0
+ 6: l[n7] - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: -x0 + d(n1) >= 0
+ 9: l[n2] - 3 >= 0
+10: l[n1] - 1 >= 0
+11: d(n1) - d(n2) >= 0
+12: d(n1) - d(n6) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_4{
+	node [shape=Mrecord] ;
+	pattern_14 [label=<<table><tr><td> y1 in [n2], l[n2] >= 2 
+ </td></tr></table>> ] ;
+	ucons_14 [label=<<table><tr><td>ucons14: polyhedron of dim (19,0)
+array of constraints of size 16
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n2] + l[n5] + 2 = 0
+ 5: -l[n2] + l[n4] = 0
+ 6: l[n7] - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: -x0 + d(n1) >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - y1 - 1 >= 0
+11: l[n2] - 3 >= 0
+12: l[n1] - 1 >= 0
+13: d(n1) - d(n2) >= 0
+14: d(n1) - d(n6) >= 0
+15: d(n1) - d(y1) >= 0
+</td></tr></table>> ] ;
+	pattern_14 -> ucons_14 [label = implies ];
+	pattern_24 [label=<<table><tr><td> y1 in [n5], l[n5] >= 2 
+ </td></tr></table>> ] ;
+	ucons_24 [label=<<table><tr><td>ucons24: polyhedron of dim (19,0)
+array of constraints of size 15
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n2] + l[n5] + 2 = 0
+ 5: -l[n2] + l[n4] = 0
+ 6: l[n7] - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: -x0 + d(n1) >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - y1 - 3 >= 0
+11: l[n1] - 1 >= 0
+12: d(n1) - d(n2) >= 0
+13: d(n1) - d(n6) >= 0
+14: d(n1) - d(y1) >= 0
+</td></tr></table>> ] ;
+	pattern_24 -> ucons_24 [label = implies ];
+	}
+
+	subgraph cluster_nodes_4 {
+	node [shape=Mrecord] ;
+	ucons_nodes_4 [label=<<table><tr><td>node to patterns: 
+ 	 n2:
+y1 in [n2], l[n2] >= 2 
+ 
+	 n5:
+y1 in [n5], l[n5] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_5 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_5 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 5 of size 9, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_5_n0 [label=" n0(#) |  NULL | [ x1 ]" ] ;
+	h_5_n1 [label=" n1 |  x2^(0) | [ x2 x9 x10 ]" ] ;
+	h_5_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_5_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_5_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_5_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_5_n6 [label=" n6 |  x7^(0) | [ x7 ]" ] ;
+	h_5_n7 [label=" n7 |  x8^(0) | [ x8 ]" ] ;
+	h_5_n8 [label=" n8 |  x12^(0) | [ x12 ]" ] ;
+	/* succ matrix */
+	h_5_n0 -> h_5_n0;
+	h_5_n1 -> h_5_n0;
+	h_5_n2 -> h_5_n8;
+	h_5_n3 -> h_5_n0;
+	h_5_n4 -> h_5_n0;
+	h_5_n5 -> h_5_n6;
+	h_5_n6 -> h_5_n0;
+	h_5_n7 -> h_5_n0;
+	h_5_n8 -> h_5_n0;
+
+	}
+
+	subgraph cluster_ucons_5 {
+	node [shape=Mrecord] ;
+	label = "ucons 5 of (datadim=1, segmdim=9)" ;
+
+	subgraph cluster_econs_5 {
+	node [shape=Mrecord] ;
+	 ucons_econs_5 [label=<<table><tr><td>econs: polyhedron of dim (19,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n2] + l[n5] + 2 = 0
+ 5: l[n7] - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n2] - l[n4] + l[n8] = 0
+ 8: -x0 + d(n1) >= 0
+ 9: -l[n2] + l[n4] - 1 >= 0
+10: l[n2] - 3 >= 0
+11: l[n1] - 1 >= 0
+12: d(n1) - d(n2) >= 0
+13: d(n1) - d(n6) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_5{
+	node [shape=Mrecord] ;
+	pattern_15 [label=<<table><tr><td> y1 in [n2], l[n2] >= 2 
+ </td></tr></table>> ] ;
+	ucons_15 [label=<<table><tr><td>ucons15: polyhedron of dim (21,0)
+array of constraints of size 17
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n2] + l[n5] + 2 = 0
+ 5: l[n7] - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n2] - l[n4] + l[n8] = 0
+ 8: -x0 + d(n1) >= 0
+ 9: -l[n2] + l[n4] - 1 >= 0
+10: y1 - 1 >= 0
+11: l[n2] - y1 - 1 >= 0
+12: l[n2] - 3 >= 0
+13: l[n1] - 1 >= 0
+14: d(n1) - d(n2) >= 0
+15: d(n1) - d(n6) >= 0
+16: d(n1) - d(y1) >= 0
+</td></tr></table>> ] ;
+	pattern_15 -> ucons_15 [label = implies ];
+	pattern_25 [label=<<table><tr><td> y1 in [n5], l[n5] >= 2 
+ </td></tr></table>> ] ;
+	ucons_25 [label=<<table><tr><td>ucons25: polyhedron of dim (21,0)
+array of constraints of size 16
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n5) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n2] + l[n5] + 2 = 0
+ 5: l[n7] - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n2] - l[n4] + l[n8] = 0
+ 8: -x0 + d(n1) >= 0
+ 9: -l[n2] + l[n4] - 1 >= 0
+10: y1 - 1 >= 0
+11: l[n2] - y1 - 3 >= 0
+12: l[n1] - 1 >= 0
+13: d(n1) - d(n2) >= 0
+14: d(n1) - d(n6) >= 0
+15: d(n1) - d(y1) >= 0
+</td></tr></table>> ] ;
+	pattern_25 -> ucons_25 [label = implies ];
+	}
+
+	subgraph cluster_nodes_5 {
+	node [shape=Mrecord] ;
+	ucons_nodes_5 [label=<<table><tr><td>node to patterns: 
+ 	 n2:
+y1 in [n2], l[n2] >= 2 
+ 
+	 n5:
+y1 in [n5], l[n5] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_6 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_6 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 6 of size 9, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_6_n0 [label=" n0(#) |  NULL | [ x1 x12 ]" ] ;
+	h_6_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_6_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_6_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_6_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_6_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_6_n6 [label=" n6 |  x7^(0) | [ x7 ]" ] ;
+	h_6_n7 [label=" n7 |  x8^(0) | [ x8 ]" ] ;
+	h_6_n8 [label=" n8 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_6_n0 -> h_6_n0;
+	h_6_n1 -> h_6_n8;
+	h_6_n2 -> h_6_n0;
+	h_6_n3 -> h_6_n0;
+	h_6_n4 -> h_6_n0;
+	h_6_n5 -> h_6_n6;
+	h_6_n6 -> h_6_n0;
+	h_6_n7 -> h_6_n0;
+	h_6_n8 -> h_6_n0;
+
+	}
+
+	subgraph cluster_ucons_6 {
+	node [shape=Mrecord] ;
+	label = "ucons 6 of (datadim=1, segmdim=9)" ;
+
+	subgraph cluster_econs_6 {
+	node [shape=Mrecord] ;
+	 ucons_econs_6 [label=<<table><tr><td>econs: polyhedron of dim (19,0)
+array of constraints of size 15
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -x0 + d(n8) >= 0
+ 8: -l[n1] + l[n3] - 1 >= 0
+ 9: l[n2] - 1 >= 0
+10: l[n1] - 1 >= 0
+11: l[n1] + l[n2] - 3 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n2) - d(n5) + l[n2] - 2 >= 0
+14: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_6{
+	node [shape=Mrecord] ;
+	pattern_16 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_16 [label=<<table><tr><td>ucons16: polyhedron of dim (21,0)
+array of constraints of size 15
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -x0 + d(n8) >= 0
+ 8: -l[n1] + l[n3] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - 1 >= 0
+11: l[n1] - y1 - 1 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n2) - d(n5) + l[n2] - 2 >= 0
+14: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_16 -> ucons_16 [label = implies ];
+	pattern_26 [label=<<table><tr><td> y1 in [n5], l[n5] >= 2 
+ </td></tr></table>> ] ;
+	ucons_26 [label=<<table><tr><td>ucons26: polyhedron of dim (21,0)
+array of constraints of size 16
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -x0 + d(n8) >= 0
+ 8: -l[n1] + l[n3] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - 1 >= 0
+11: l[n1] - 1 >= 0
+12: l[n1] + l[n2] - y1 - 3 >= 0
+13: d(n2) - d(n5) >= 0
+14: d(n2) - d(n5) + l[n2] - 2 >= 0
+15: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_26 -> ucons_26 [label = implies ];
+	pattern_36 [label=<<table><tr><td> y1 in [n2], l[n2] >= 2 
+ </td></tr></table>> ] ;
+	ucons_36 [label=<<table><tr><td>ucons36: polyhedron of dim (21,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -x0 + d(n8) >= 0
+ 8: -l[n1] + l[n3] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - y1 - 1 >= 0
+11: l[n1] - 1 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_36 -> ucons_36 [label = implies ];
+	}
+
+	subgraph cluster_nodes_6 {
+	node [shape=Mrecord] ;
+	ucons_nodes_6 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+	 n2:
+y1 in [n2], l[n2] >= 2 
+ 
+	 n5:
+y1 in [n5], l[n5] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_7 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_7 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 7 of size 10, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_7_n0 [label=" n0(#) |  NULL | [ x1 ]" ] ;
+	h_7_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_7_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_7_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_7_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_7_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_7_n6 [label=" n6 |  x7^(0) | [ x7 ]" ] ;
+	h_7_n7 [label=" n7 |  x8^(0) | [ x8 ]" ] ;
+	h_7_n8 [label=" n8 |  x10^(0) | [ x10 ]" ] ;
+	h_7_n9 [label=" n9 |  x12^(0) | [ x12 ]" ] ;
+	/* succ matrix */
+	h_7_n0 -> h_7_n0;
+	h_7_n1 -> h_7_n8;
+	h_7_n2 -> h_7_n9;
+	h_7_n3 -> h_7_n0;
+	h_7_n4 -> h_7_n0;
+	h_7_n5 -> h_7_n6;
+	h_7_n6 -> h_7_n0;
+	h_7_n7 -> h_7_n0;
+	h_7_n8 -> h_7_n0;
+	h_7_n9 -> h_7_n0;
+
+	}
+
+	subgraph cluster_ucons_7 {
+	node [shape=Mrecord] ;
+	label = "ucons 7 of (datadim=1, segmdim=10)" ;
+
+	subgraph cluster_econs_7 {
+	node [shape=Mrecord] ;
+	 ucons_econs_7 [label=<<table><tr><td>econs: polyhedron of dim (21,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: l[n7] - 1 = 0
+ 4: l[n6] - 1 = 0
+ 5: l[n2] - l[n4] + l[n9] = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -l[n1] + l[n3] - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: l[n2] - 1 >= 0
+10: l[n1] - 1 >= 0
+11: l[n1] + l[n2] - 3 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_7{
+	node [shape=Mrecord] ;
+	pattern_17 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_17 [label=<<table><tr><td>ucons17: polyhedron of dim (23,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: l[n7] - 1 = 0
+ 4: l[n6] - 1 = 0
+ 5: l[n2] - l[n4] + l[n9] = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -l[n1] + l[n3] - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - 1 >= 0
+11: l[n1] - y1 - 1 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_17 -> ucons_17 [label = implies ];
+	pattern_27 [label=<<table><tr><td> y1 in [n2], l[n2] >= 2 
+ </td></tr></table>> ] ;
+	ucons_27 [label=<<table><tr><td>ucons27: polyhedron of dim (23,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: l[n7] - 1 = 0
+ 4: l[n6] - 1 = 0
+ 5: l[n2] - l[n4] + l[n9] = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -l[n1] + l[n3] - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - y1 - 1 >= 0
+11: l[n1] - 1 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_27 -> ucons_27 [label = implies ];
+	pattern_37 [label=<<table><tr><td> y1 in [n5], l[n5] >= 2 
+ </td></tr></table>> ] ;
+	ucons_37 [label=<<table><tr><td>ucons37: polyhedron of dim (23,0)
+array of constraints of size 15
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: l[n7] - 1 = 0
+ 4: l[n6] - 1 = 0
+ 5: l[n2] - l[n4] + l[n9] = 0
+ 6: l[n1] - l[n3] + l[n8] = 0
+ 7: -l[n1] + l[n3] - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - 1 >= 0
+11: l[n1] - 1 >= 0
+12: l[n1] + l[n2] - y1 - 3 >= 0
+13: d(n2) - d(n5) >= 0
+14: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_37 -> ucons_37 [label = implies ];
+	}
+
+	subgraph cluster_nodes_7 {
+	node [shape=Mrecord] ;
+	ucons_nodes_7 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+	 n2:
+y1 in [n2], l[n2] >= 2 
+ 
+	 n5:
+y1 in [n5], l[n5] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_8 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_8 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 8 of size 6, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_8_n0 [label=" n0(#) |  NULL | [ x1 x6 x7 x12 ]" ] ;
+	h_8_n1 [label=" n1 |  x2^(0) | [ x2 x9 x10 ]" ] ;
+	h_8_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_8_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_8_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_8_n5 [label=" n5 |  x8^(0) | [ x8 ]" ] ;
+	/* succ matrix */
+	h_8_n0 -> h_8_n0;
+	h_8_n1 -> h_8_n0;
+	h_8_n2 -> h_8_n0;
+	h_8_n3 -> h_8_n0;
+	h_8_n4 -> h_8_n0;
+	h_8_n5 -> h_8_n0;
+
+	}
+
+	subgraph cluster_ucons_8 {
+	node [shape=Mrecord] ;
+	label = "ucons 8 of (datadim=1, segmdim=6)" ;
+
+	subgraph cluster_econs_8 {
+	node [shape=Mrecord] ;
+	 ucons_econs_8 [label=<<table><tr><td>econs: polyhedron of dim (13,0)
+array of constraints of size 9
+ 0: -x0 + d(n4) = 0
+ 1: -x0 + d(n2) = 0
+ 2: -d(n1) + d(n3) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: l[n5] - 1 = 0
+ 5: l[n4] - 1 = 0
+ 6: l[n2] - 1 = 0
+ 7: -x0 + d(n1) >= 0
+ 8: l[n1] - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_8{
+	node [shape=Mrecord] ;
+	}
+
+	subgraph cluster_nodes_8 {
+	node [shape=Mrecord] ;
+	ucons_nodes_8 [label=<<table><tr><td>node to patterns: 
+ </td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_9 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_9 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 9 of size 7, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_9_n0 [label=" n0(#) |  NULL | [ x1 x6 x7 ]" ] ;
+	h_9_n1 [label=" n1 |  x2^(0) | [ x2 x9 x10 ]" ] ;
+	h_9_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_9_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_9_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_9_n5 [label=" n5 |  x8^(0) | [ x8 ]" ] ;
+	h_9_n6 [label=" n6 |  x12^(0) | [ x12 ]" ] ;
+	/* succ matrix */
+	h_9_n0 -> h_9_n0;
+	h_9_n1 -> h_9_n0;
+	h_9_n2 -> h_9_n6;
+	h_9_n3 -> h_9_n0;
+	h_9_n4 -> h_9_n0;
+	h_9_n5 -> h_9_n0;
+	h_9_n6 -> h_9_n0;
+
+	}
+
+	subgraph cluster_ucons_9 {
+	node [shape=Mrecord] ;
+	label = "ucons 9 of (datadim=1, segmdim=7)" ;
+
+	subgraph cluster_econs_9 {
+	node [shape=Mrecord] ;
+	 ucons_econs_9 [label=<<table><tr><td>econs: polyhedron of dim (15,0)
+array of constraints of size 10
+ 0: -x0 + d(n4) = 0
+ 1: -x0 + d(n2) = 0
+ 2: -d(n1) + d(n3) = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: -l[n4] + l[n6] + 1 = 0
+ 5: l[n5] - 1 = 0
+ 6: l[n2] - 1 = 0
+ 7: -x0 + d(n1) >= 0
+ 8: l[n4] - 2 >= 0
+ 9: l[n1] - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_9{
+	node [shape=Mrecord] ;
+	}
+
+	subgraph cluster_nodes_9 {
+	node [shape=Mrecord] ;
+	ucons_nodes_9 [label=<<table><tr><td>node to patterns: 
+ </td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_10 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_10 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 10 of size 8, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_10_n0 [label=" n0(#) |  NULL | [ x1 x10 ]" ] ;
+	h_10_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_10_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_10_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_10_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_10_n5 [label=" n5 |  x6^(0) | [ x6 x7 ]" ] ;
+	h_10_n6 [label=" n6 |  x8^(0) | [ x8 ]" ] ;
+	h_10_n7 [label=" n7 |  x12^(0) | [ x12 ]" ] ;
+	/* succ matrix */
+	h_10_n0 -> h_10_n0;
+	h_10_n1 -> h_10_n0;
+	h_10_n2 -> h_10_n7;
+	h_10_n3 -> h_10_n0;
+	h_10_n4 -> h_10_n0;
+	h_10_n5 -> h_10_n0;
+	h_10_n6 -> h_10_n0;
+	h_10_n7 -> h_10_n0;
+
+	}
+
+	subgraph cluster_ucons_10 {
+	node [shape=Mrecord] ;
+	label = "ucons 10 of (datadim=1, segmdim=8)" ;
+
+	subgraph cluster_econs_10 {
+	node [shape=Mrecord] ;
+	 ucons_econs_10 [label=<<table><tr><td>econs: polyhedron of dim (17,0)
+array of constraints of size 13
+ 0: -x0 + d(n3) = 0
+ 1: -x0 + d(n1) = 0
+ 2: -d(n2) + d(n5) = 0
+ 3: -d(n2) + d(n4) = 0
+ 4: -l[n4] + l[n7] + 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n5] - 1 = 0
+ 7: l[n3] - 1 = 0
+ 8: l[n2] - 1 = 0
+ 9: l[n1] - 1 = 0
+10: -x0 + d(n7) - 1 >= 0
+11: l[n4] - 2 >= 0
+12: x0 - d(n2) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_10{
+	node [shape=Mrecord] ;
+	}
+
+	subgraph cluster_nodes_10 {
+	node [shape=Mrecord] ;
+	ucons_nodes_10 [label=<<table><tr><td>node to patterns: 
+ </td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_11 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_11 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 11 of size 7, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_11_n0 [label=" n0(#) |  NULL | [ x1 x10 ]" ] ;
+	h_11_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_11_n2 [label=" n2 |  x3^(0) | [ x3 x11 x12 ]" ] ;
+	h_11_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_11_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_11_n5 [label=" n5 |  x6^(0) | [ x6 x7 ]" ] ;
+	h_11_n6 [label=" n6 |  x8^(0) | [ x8 ]" ] ;
+	/* succ matrix */
+	h_11_n0 -> h_11_n0;
+	h_11_n1 -> h_11_n0;
+	h_11_n2 -> h_11_n0;
+	h_11_n3 -> h_11_n0;
+	h_11_n4 -> h_11_n0;
+	h_11_n5 -> h_11_n0;
+	h_11_n6 -> h_11_n0;
+
+	}
+
+	subgraph cluster_ucons_11 {
+	node [shape=Mrecord] ;
+	label = "ucons 11 of (datadim=1, segmdim=7)" ;
+
+	subgraph cluster_econs_11 {
+	node [shape=Mrecord] ;
+	 ucons_econs_11 [label=<<table><tr><td>econs: polyhedron of dim (15,0)
+array of constraints of size 11
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: l[n6] - 1 = 0
+ 5: l[n5] - 1 = 0
+ 6: l[n3] - 2 = 0
+ 7: l[n1] - 2 = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: l[n2] - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_11{
+	node [shape=Mrecord] ;
+	pattern_111 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_111 [label=<<table><tr><td>ucons111: polyhedron of dim (17,0)
+array of constraints of size 13
+ 0: -x0 + d(y1) = 0
+ 1: -d(n1) + d(n5) = 0
+ 2: -d(n1) + d(n3) = 0
+ 3: -d(n2) + d(n4) = 0
+ 4: -l[n2] + l[n4] = 0
+ 5: y1 - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n5] - 1 = 0
+ 8: l[n3] - 2 = 0
+ 9: l[n1] - 2 = 0
+10: -x0 + d(n2) - 1 >= 0
+11: -d(n1) + d(n2) - 1 >= 0
+12: l[n2] - 1 >= 0
+</td></tr></table>> ] ;
+	pattern_111 -> ucons_111 [label = implies ];
+	}
+
+	subgraph cluster_nodes_11 {
+	node [shape=Mrecord] ;
+	ucons_nodes_11 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_12 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_12 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 12 of size 8, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_12_n0 [label=" n0(#) |  NULL | [ x1 ]" ] ;
+	h_12_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_12_n2 [label=" n2 |  x3^(0) | [ x3 x11 x12 ]" ] ;
+	h_12_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_12_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_12_n5 [label=" n5 |  x6^(0) | [ x6 x7 ]" ] ;
+	h_12_n6 [label=" n6 |  x8^(0) | [ x8 ]" ] ;
+	h_12_n7 [label=" n7 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_12_n0 -> h_12_n0;
+	h_12_n1 -> h_12_n7;
+	h_12_n2 -> h_12_n0;
+	h_12_n3 -> h_12_n0;
+	h_12_n4 -> h_12_n0;
+	h_12_n5 -> h_12_n0;
+	h_12_n6 -> h_12_n0;
+	h_12_n7 -> h_12_n0;
+
+	}
+
+	subgraph cluster_ucons_12 {
+	node [shape=Mrecord] ;
+	label = "ucons 12 of (datadim=1, segmdim=8)" ;
+
+	subgraph cluster_econs_12 {
+	node [shape=Mrecord] ;
+	 ucons_econs_12 [label=<<table><tr><td>econs: polyhedron of dim (17,0)
+array of constraints of size 12
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: -l[n3] + l[n7] + 2 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n5] - 1 = 0
+ 7: l[n1] - 2 = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: l[n3] - 3 >= 0
+11: l[n2] - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_12{
+	node [shape=Mrecord] ;
+	pattern_112 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_112 [label=<<table><tr><td>ucons112: polyhedron of dim (19,0)
+array of constraints of size 14
+ 0: -x0 + d(y1) = 0
+ 1: -d(n1) + d(n5) = 0
+ 2: -d(n1) + d(n3) = 0
+ 3: -d(n2) + d(n4) = 0
+ 4: -l[n2] + l[n4] = 0
+ 5: -l[n3] + l[n7] + 2 = 0
+ 6: y1 - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: l[n5] - 1 = 0
+ 9: l[n1] - 2 = 0
+10: -x0 + d(n2) - 1 >= 0
+11: -d(n1) + d(n2) - 1 >= 0
+12: l[n3] - 3 >= 0
+13: l[n2] - 1 >= 0
+</td></tr></table>> ] ;
+	pattern_112 -> ucons_112 [label = implies ];
+	}
+
+	subgraph cluster_nodes_12 {
+	node [shape=Mrecord] ;
+	ucons_nodes_12 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_13 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_13 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 13 of size 9, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_13_n0 [label=" n0(#) |  NULL | [ x1 x10 ]" ] ;
+	h_13_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_13_n2 [label=" n2 |  x3^(0) | [ x3 x11 ]" ] ;
+	h_13_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_13_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_13_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_13_n6 [label=" n6 |  x7^(0) | [ x7 ]" ] ;
+	h_13_n7 [label=" n7 |  x8^(0) | [ x8 ]" ] ;
+	h_13_n8 [label=" n8 |  x12^(0) | [ x12 ]" ] ;
+	/* succ matrix */
+	h_13_n0 -> h_13_n0;
+	h_13_n1 -> h_13_n0;
+	h_13_n2 -> h_13_n8;
+	h_13_n3 -> h_13_n0;
+	h_13_n4 -> h_13_n0;
+	h_13_n5 -> h_13_n6;
+	h_13_n6 -> h_13_n0;
+	h_13_n7 -> h_13_n0;
+	h_13_n8 -> h_13_n0;
+
+	}
+
+	subgraph cluster_ucons_13 {
+	node [shape=Mrecord] ;
+	label = "ucons 13 of (datadim=1, segmdim=9)" ;
+
+	subgraph cluster_econs_13 {
+	node [shape=Mrecord] ;
+	 ucons_econs_13 [label=<<table><tr><td>econs: polyhedron of dim (19,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n2] - l[n4] + l[n8] = 0
+ 7: -x0 + d(n8) - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: l[n2] - 1 >= 0
+10: l[n1] - 1 >= 0
+11: l[n1] + l[n2] - 3 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_13{
+	node [shape=Mrecord] ;
+	pattern_113 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_113 [label=<<table><tr><td>ucons113: polyhedron of dim (21,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n2] - l[n4] + l[n8] = 0
+ 7: -x0 + d(n8) - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - 1 >= 0
+11: l[n1] - y1 - 1 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_113 -> ucons_113 [label = implies ];
+	pattern_213 [label=<<table><tr><td> y1 in [n2], l[n2] >= 2 
+ </td></tr></table>> ] ;
+	ucons_213 [label=<<table><tr><td>ucons213: polyhedron of dim (21,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n2] - l[n4] + l[n8] = 0
+ 7: -x0 + d(n8) - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - y1 - 1 >= 0
+11: l[n1] - 1 >= 0
+12: d(n2) - d(n5) >= 0
+13: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_213 -> ucons_213 [label = implies ];
+	pattern_313 [label=<<table><tr><td> y1 in [n5], l[n5] >= 2 
+ </td></tr></table>> ] ;
+	ucons_313 [label=<<table><tr><td>ucons313: polyhedron of dim (21,0)
+array of constraints of size 15
+ 0: -d(n1) + d(n3) = 0
+ 1: -d(n2) + d(n4) = 0
+ 2: -l[n1] - l[n2] + l[n5] + 2 = 0
+ 3: -l[n1] + l[n3] = 0
+ 4: l[n7] - 1 = 0
+ 5: l[n6] - 1 = 0
+ 6: l[n2] - l[n4] + l[n8] = 0
+ 7: -x0 + d(n8) - 1 >= 0
+ 8: -l[n2] + l[n4] - 1 >= 0
+ 9: y1 - 1 >= 0
+10: l[n2] - 1 >= 0
+11: l[n1] - 1 >= 0
+12: l[n1] + l[n2] - y1 - 3 >= 0
+13: d(n2) - d(n5) >= 0
+14: d(n1) - d(n5) >= 0
+</td></tr></table>> ] ;
+	pattern_313 -> ucons_313 [label = implies ];
+	}
+
+	subgraph cluster_nodes_13 {
+	node [shape=Mrecord] ;
+	ucons_nodes_13 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+	 n2:
+y1 in [n2], l[n2] >= 2 
+ 
+	 n5:
+y1 in [n5], l[n5] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_14 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_14 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 14 of size 8, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_14_n0 [label=" n0(#) |  NULL | [ x1 x10 ]" ] ;
+	h_14_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_14_n2 [label=" n2 |  x3^(0) | [ x3 x11 x12 ]" ] ;
+	h_14_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_14_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_14_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_14_n6 [label=" n6 |  x7^(0) | [ x7 ]" ] ;
+	h_14_n7 [label=" n7 |  x8^(0) | [ x8 ]" ] ;
+	/* succ matrix */
+	h_14_n0 -> h_14_n0;
+	h_14_n1 -> h_14_n0;
+	h_14_n2 -> h_14_n0;
+	h_14_n3 -> h_14_n0;
+	h_14_n4 -> h_14_n0;
+	h_14_n5 -> h_14_n6;
+	h_14_n6 -> h_14_n0;
+	h_14_n7 -> h_14_n0;
+
+	}
+
+	subgraph cluster_ucons_14 {
+	node [shape=Mrecord] ;
+	label = "ucons 14 of (datadim=1, segmdim=8)" ;
+
+	subgraph cluster_econs_14 {
+	node [shape=Mrecord] ;
+	 ucons_econs_14 [label=<<table><tr><td>econs: polyhedron of dim (17,0)
+array of constraints of size 13
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n5] + 2 = 0
+ 4: -l[n1] + l[n3] = 0
+ 5: -l[n2] + l[n4] = 0
+ 6: l[n7] - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: l[n2] - 1 >= 0
+11: l[n1] - 3 >= 0
+12: d(n2) - d(n6) - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_14{
+	node [shape=Mrecord] ;
+	pattern_114 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_114 [label=<<table><tr><td>ucons114: polyhedron of dim (19,0)
+array of constraints of size 16
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n5] + 2 = 0
+ 4: -l[n1] + l[n3] = 0
+ 5: -l[n2] + l[n4] = 0
+ 6: l[n7] - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: y1 - 1 >= 0
+11: l[n2] - 1 >= 0
+12: l[n1] - y1 - 1 >= 0
+13: l[n1] - 3 >= 0
+14: d(n2) - d(n6) - 1 >= 0
+15: d(n2) - d(y1) - 1 >= 0
+</td></tr></table>> ] ;
+	pattern_114 -> ucons_114 [label = implies ];
+	pattern_214 [label=<<table><tr><td> y1 in [n5], l[n5] >= 2 
+ </td></tr></table>> ] ;
+	ucons_214 [label=<<table><tr><td>ucons214: polyhedron of dim (19,0)
+array of constraints of size 15
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n5] + 2 = 0
+ 4: -l[n1] + l[n3] = 0
+ 5: -l[n2] + l[n4] = 0
+ 6: l[n7] - 1 = 0
+ 7: l[n6] - 1 = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: y1 - 1 >= 0
+11: l[n2] - 1 >= 0
+12: l[n1] - y1 - 3 >= 0
+13: d(n2) - d(n6) - 1 >= 0
+14: d(n2) - d(y1) - 1 >= 0
+</td></tr></table>> ] ;
+	pattern_214 -> ucons_214 [label = implies ];
+	}
+
+	subgraph cluster_nodes_14 {
+	node [shape=Mrecord] ;
+	ucons_nodes_14 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+	 n5:
+y1 in [n5], l[n5] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_15 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_15 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 15 of size 9, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_15_n0 [label=" n0(#) |  NULL | [ x1 ]" ] ;
+	h_15_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_15_n2 [label=" n2 |  x3^(0) | [ x3 x11 x12 ]" ] ;
+	h_15_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_15_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_15_n5 [label=" n5 |  x6^(0) | [ x6 ]" ] ;
+	h_15_n6 [label=" n6 |  x7^(0) | [ x7 ]" ] ;
+	h_15_n7 [label=" n7 |  x8^(0) | [ x8 ]" ] ;
+	h_15_n8 [label=" n8 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_15_n0 -> h_15_n0;
+	h_15_n1 -> h_15_n8;
+	h_15_n2 -> h_15_n0;
+	h_15_n3 -> h_15_n0;
+	h_15_n4 -> h_15_n0;
+	h_15_n5 -> h_15_n6;
+	h_15_n6 -> h_15_n0;
+	h_15_n7 -> h_15_n0;
+	h_15_n8 -> h_15_n0;
+
+	}
+
+	subgraph cluster_ucons_15 {
+	node [shape=Mrecord] ;
+	label = "ucons 15 of (datadim=1, segmdim=9)" ;
+
+	subgraph cluster_econs_15 {
+	node [shape=Mrecord] ;
+	 ucons_econs_15 [label=<<table><tr><td>econs: polyhedron of dim (19,0)
+array of constraints of size 14
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n5] + 2 = 0
+ 4: -l[n2] + l[n4] = 0
+ 5: l[n7] - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n1] - l[n3] + l[n8] = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: -l[n1] + l[n3] - 1 >= 0
+11: l[n2] - 1 >= 0
+12: l[n1] - 3 >= 0
+13: d(n2) - d(n6) - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_15{
+	node [shape=Mrecord] ;
+	pattern_115 [label=<<table><tr><td> y1 in [n1], l[n1] >= 2 
+ </td></tr></table>> ] ;
+	ucons_115 [label=<<table><tr><td>ucons115: polyhedron of dim (21,0)
+array of constraints of size 17
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n5] + 2 = 0
+ 4: -l[n2] + l[n4] = 0
+ 5: l[n7] - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n1] - l[n3] + l[n8] = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: -l[n1] + l[n3] - 1 >= 0
+11: y1 - 1 >= 0
+12: l[n2] - 1 >= 0
+13: l[n1] - y1 - 1 >= 0
+14: l[n1] - 3 >= 0
+15: d(n2) - d(n6) - 1 >= 0
+16: d(n2) - d(y1) - 1 >= 0
+</td></tr></table>> ] ;
+	pattern_115 -> ucons_115 [label = implies ];
+	pattern_215 [label=<<table><tr><td> y1 in [n5], l[n5] >= 2 
+ </td></tr></table>> ] ;
+	ucons_215 [label=<<table><tr><td>ucons215: polyhedron of dim (21,0)
+array of constraints of size 16
+ 0: -d(n1) + d(n5) = 0
+ 1: -d(n1) + d(n3) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n1] + l[n5] + 2 = 0
+ 4: -l[n2] + l[n4] = 0
+ 5: l[n7] - 1 = 0
+ 6: l[n6] - 1 = 0
+ 7: l[n1] - l[n3] + l[n8] = 0
+ 8: -x0 + d(n2) - 1 >= 0
+ 9: -d(n1) + d(n2) - 1 >= 0
+10: -l[n1] + l[n3] - 1 >= 0
+11: y1 - 1 >= 0
+12: l[n2] - 1 >= 0
+13: l[n1] - y1 - 3 >= 0
+14: d(n2) - d(n6) - 1 >= 0
+15: d(n2) - d(y1) - 1 >= 0
+</td></tr></table>> ] ;
+	pattern_215 -> ucons_215 [label = implies ];
+	}
+
+	subgraph cluster_nodes_15 {
+	node [shape=Mrecord] ;
+	ucons_nodes_15 [label=<<table><tr><td>node to patterns: 
+ 	 n1:
+y1 in [n1], l[n1] >= 2 
+ 
+	 n5:
+y1 in [n5], l[n5] >= 2 
+ 
+</td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_16 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_16 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 16 of size 6, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_16_n0 [label=" n0(#) |  NULL | [ x1 x6 x7 x10 ]" ] ;
+	h_16_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_16_n2 [label=" n2 |  x3^(0) | [ x3 x11 x12 ]" ] ;
+	h_16_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_16_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_16_n5 [label=" n5 |  x8^(0) | [ x8 ]" ] ;
+	/* succ matrix */
+	h_16_n0 -> h_16_n0;
+	h_16_n1 -> h_16_n0;
+	h_16_n2 -> h_16_n0;
+	h_16_n3 -> h_16_n0;
+	h_16_n4 -> h_16_n0;
+	h_16_n5 -> h_16_n0;
+
+	}
+
+	subgraph cluster_ucons_16 {
+	node [shape=Mrecord] ;
+	label = "ucons 16 of (datadim=1, segmdim=6)" ;
+
+	subgraph cluster_econs_16 {
+	node [shape=Mrecord] ;
+	 ucons_econs_16 [label=<<table><tr><td>econs: polyhedron of dim (13,0)
+array of constraints of size 9
+ 0: -x0 + d(n3) = 0
+ 1: -x0 + d(n1) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: l[n5] - 1 = 0
+ 5: l[n3] - 1 = 0
+ 6: l[n1] - 1 = 0
+ 7: -x0 + d(n2) - 1 >= 0
+ 8: l[n2] - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_16{
+	node [shape=Mrecord] ;
+	}
+
+	subgraph cluster_nodes_16 {
+	node [shape=Mrecord] ;
+	ucons_nodes_16 [label=<<table><tr><td>node to patterns: 
+ </td></tr></table>> ] ;
+	}
+	}
+}
+
+subgraph cluster_17 {
+	color = black ;
+	label = "ushape of dim (1,12)" ;
+	subgraph cluster_hgraph_17 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 17 of size 7, ptrdim 12, datadim 1, not closed" ;
+	/* nodes and their labels */
+	h_17_n0 [label=" n0(#) |  NULL | [ x1 x6 x7 ]" ] ;
+	h_17_n1 [label=" n1 |  x2^(0) | [ x2 x9 ]" ] ;
+	h_17_n2 [label=" n2 |  x3^(0) | [ x3 x11 x12 ]" ] ;
+	h_17_n3 [label=" n3 |  x4^(0) | [ x4 ]" ] ;
+	h_17_n4 [label=" n4 |  x5^(0) | [ x5 ]" ] ;
+	h_17_n5 [label=" n5 |  x8^(0) | [ x8 ]" ] ;
+	h_17_n6 [label=" n6 |  x10^(0) | [ x10 ]" ] ;
+	/* succ matrix */
+	h_17_n0 -> h_17_n0;
+	h_17_n1 -> h_17_n6;
+	h_17_n2 -> h_17_n0;
+	h_17_n3 -> h_17_n0;
+	h_17_n4 -> h_17_n0;
+	h_17_n5 -> h_17_n0;
+	h_17_n6 -> h_17_n0;
+
+	}
+
+	subgraph cluster_ucons_17 {
+	node [shape=Mrecord] ;
+	label = "ucons 17 of (datadim=1, segmdim=7)" ;
+
+	subgraph cluster_econs_17 {
+	node [shape=Mrecord] ;
+	 ucons_econs_17 [label=<<table><tr><td>econs: polyhedron of dim (15,0)
+array of constraints of size 10
+ 0: -x0 + d(n3) = 0
+ 1: -x0 + d(n1) = 0
+ 2: -d(n2) + d(n4) = 0
+ 3: -l[n2] + l[n4] = 0
+ 4: -l[n3] + l[n6] + 1 = 0
+ 5: l[n5] - 1 = 0
+ 6: l[n1] - 1 = 0
+ 7: -x0 + d(n2) - 1 >= 0
+ 8: l[n3] - 2 >= 0
+ 9: l[n2] - 1 >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_17{
+	node [shape=Mrecord] ;
+	}
+
+	subgraph cluster_nodes_17 {
+	node [shape=Mrecord] ;
+	ucons_nodes_17 [label=<<table><tr><td>node to patterns: 
+ </td></tr></table>> ] ;
+	}
+	}
+}
+}

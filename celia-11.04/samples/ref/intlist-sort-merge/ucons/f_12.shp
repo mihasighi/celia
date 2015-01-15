@@ -1,0 +1,91 @@
+digraph shape {
+	graph [rankdir="LR"];
+	label="shape size 1 " ;
+
+subgraph cluster_0 {
+	color = black ;
+	label = "ushape of dim (0,8)" ;
+	subgraph cluster_hgraph_0 {
+ 	node [shape=Mrecord] ;
+	label="hgraph 0 of size 3, ptrdim 8, datadim 0, not closed" ;
+	/* nodes and their labels */
+	h_0_n0 [label=" n0(#) |  NULL | [ x0 x3 x4 x5 x6 ]" ] ;
+	h_0_n1 [label=" n1 |  x1^(0) | [ x1 x7 ]" ] ;
+	h_0_n2 [label=" n2 |  x2^(0) | [ x2 ]" ] ;
+	/* succ matrix */
+	h_0_n0 -> h_0_n0;
+	h_0_n1 -> h_0_n0;
+	h_0_n2 -> h_0_n0;
+
+	}
+
+	subgraph cluster_ucons_0 {
+	node [shape=Mrecord] ;
+	label = "ucons 0 of (datadim=0, segmdim=3)" ;
+
+	subgraph cluster_econs_0 {
+	node [shape=Mrecord] ;
+	 ucons_econs_0 [label=<<table><tr><td>econs: octagon of dim (6,0)
+-d(n1) + d(n2) >= 0
+d(n1) - d(n2) >= 0
+l[n1] - 2 >= 0
+l[n1] + l[n2] - 4 >= 0
+l[n2] - 2 >= 0
+l[n1] - l[n2] >= 0
+</td></tr></table>> ] ;
+	}
+
+	subgraph cluster_formulas_0{
+	node [shape=Mrecord] ;
+	pattern_10 [label=<<table><tr><td> forall y1. 
+ y1 in [n2], l[n2] >= 2 </td></tr></table>> ] ;
+	ucons_10 [label=<<table><tr><td>ucons10: octagon of dim (8,0)
+-d(n1) + d(n2) >= 0
+d(n1) - d(n2) >= 0
+l[n1] - 2 >= 0
+l[n1] + l[n2] - 4 >= 0
+l[n2] - 2 >= 0
+l[n1] - l[n2] >= 0
+</td></tr></table>> ] ;
+	pattern_10 -> ucons_10 [label = implies ];
+	pattern_20 [label=<<table><tr><td> forall y1, y2. 
+ y1, y2 in [n2],
+ y2 >= y1,
+ l[n2] >= 2 </td></tr></table>> ] ;
+	ucons_20 [label=<<table><tr><td>ucons20: octagon of dim (10,0)
+-d(n1) + d(n2) >= 0
+d(n1) - d(n2) >= 0
+l[n1] - 2 >= 0
+l[n1] + l[n2] - 4 >= 0
+l[n2] - 2 >= 0
+l[n1] - l[n2] >= 0
+</td></tr></table>> ] ;
+	pattern_20 -> ucons_20 [label = implies ];
+	pattern_30 [label=<<table><tr><td> forall y1. 
+ y1 in [n1], l[n1] >= 2 </td></tr></table>> ] ;
+	ucons_30 [label=<<table><tr><td>ucons30: octagon of dim (8,0)
+-d(n1) + d(n2) >= 0
+d(n1) - d(n2) >= 0
+l[n1] - 2 >= 0
+l[n1] + l[n2] - 4 >= 0
+l[n2] - 2 >= 0
+l[n1] - l[n2] >= 0
+</td></tr></table>> ] ;
+	pattern_30 -> ucons_30 [label = implies ];
+	pattern_40 [label=<<table><tr><td> forall y1, y2. 
+ y1, y2 in [n1],
+ y2 >= y1,
+ l[n1] >= 2 </td></tr></table>> ] ;
+	ucons_40 [label=<<table><tr><td>ucons40: octagon of dim (10,0)
+-d(n1) + d(n2) >= 0
+d(n1) - d(n2) >= 0
+l[n1] - 2 >= 0
+l[n1] + l[n2] - 4 >= 0
+l[n2] - 2 >= 0
+l[n1] - l[n2] >= 0
+</td></tr></table>> ] ;
+	pattern_40 -> ucons_40 [label = implies ];
+	}
+	}
+}
+}
