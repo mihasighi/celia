@@ -1,0 +1,11 @@
+Ast2dot.cmi :
+ast2dot_options.cmo :
+ast2dot_options.cmx :
+ast2dot_core.cmo :
+ast2dot_core.cmx :
+ast2dot_register.cmo : ast2dot_options.cmo ast2dot_core.cmo
+ast2dot_register.cmx : ast2dot_options.cmx ast2dot_core.cmx
+ast2dot_gui.cmo : ast2dot_options.cmo ast2dot_core.cmo
+ast2dot_gui.cmx : ast2dot_options.cmx ast2dot_core.cmx
+Ast2dot.cmi :
+gui/Ast2dot.cmi :

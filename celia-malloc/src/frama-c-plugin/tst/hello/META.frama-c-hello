@@ -1,0 +1,7 @@
+description = "Frama-C Hello plug-in"
+version = "Magnesium-rc3"
+requires = ""
+archive(byte) = "Hello.cmo"
+archive(native) = "Hello.cmx"
+archive(plugin) = "Hello.cmxs"
+directory = ""
